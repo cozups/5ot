@@ -5,19 +5,45 @@
 // 변수
 let currentIdx = 0;
 let slidesTop = 0;
+let stopScroll = false;
+const timer = null;
 
 // html elements
 const body = document.querySelector('body');
 const slides = document.querySelector('.slides');
 const slideButtons = document.querySelectorAll('.slide-button-element');
 const slideIndex = document.querySelectorAll('.slide-index-element');
+const slideArrows = document.querySelectorAll('.page-slide-button i');
+
 // add events
 body.addEventListener('wheel', scrollItems);
 for (let i = 0; i < slideButtons.length; i++) {
   slideButtons[i].addEventListener('click', scrollByButton);
 }
 
+for (let i = 0; i < slideArrows.length; i++) {
+  slideArrows[i].addEventListener('click', slidePage);
+}
+
+// functions
+function moveNext() {
+  slidesTop = currentIdx * 500;
+  slides.style.top = -slidesTop + 'px';
+  scrollIndex();
+}
+
+function scrollByTime() {
+  setInterval(function () {
+    if (!stopScroll) {
+      currentIdx += 1;
+      if (currentIdx > 3) currentIdx = 0;
+      moveNext();
+    }
+  }, 3000);
+}
+
 function scrollItems(e) {
+  stopScroll = true;
   if (e.wheelDelta > 0 && currentIdx > 0) {
     // scroll up
     currentIdx -= 1;
@@ -25,17 +51,14 @@ function scrollItems(e) {
     // scroll down
     currentIdx += 1;
   }
-  slidesTop = currentIdx * 500;
-  slides.style.top = -slidesTop + 'px';
-  scrollIndex();
+  moveNext();
 }
 
 function scrollByButton(e) {
   currentIdx = Number(this.value);
 
-  slidesTop = currentIdx * 500;
-  slides.style.top = -slidesTop + 'px';
-  scrollIndex();
+  stopScroll = true;
+  moveNext();
 }
 
 function scrollIndex() {
@@ -44,3 +67,11 @@ function scrollIndex() {
   }
   slideIndex[currentIdx].classList.add('active');
 }
+
+function slidePage() {
+  for (let i = 0; i < slideArrows.length; i++) {
+    slideArrows[i].classList.toggle('shown');
+  }
+}
+
+scrollByTime();

@@ -5,6 +5,7 @@
 
 body {
   position: relative;
+  background-color: #fff;
 }
 
 .div-container {
@@ -30,6 +31,10 @@ body {
   height: 500px;
   overflow: hidden;
   position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slides {
@@ -84,4 +89,24 @@ body {
   border-radius: 50%;
   border: 1px solid black;
   margin: 6px 0;
+}
+
+.fa-angles-left {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  cursor: pointer;
+}
+
+.fa-angles-right {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  cursor: pointer;
+}
+
+.shown {
+  display: inline;
 }
