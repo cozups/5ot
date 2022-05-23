@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-n팀</title>
+    <title>쇼핑-5팀</title>
     <!-- 아이콘 -->
     <link
       rel="icon"
@@ -33,7 +33,7 @@
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
             <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-n팀</span>
+            <span class="has-text-link">쇼핑-5팀</span>
           </a>
 
           <a
@@ -68,13 +68,56 @@
     </nav>
 
     <div class="div-container">
-      <div class="landing" id="landingDiv">
-        <h1>랜딩 페이지</h1>
+      <div id="slideShow">
+        <ul class="slides">
+          <li class="item-photo">
+            <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-new/subhome-xmedia-19//w/1039/IMAGE-landscape-f15c96c3-370d-4703-a9af-4a92065f0bfe-default_0.jpg?ts=1652354105595" alt="">
+          </li>
+          <li class="item-photo">
+            <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-beauty-new/subhome-xmedia-19//w/1039/IMAGE-landscape-a17387a1-72f2-4317-98db-62dbcbb22cff-default_0.jpg?ts=1652193887716" alt="">
+          </li>
+          <li class="item-photo">
+            <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-shoes-bags/subhome-xmedia-18//w/1039/landscape-510486c6-8e4e-46b2-82e6-3e5069ad066e_0.jpg?ts=1651835387540" alt="">
+          </li>
+          <li class="item-photo">
+            <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-dresses/subhome-xmedia-18//w/1039/IMAGE-landscape-77184496-2326-49d8-93e8-4c0f54a6f699-default_0.jpg?ts=1651837590664" alt="">
+          </li>
+        </ul>
+        <ul class="slides">
+          <li class="item-photo">
+            <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-new/subhome-xmedia-19//w/1039/IMAGE-landscape-f15c96c3-370d-4703-a9af-4a92065f0bfe-default_0.jpg?ts=1652354105595" alt="">
+          </li>
+          <li class="item-photo">
+            <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-beauty-new/subhome-xmedia-19//w/1039/IMAGE-landscape-a17387a1-72f2-4317-98db-62dbcbb22cff-default_0.jpg?ts=1652193887716" alt="">
+          </li>
+          <li class="item-photo">
+            <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-shoes-bags/subhome-xmedia-18//w/1039/landscape-510486c6-8e4e-46b2-82e6-3e5069ad066e_0.jpg?ts=1651835387540" alt="">
+          </li>
+          <li class="item-photo">
+            <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-dresses/subhome-xmedia-18//w/1039/IMAGE-landscape-77184496-2326-49d8-93e8-4c0f54a6f699-default_0.jpg?ts=1651837590664" alt="">
+          </li>
+        </ul>
       </div>
-      <div class="greeting" id="greetingDiv">
-        <h1>안녕하세요!</h1>
+      <div id="slide-buttons">
+        <ul class="slide-button-list">
+          <li><button class="slide-button-element" value="0">new</button></li>
+          <li><button class="slide-button-element" value="1">beauty</button></li>
+          <li><button class="slide-button-element" value="2">shoes</button></li>
+          <li><button class="slide-button-element" value="3">dress</button></li>
+        </ul>
       </div>
     </div>
-
+    <div class="slide-index">
+      <ul>
+        <li class="slide-index-element active"></li>
+        <li class="slide-index-element"></li>
+        <li class="slide-index-element"></li>
+        <li class="slide-index-element"></li>
+      </ul>
+    </div>
+    <div class="page-slide-button">
+      <i class="fa-solid fa-angles-left"></i>
+      <i class="fa-solid fa-angles-right shown"></i>
+    </div>
   </body>
 </html>
