@@ -1,60 +1,46 @@
 // 아래는 현재 home.html 페이지에서 쓰이는 코드는 아닙니다.
 // 다만, 앞으로 ~.js 파일을 작성할 때 아래의 코드 구조를 참조할 수 있도록,
-// 코드 예시를 남겨 두었습니다.
+// 코드 예시를 남겨 두었습니다. (원본 따로 백업 저장함)
 
-import * as Api from '/api.js';
-import { randomId } from '/useful-functions.js';
+// 변수
+let currentIdx = 0;
+let slidesTop = 0;
 
-// 요소(element), input 혹은 상수
-const landingDiv = document.querySelector('#landingDiv');
-const greetingDiv = document.querySelector('#greetingDiv');
-
-addAllElements();
-addAllEvents();
-
-// html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-async function addAllElements() {
-  insertTextToLanding();
-  insertTextToGreeting();
+// html elements
+const body = document.querySelector('body');
+const slides = document.querySelector('.slides');
+const slideButtons = document.querySelectorAll('.slide-button-element');
+const slideIndex = document.querySelectorAll('.slide-index-element');
+// add events
+body.addEventListener('wheel', scrollItems);
+for (let i = 0; i < slideButtons.length; i++) {
+  slideButtons[i].addEventListener('click', scrollByButton);
 }
 
-// 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-function addAllEvents() {
-  landingDiv.addEventListener('click', alertLandingText);
-  greetingDiv.addEventListener('click', alertGreetingText);
+function scrollItems(e) {
+  if (e.wheelDelta > 0 && currentIdx > 0) {
+    // scroll up
+    currentIdx -= 1;
+  } else if (e.wheelDelta < 0 && currentIdx < 3) {
+    // scroll down
+    currentIdx += 1;
+  }
+  slidesTop = currentIdx * 500;
+  slides.style.top = -slidesTop + 'px';
+  scrollIndex();
 }
 
-function insertTextToLanding() {
-  landingDiv.insertAdjacentHTML(
-    'beforeend',
-    `
-      <h2>n팀 쇼핑몰의 랜딩 페이지입니다. 자바스크립트 파일에서 삽입되었습니다.</h2>
-    `
-  );
+function scrollByButton(e) {
+  currentIdx = Number(this.value);
+
+  slidesTop = currentIdx * 500;
+  slides.style.top = -slidesTop + 'px';
+  scrollIndex();
 }
 
-function insertTextToGreeting() {
-  greetingDiv.insertAdjacentHTML(
-    'beforeend',
-    `
-      <h1>반갑습니다! 자바스크립트 파일에서 삽입되었습니다.</h1>
-    `
-  );
-}
-
-function alertLandingText() {
-  alert('n팀 쇼핑몰입니다. 안녕하세요.');
-}
-
-function alertGreetingText() {
-  alert('n팀 쇼핑몰에 오신 것을 환영합니다');
-}
-
-async function getDataFromApi() {
-  // 예시 URI입니다. 현재 주어진 프로젝트 코드에는 없는 URI입니다.
-  const data = await Api.get('/api/user/data');
-  const random = randomId();
-
-  console.log({ data });
-  console.log({ random });
+function scrollIndex() {
+  for (let i = 0; i < slideIndex.length; i++) {
+    slideIndex[i].classList.remove('active');
+  }
+  slideIndex[currentIdx].classList.add('active');
 }
