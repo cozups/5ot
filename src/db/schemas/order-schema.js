@@ -2,15 +2,28 @@ import { Schema } from 'mongoose';
 
 const OrderSchema = new Schema(
   {
+    OrderList: {   
+      type: new Schema(
+        {
+          product_id: String,
+          quantity: Integer,
+          price: Integer,
+        },
+        {
+          _id: false,
+        }
+      ),
+      required: true,
+    },
+    order_id: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
     },
     fullName: {
-      type: String,
-      required: true,
-    },
-    password: {
       type: String,
       required: true,
     },
@@ -31,14 +44,9 @@ const OrderSchema = new Schema(
       ),
       required: false,
     },
-    role: {
-      type: String,
-      required: false,
-      default: 'basic-user',
-    },
   },
   {
-    collection: 'users',
+    collection: 'orders',
     timestamps: true,
   }
 );
