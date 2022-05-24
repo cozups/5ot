@@ -9,13 +9,14 @@ const OrderSchema = new Schema(
   {
     OrderList: [
       new mongoose.Schema({
-        product_id: String, 
+        product_id: Number, 
         quantity: Number,
         price: Number,
+        product_size: Number,
       })
     ],
     order_id: {
-      type: String,
+      type: Number,
       required: true,
     },
     email: {
