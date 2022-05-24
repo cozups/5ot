@@ -1,16 +1,39 @@
-import { Schema } from 'mongoose';
+import { mongoose } from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment';
+
+const Schema = mongoose.Schema;
+
+autoIncrement.initialize(mongoose);
 
 const OrderSchema = new Schema(
   {
+    OrderList: {   
+      type: new Schema(
+        {
+          product_id: String,
+          quantity: Integer,
+          price: {
+            key:{$gte:0},
+            type: Integer,
+            required: true,
+            minimum: 0,
+          },
+        },
+        {
+          _id: false,
+        }
+      ),
+      required: true,
+    },
+    order_id: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
     },
     fullName: {
-      type: String,
-      required: true,
-    },
-    password: {
       type: String,
       required: true,
     },
@@ -31,16 +54,17 @@ const OrderSchema = new Schema(
       ),
       required: false,
     },
-    role: {
-      type: String,
-      required: false,
-      default: 'basic-user',
-    },
   },
   {
-    collection: 'users',
+    collection: 'orders',
     timestamps: true,
   }
 );
+OrderSchema.plugin(autoIncrement.plugin, {
+  model: 'order',
+  field: 'order_id',
+  startAt: 1,
+  incrementBy: 1
+});
 
 export { OrderSchema };
