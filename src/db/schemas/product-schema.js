@@ -1,7 +1,12 @@
 //DW CHOI 2022_05_23 
 //DESCRIPTION: schema for product
 
-import { Schema } from 'mongoose';
+import { mongoose } from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment';
+
+const Schema = mongoose.Schema;
+
+autoIncrement.initialize(mongoose);
 
 const Productschema = new Schema(
   {
@@ -14,32 +19,8 @@ const Productschema = new Schema(
       type: String, //w is woman, m is man
       required: true,
     },
-    womanType: {   //확인 요청, type 중복으로 사용됨, 이렇게 작성하면 되는지
-      type: new Schema(
-        {
-          new: String,
-          beauty: String,
-          shoes: String,
-          dress: String,
-        },
-        {
-          _id: false, // 역할이 무엇인지
-        }
-      ),
-      required: true,
-    },
-    manType: {   //확인 요청, type 중복으로 사용됨, 이렇게 작성하면 되는지
-      type: new Schema(
-        {
-          new: String,
-          suit: String,
-          shoes: String,
-          athletics: String,
-        },
-        {
-          _id: false,
-        }
-      ),
+    type: {
+      type: String,
       required: true,
     },
     SizeStockList: {   
@@ -60,11 +41,33 @@ const Productschema = new Schema(
       required: true,
       minimum: 0,
     },
+    product_id: {
+      type: Integer,
+      required: true,
+    },
+    product_info: {
+      type: Integer,
+      required: true,
+    },
+    product_image: {
+      type: String, // 넣을수 있는지 확인
+      required: true,
+    },
+    producer: {
+      type: String,
+      required: true,
+    },
   },
   {
     collection: 'products',
     timestamps: true,
   }
 );
+OrderSchema.plugin(autoIncrement.plugin, {
+  model: 'product',
+  field: 'product_id',
+  startAt: 1,
+  incrementBy: 1
+});
 
 export { ProductSchema };

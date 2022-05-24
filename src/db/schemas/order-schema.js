@@ -1,4 +1,9 @@
-import { Schema } from 'mongoose';
+import { mongoose } from 'mongoose';
+import autoIncrement from 'mongoose-auto-increment';
+
+const Schema = mongoose.Schema;
+
+autoIncrement.initialize(mongoose);
 
 const OrderSchema = new Schema(
   {
@@ -7,7 +12,12 @@ const OrderSchema = new Schema(
         {
           product_id: String,
           quantity: Integer,
-          price: Integer,
+          price: {
+            key:{$gte:0},
+            type: Integer,
+            required: true,
+            minimum: 0,
+          },
         },
         {
           _id: false,
@@ -50,5 +60,11 @@ const OrderSchema = new Schema(
     timestamps: true,
   }
 );
+OrderSchema.plugin(autoIncrement.plugin, {
+  model: 'order',
+  field: 'order_id',
+  startAt: 1,
+  incrementBy: 1
+});
 
 export { OrderSchema };
