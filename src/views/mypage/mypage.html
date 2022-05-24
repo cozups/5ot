@@ -34,8 +34,8 @@
 
         <div class="navbar-end">
           <ul id="navbar">
-            <li><a href="/login">로그인</a></li>
-            <li><a href="/register">회원가입</a></li>
+            <li><a href="/login">로그아웃</a></li>
+            <li><a href="/mypage">마이페이지</a></li>
             <li>
               <a href="/cart" aria-current="page">
                 <span class="icon">
@@ -56,20 +56,28 @@
       <div class="button-grid">
         <ul class="buttons">
           <li class="button-menu">
-            <i class="fa-solid fa-basket-shopping"></i>
-            <span>주문 조회</span>
+            <a href="/orderlist">
+              <i class="fa-solid fa-basket-shopping"></i>
+              <span>주문 조회</span>
+            </a>
           </li>
           <li class="button-menu">
-            <i class="fa-solid fa-address-card"></i>
-            <span>정보 수정</span>
+            <a href="/profile">
+              <i class="fa-solid fa-address-card"></i>
+              <span>정보 수정</span>
+            </a>
           </li>
           <li class="button-menu">
-            <i class="fa-solid fa-shirt"></i>
-            <span>제품 판매</span>
+            <a href="">
+              <i class="fa-solid fa-shirt"></i>
+              <span>제품 판매</span>
+            </a>
           </li>
           <li class="button-menu">
-            <i class="fa-solid fa-user-xmark"></i>
-            <span>회원 탈퇴</span>
+            <a href="/unregister">
+              <i class="fa-solid fa-user-xmark"></i>
+              <span>회원 탈퇴</span>
+            </a>
           </li>
         </ul>
       </div>
