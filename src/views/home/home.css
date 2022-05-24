@@ -1,11 +1,35 @@
+@import url('http://fonts.cdnfonts.com/css/helvetica-neue-9');
+
 * {
   box-sizing: border-box;
   margin: 0;
+}
+:root {
+  --main-color: #1d3557;
+  --sub-color: #457b9d;
+  --sub2-color: #a8dadc;
+  --error-color: #e63946;
 }
 
 body {
   position: relative;
   background-color: #fff;
+}
+.navbar-end ul li a {
+  color: var(--main-color);
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+.navbar-end ul li a:hover {
+  color: var(--sub-color);
+}
+
+#navbar {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  line-height: 52px;
 }
 
 .div-container {
@@ -18,6 +42,10 @@ body {
 
 #slide-buttons {
   margin: 50px 0 0 0;
+}
+
+#slide-buttons ul li button {
+  font-family: 'Helvetica 45 Light', sans-serif;
 }
 
 .slide-button-list {
