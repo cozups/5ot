@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 
 autoIncrement.initialize(mongoose);
 
-const Productschema = new Schema(
+const ProductSchema = new Schema(
   {
     product_name: { //primary key 인데 설정 어떻게 하는지 모름..
       type: String,
@@ -23,30 +23,24 @@ const Productschema = new Schema(
       type: String,
       required: true,
     },
-    SizeStockList: {   
-      type: new Schema(
-        {
-          size: Integer,
-          stock: Integer,
-        },
-        {
-          _id: false,
-        }
-      ),
-      required: true,
-    },
+    SizeStockList: [
+      new mongoose.Schema({
+        size: Number, 
+        stock: Number,
+      })
+    ],
     price: {
       key:{$gte:0},
-      type: Integer,
+      type: Number,
       required: true,
       minimum: 0,
     },
     product_id: {
-      type: Integer,
+      type: Number,
       required: true,
     },
     product_info: {
-      type: Integer,
+      type: Number,
       required: true,
     },
     product_image: {
@@ -63,7 +57,7 @@ const Productschema = new Schema(
     timestamps: true,
   }
 );
-OrderSchema.plugin(autoIncrement.plugin, {
+ProductSchema.plugin(autoIncrement.plugin, {
   model: 'product',
   field: 'product_id',
   startAt: 1,
