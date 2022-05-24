@@ -3,6 +3,8 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
+  font-family: Helvetica, sans-serif;
 }
 :root {
   --main-color: #1d3557;
@@ -15,6 +17,7 @@ body {
   position: relative;
   background-color: #fff;
 }
+
 .navbar-end ul li a {
   color: var(--main-color);
   font-size: 0.8rem;
@@ -32,11 +35,12 @@ body {
   line-height: 52px;
 }
 
+/* div container */
 .div-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
   height: 85vh;
 }
 
@@ -46,12 +50,6 @@ body {
 
 #slide-buttons ul li button {
   font-family: 'Helvetica 45 Light', sans-serif;
-}
-
-.slide-button-list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 #slideShow {
@@ -74,17 +72,23 @@ body {
 
 .item-photo {
   height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .item-photo img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
+/* slide button 관련 */
 .slide-button-element {
   border: none;
   background-color: transparent;
   font-size: 16px;
-  margin: 0 20px;
+  margin: 8px 0;
   cursor: pointer;
   transition: all 0.1s;
 }
@@ -93,48 +97,21 @@ body {
   font-weight: bold;
 }
 
-.slide-index {
-  position: absolute;
-  right: 5px;
-  bottom: 0;
-  font-size: 8px;
-}
-
-.slide-index-element {
-  display: block;
-  width: 6px;
-  height: 6px;
-  background-color: white;
-  border-radius: 50%;
-  border: 1px solid black;
-  margin: 6px 0;
-}
-.slide-index-element.active {
-  display: block;
-  width: 6px;
-  height: 6px;
-  background-color: black;
-  border-radius: 50%;
-  border: 1px solid black;
-  margin: 6px 0;
-}
-
-.fa-angles-left {
-  display: none;
+#slide-buttons {
   position: absolute;
   top: 50%;
-  left: 30px;
-  cursor: pointer;
+  left: 10%;
+  transform: translate(-50%, -50%);
 }
 
-.fa-angles-right {
-  display: none;
-  position: absolute;
-  top: 50%;
-  right: 30px;
-  cursor: pointer;
+.slide-button-list {
+  margin-bottom: 20px;
 }
 
-.shown {
-  display: inline;
+#slide-buttons h2 {
+  font-size: 32px;
+}
+
+.button-active {
+  font-weight: bold;
 }
