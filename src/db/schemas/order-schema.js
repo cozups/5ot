@@ -1,4 +1,4 @@
-import { mongoose } from 'mongoose';
+import { mongoose, trusted } from 'mongoose';
 import autoIncrement from 'mongoose-auto-increment';
 
 const Schema = mongoose.Schema;
@@ -7,26 +7,16 @@ autoIncrement.initialize(mongoose);
 
 const OrderSchema = new Schema(
   {
-    OrderList: {   
-      type: new Schema(
-        {
-          product_id: String,
-          quantity: Integer,
-          price: {
-            key:{$gte:0},
-            type: Integer,
-            required: true,
-            minimum: 0,
-          },
-        },
-        {
-          _id: false,
-        }
-      ),
-      required: true,
-    },
+    OrderList: [
+      new mongoose.Schema({
+        product_id: Number, 
+        quantity: Number,
+        price: Number,
+        product_size: Number,
+      })
+    ],
     order_id: {
-      type: String,
+      type: Number,
       required: true,
     },
     email: {

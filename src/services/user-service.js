@@ -129,7 +129,7 @@ class UserService {
   
   //유저 정보 삭제, 현재 비밀번호가 있어야 수정 가능함.
   //박세웅
-  async deletUser( password){
+  async deleteUser( password){
     //
   }
 }
