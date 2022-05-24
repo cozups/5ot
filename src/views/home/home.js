@@ -23,7 +23,7 @@ for (let i = 0; i < slideButtons.length; i++) {
 // functions
 function moveNext() {
   setActive(currentIdx);
-  slidesTop = currentIdx * 500;
+  slidesTop = currentIdx * 510;
   slides.style.top = -slidesTop + 'px';
 }
 
