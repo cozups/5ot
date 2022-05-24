@@ -1,0 +1,282 @@
+.header-search-input {
+  width: 20rem
+}
+
+.navbar-menu .is-info:focus {
+  box-shadow: none;
+  outline: none
+}
+
+.cart-header {
+  margin-bottom: 2rem
+}
+
+.cart-header .title {
+  padding: 0;
+  margin: 0 0 1rem 0;
+  text-align: center;
+  line-height: 24px;
+  font-weight: bold;
+  letter-spacing: -0.2px;
+  color: #111111;
+}
+.cart-header .product-count{
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  color: #666;
+}
+.cart-header .subtitle {
+  line-height: 2.5rem;
+  padding: 3rem 1rem 0
+}
+
+.cart-products {
+  height: 100%
+}
+
+.cart-products-container {
+  width: 100%
+}
+
+.cart-products-header {
+  padding: 20px 0;
+  border-top: 1px solid #e5e5e5;
+}
+
+.cart-products-header .help {
+  display: inline-block;
+  font-size: .9rem;
+  margin-bottom: .5rem;
+  margin-top: 0;
+  text-decoration: underline;
+}
+
+.cart-products-header label {
+  border-radius: 100%;
+  display: inline-block;
+  line-height: .5rem
+}
+
+.cart-products-header input {
+  height: .9rem;
+  width: .9rem
+}
+
+.cart-products-header .seperator {
+  line-height: .8rem
+}
+
+.cart-products-header .delete-part {
+  cursor: pointer;
+  line-height: 1rem
+}
+
+.cart-product-item {
+  align-items: center;
+  display: flex;
+  margin-bottom: .5rem;
+  padding-bottom: 2rem;
+  padding-top: .3rem;
+  position: relative
+}
+
+.cart-product-item:not(:last-child) {
+  border-bottom: 1px solid #ddd
+}
+
+.cart-product-item label {
+  position: absolute;
+  top: .2rem
+}
+
+.cart-product-item .delete-button {
+  background-color: transparent;
+  border: none;
+  color: #bdbdbd;
+  cursor: pointer;
+  font-size: 1rem;
+  position: absolute;
+  right: -.5rem;
+  top: -.1rem
+}
+
+.cart-product-item .image {
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 1.2rem
+}
+
+.cart-product-item input {
+  height: .9rem;
+  width: .9rem
+}
+
+.cart-product-item .content {
+  align-items: center;
+  display: flex;
+  flex-basis: 12rem;
+  flex-direction: column;
+  margin-bottom: 0;
+  margin-left: 1rem
+}
+
+.cart-product-item .content p {
+  cursor: pointer;
+  font-size: 1.4rem;
+  margin-bottom: .5em
+}
+
+.cart-product-item .content p:hover {
+  opacity: .8
+}
+
+.cart-product-item .quantity .button {
+  border-color: #aaa;
+  font-size: .6rem;
+  padding: 1px 9px
+}
+
+.cart-product-item .quantity .input {
+  height: 1.5rem;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+  width: 2.5rem
+}
+
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none
+}
+
+.calculation {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-around;
+  margin-left: 2rem;
+  padding: 0 .5rem
+}
+
+.calculation .icon {
+  color: #888
+}
+
+.calculation p {
+  display: block;
+  font-size: 1.4rem
+}
+
+.tile-order-summary {
+  height: 100%;
+  position: sticky;
+  top: .5rem
+}
+
+.order-summary {
+  width: 380px;
+  letter-spacing: -0.7px;
+  color: #111111;
+}
+
+.order-summary .header {
+  display: block;
+  margin-top: -1px;
+  padding: 1rem;
+  border-bottom: 0;
+  background-color: #e5e5e5;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid #e5e5e5;
+  padding: 1.2rem;
+}
+
+.order-info .info {
+  display: flex;
+  font-size: 1rem;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+/* .order-info .info:first-child {
+  margin-top: 1.2rem
+}
+
+.order-info .info:last-child {
+  margin-bottom: 1.2rem
+} */
+
+.order-info .info p {
+  display: block
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: .8rem
+}
+
+.total P {
+  display: block
+}
+
+.total .total-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: .2rem
+}
+
+.total .total-price {
+  font-size: 1.5rem;
+  font-weight: 700
+}
+
+.purchase {
+  margin-top: 1.5rem;
+  padding: .2rem 0
+}
+
+.purchase button {
+  font-size: 1rem;
+  font-weight: 600;
+  height: 3rem;
+  width: 100%
+}
+
+@media only screen and (max-width: 500px) {
+  .cart-product-item {
+      flex-direction:column
+  }
+
+  .cart-product-item label {
+      left: 0
+  }
+
+  .cart-product-item .image {
+      height: 150px;
+      margin-top: 1rem;
+      width: 150px
+  }
+
+  .cart-product-item .content {
+      flex-basis: 2rem;
+      margin-top: 2rem
+  }
+
+  .cart-product-item .content p {
+      margin-top: .5rem
+  }
+
+  .calculation {
+      margin-left: 0;
+      margin-top: 1rem;
+      width: 100%
+  }
+}
