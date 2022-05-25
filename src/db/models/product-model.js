@@ -9,8 +9,8 @@ const Product = model('products', ProductSchema);
 export class ProductModel {
 
  
-  async findBySexNType(sex,type) {
-    const products = await Product.find({ sex: sex, type: type });
+  async findByCategory(category) {
+    const products = await Product.find({category: category});
     return products;
   }
 
