@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-5팀</title>
+    <title>쇼핑-n팀</title>
     <!-- 아이콘 -->
     <link
       rel="icon"
@@ -33,7 +33,7 @@
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
             <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-5팀</span>
+            <span class="has-text-link">쇼핑-n팀</span>
           </a>
 
           <a
@@ -49,12 +49,12 @@
           </a>
         </div>
 
-          <div class="navbar-end">
+          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
             <ul id="navbar">
-              <li><a href="/register">회원가입</a></li>
               <li><a href="/login">로그인</a></li>
+              <li><a href="/register">회원가입</a></li>
               <li>
-                <a href="/cart" aria-current="page">
+                <a href="#cart" aria-current="page">
                   <span class="icon">
                     <i class="fas fa-cart-shopping"></i>
                   </span>
@@ -68,69 +68,13 @@
     </nav>
 
     <div class="div-container">
-      <div id="slide-buttons">
-        <h2>Woman</h2>
-        <ul class="slide-button-list">
-          <li><button class="slide-button-element" value="0">new</button></li>
-          <li><button class="slide-button-element" value="1">beauty</button></li>
-          <li><button class="slide-button-element" value="2">shoes</button></li>
-          <li><button class="slide-button-element" value="3">dress</button></li>
-        </ul>
-        <h2>Man</h2>
-        <ul class="slide-button-list">
-          <li><button class="slide-button-element" value="4">new</button></li>
-          <li><button class="slide-button-element" value="5">suit</button></li>
-          <li><button class="slide-button-element" value="6">shoes</button></li>
-          <li><button class="slide-button-element" value="7">athletics</button></li>
-        </ul>
+      <div class="landing" id="landingDiv">
+        <h1>랜딩 페이지</h1>
       </div>
-      <div id="slideShow">
-        <ul class="slides">
-          <!-- for woman -->
-          <li class="item-photo new">
-            <a href="/w/new">
-              <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-new/subhome-xmedia-19//w/1039/IMAGE-landscape-f15c96c3-370d-4703-a9af-4a92065f0bfe-default_0.jpg?ts=1652354105595" alt="">
-            </a>
-          </li>
-          <li class="item-photo beauty">
-            <a href="/w/beauty">
-              <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-beauty-new/subhome-xmedia-19//w/1039/IMAGE-landscape-a17387a1-72f2-4317-98db-62dbcbb22cff-default_0.jpg?ts=1652193887716" alt="">
-            </a>
-          </li>
-          <li class="item-photo shoes">
-            <a href="/w/shoes">
-              <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-shoes-bags/subhome-xmedia-21//w/1046/landscape-9de6afa9-4b7d-4b11-90a4-f334fa82f3fb_0.jpg?ts=1653297062007" alt="">
-            </a>
-          </li>
-          <li class="item-photo dress">
-            <a href="/w/dress">
-              <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-woman-dresses/subhome-xmedia-18//w/1039/IMAGE-landscape-77184496-2326-49d8-93e8-4c0f54a6f699-default_0.jpg?ts=1651837590664" alt="">
-            </a>
-          </li>
-
-          <!-- for men -->
-          <li class="item-photo new">
-            <a href="/m/new">
-              <img src="https://static.zara.net/photos///contents/mkt/spots/ss22-north-man-new/subhome-xmedia-20//w/1046/IMAGE-landscape-e173a6d5-0d1e-4da4-9e7f-151b0946b25e-default_0.jpg?ts=1653035472480" alt="">
-            </a>
-          </li>
-          <li class="item-photo suit">
-            <a href="/m/suit">
-              <img src="https://images.unsplash.com/photo-1601484993451-8fccfeedc825?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170" alt="">
-            </a>
-          </li>
-          <li class="item-photo shoes">
-            <a href="/m/shoes">
-              <img src="https://images.unsplash.com/photo-1520639888713-7851133b1ed0?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387  " alt="">
-            </a>
-          </li>
-          <li class="item-photo athletics">
-            <a href="/m/athletics">
-              <img src="https://images.unsplash.com/photo-1461897104016-0b3b00cc81ee?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170" alt="">
-            </a>
-          </li>
-        </ul>
+      <div class="greeting" id="greetingDiv">
+        <h1>안녕하세요!</h1>
       </div>
     </div>
+
   </body>
 </html>

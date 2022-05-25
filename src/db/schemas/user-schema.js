@@ -1,9 +1,4 @@
-import { mongoose } from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
-
-const Schema = mongoose.Schema;
-
-autoIncrement.initialize(mongoose);
+import { Schema } from 'mongoose';
 
 const UserSchema = new Schema(
   {
@@ -41,17 +36,11 @@ const UserSchema = new Schema(
       required: false,
       default: 'basic-user',
     },
-  }, 
+  },
   {
     collection: 'users',
     timestamps: true,
-  },
+  }
 );
-UserSchema.plugin(autoIncrement.plugin, {
-  model: 'user',
-  field: 'userId',
-  startAt: 1,
-  incrementBy: 1
-});
 
 export { UserSchema };

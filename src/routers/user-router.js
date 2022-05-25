@@ -16,7 +16,7 @@ userRouter.post('/register', async (req, res, next) => {
         'headers의 Content-Type을 application/json으로 설정해주세요'
       );
     }
-    
+
     // req (request)의 body 에서 데이터 가져오기
     const fullName = req.body.fullName;
     const email = req.body.email;
@@ -133,19 +133,5 @@ userRouter.patch(
     }
   }
 );
-// user data를 삭제함
-// 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
-userRouter.get('/unregister', loginRequired, async function (req, res, next) {
-  try {
-  const password= req.body.password;
-    //../services/user-service에  deleteUser 구현 필요 => 박세웅
-  const message= await userService.deleteUser(password)
-  res.status(200).json(message);
-
-  } catch (error) {
-    next(error);
-  }
-});
-
 
 export { userRouter };
