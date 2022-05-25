@@ -52,10 +52,10 @@ productRouter.post('/add', async(req,res,next)=>{
     const producer= req.body.producer;
     const stock= req.body.stock;
     const product_info= req.body.product_info;
-
+    const category= {sex,type}
 
     const new_product= await productService.addItems({
-      product_name,sex,type,product_image,price, producer, stock, product_info
+      product_name,category,product_image,price, producer, stock, product_info
     });
 
     res.status(201).json(new_product);
