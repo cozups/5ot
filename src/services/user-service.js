@@ -129,8 +129,32 @@ class UserService {
   
   //유저 정보 삭제, 현재 비밀번호가 있어야 수정 가능함.
   //박세웅
-  async deleteUser( password){
-    //
+  async deleteUser(email, password){
+    
+    let user = await this.userModel.findByEmail(email);
+    const correctPasswordHash = user.password;
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      correctPasswordHash,
+    );
+
+    if (!isPasswordCorrect) {
+      throw new Error(
+        '현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요.'
+      );
+    }
+    //유저 이메일 불러와서 삭제하기
+    user = await this.userModel.deleteUser(
+      email,
+    );
+
+    if (!user) {
+      throw new Error(
+        '삭제에 실패했습니다. 다시 한 번 확인해 주세요.' // 확인 필요
+      );
+    }
+    return user;
+
   }
 }
 
