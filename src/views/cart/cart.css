@@ -41,7 +41,7 @@
   margin-bottom: 2rem;
 }
 
-.cart-header .title {
+.cart-header .title p {
   padding: 0;
   margin: 0 0 1rem 0;
   text-align: center;
@@ -280,12 +280,19 @@ input[type='number']::-webkit-outer-spin-button {
   height: 3rem;
   width: 100%;
   background-color: var(--sub-color);
-  color: white;
 }
 
 .purchase button:hover {
   background-color: var(--main-color);
   color: white;
+}
+
+.purchase a button {
+  color: white;
+}
+
+.order-complete-container {
+  margin-top: 20px;
 }
 
 @media only screen and (max-width: 500px) {
