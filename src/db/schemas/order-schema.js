@@ -12,7 +12,6 @@ const OrderSchema = new Schema(
         product_id: Number, 
         quantity: Number,
         price: Number,
-        product_size: Number,
       })
     ],
     order_id: {
