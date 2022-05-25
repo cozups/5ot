@@ -19,6 +19,7 @@ viewsRouter.use('/m/new', serveStatic('product-list'));
 viewsRouter.use('/m/suit', serveStatic('product-list'));
 viewsRouter.use('/m/shoes', serveStatic('product-list'));
 viewsRouter.use('/m/athletics', serveStatic('product-list'));
+viewsRouter.use('/product-detail', serveStatic('product-detail'));
 
 viewsRouter.use('/mypage/orderlist', serveStatic('orderlist'));
 viewsRouter.use('/mypage/register', serveStatic('register-select-page'));
