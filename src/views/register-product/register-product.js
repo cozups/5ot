@@ -26,6 +26,8 @@ async function postProduct(e) {
   const stock = stockInput.value;
   const price = priceInput.value;
 
+  console.log(productImage);
+
   try {
     const data = {
       product_name: productName,
