@@ -79,7 +79,7 @@
       <h1>제품 판매</h1>
 
       <div id="sell-form-wrap">
-        <form action="/product/add" method="post" class="sell-form">
+        <form class="sell-form" enctype="multipart/form-data" action="/product/add" method="post">
           <label for="product_name">제품명</label>
           <input type="text" name="product_name" id="product_name" />
 
@@ -91,25 +91,25 @@
 
           <label for="type">카테고리 선택</label>
           <select name="type" id="type">
-            <option value="category1">category1</option>
+            <option value="new">new</option>
           </select>
 
           <label for="producer">제조사</label>
-          <input type="producer" id="producer" />
+          <input type="text" id="producer" name="producer" />
 
           <label for="product_info">설명</label>
           <textarea name="product_info" id="product_info" cols="50" rows="10"></textarea>
 
           <label for="product_image">제품 이미지 첨부</label>
-          <input type="file" accept="image/*" name="product_image" />
+          <input type="file" name="image" id="product_image" />
 
           <label for="stock">재고 수</label>
-          <input type="number" name="sizeStockList" />
+          <input type="number" name="stock" id="stock" />
 
           <label for="price">가격</label>
-          <input type="number" name="price" />
+          <input type="number" name="price" id="price" />
 
-          <button type="submit" class="register-button">등록하기</button>
+          <button type="submit">등록하기</button>
         </form>
       </div>
     </div>
