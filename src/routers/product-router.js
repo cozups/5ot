@@ -5,7 +5,15 @@ import is from '@sindresorhus/is';
 import { loginRequired } from '../middlewares';
 import { productService } from '../services';
 const multer = require('multer');
-const upload = multer({dest: 'images/'}) //dest : 저장 위치
+const storage = multer.diskStorage({
+  destination: (req,file, callback) =>{
+    callback(null, "images/");
+  },
+  filename:(req,file,callback)=>{
+    callback(null,file.originalname);
+  }
+});
+const upload = multer({storage: storage}) //dest : 저장 위치
 
 const productRouter = Router();
 
@@ -47,7 +55,7 @@ productRouter.get('/:sex/:type', async(req,res,next)=>{
 productRouter.post('/add', upload.single("image") , async(req,res,next)=>{
   try{
     console.log(req.file);
-    
+
     const product_name= req.body.product_name;
     const sex= req.body.sex;
     const type= req.body.type;
