@@ -3,7 +3,8 @@ import { OrderSchema } from '../schemas/order-schema';
 
 const Order = model('orders', OrderSchema);
 
-export class UserModel {
+export class OrderModel {
+  
   async findByEmail(email) {
     const order = await Order.findOne({ email });
     return order;
