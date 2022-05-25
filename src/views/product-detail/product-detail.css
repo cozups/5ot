@@ -102,9 +102,14 @@ body {
   height: 400px;
   margin-left: 50px;
   float: right;
-  border: 1px solid black;
 }
 
+.content {
+  margin-top: 10px;
+}
+.content * {
+  margin: 0;
+}
 #producer {
   color: darkgray;
   border-bottom: 1px solid darkgray;
@@ -124,6 +129,7 @@ body {
 
 .buttons #purchase,
 .buttons #cart {
+  color: #fff;
   border-radius: 10px;
   width: 180px;
   height: 60px;
@@ -133,11 +139,10 @@ body {
 }
 
 .buttons #purchase {
-  background-color: #a8dadc;
-  border: 1px solid #a8dadc;
-  color: #fff;
+  background-color: #457b9d;
+  border: 1px solid #457b9d;
 }
 .buttons #cart {
-  background-color: cornsilk;
-  border: 1px solid cornsilk;
+  background-color: #1d3557;
+  border: 1px solid #1d3557;
 }

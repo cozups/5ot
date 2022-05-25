@@ -50,6 +50,9 @@
   height: 40px;
 }
 .certify-password #submit {
+  background-color: #457b9d;
+  border: 1px solid #457b9d;
+  color: #fff;
   width: 80px;
   height: 40px;
 }

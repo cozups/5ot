@@ -28,7 +28,7 @@ viewsRouter.use('/mypage/register', serveStatic('register-select-page'));
 viewsRouter.use('/mypage/register/category', serveStatic('register-category'));
 viewsRouter.use('/mypage/register/product', serveStatic('register-product'));
 viewsRouter.use('/mypage/register/product', serveStatic('register-product'));
-viewsRouter.use('/mypage/unregister', serveStatic('unregister-product'));
+viewsRouter.use('/mypage/unregister', serveStatic('unregister-user'));
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));
