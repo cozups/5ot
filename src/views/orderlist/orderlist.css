@@ -1,0 +1,164 @@
+@import url('http://fonts.cdnfonts.com/css/helvetica-neue-9');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, sans-serif;
+}
+:root {
+  --main-color: #1d3557;
+  --sub-color: #457b9d;
+  --sub2-color: #a8dadc;
+  --error-color: #e63946;
+}
+
+body {
+  position: relative;
+  background-color: #fff;
+}
+.navbar-end ul li a {
+  color: var(--main-color);
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+.navbar-end ul li a:hover {
+  color: var(--sub-color);
+}
+
+#navbar {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  line-height: 52px;
+}
+/*  사이드 메뉴 */
+#side-menus-wrap {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+}
+
+.side-menu-element {
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  margin: 8px 0;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.selected {
+  font-weight: bold;
+}
+
+/* div 컨테이너 */
+.div-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 85vh;
+}
+
+.div-container h1 {
+  padding: 0 10px;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  color: #000;
+}
+
+/* 주문 조회 컨테이너 */
+
+#order-list-wrap {
+  width: 800px;
+}
+
+/* 주문 조회 리스트 엘리먼트 */
+
+.order-list-item {
+  width: 100%;
+  border-top: 1px solid #acacac;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* 이미지, 주문 취소 버튼 */
+.left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  width: 200px;
+}
+
+.order-cancel {
+  margin-top: 8px;
+  background-color: #fff;
+  color: var(--error-color);
+  border: 1px solid var(--error-color);
+  padding: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.order-cancel:hover {
+  color: #fff;
+  background-color: var(--error-color);
+}
+
+.item-thumbnail {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* 주문 정보 부분 */
+.right-side {
+  margin: 12px 12px 0 12px;
+  position: relative;
+  width: 600px;
+}
+
+.item-name {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.brand {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.order-count {
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.address {
+  font-size: 14px;
+  color: #acacac;
+}
+
+.total-price {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--sub2-color);
+}
+
+.state {
+  color: #acacac;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 14px;
+}
