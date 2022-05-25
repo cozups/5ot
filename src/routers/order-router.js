@@ -15,14 +15,6 @@ orderRouter.post('/',async(req,res,next)=>{
   }
 });
 
-orderRouter.post('/complete',async(req,res,next)=>{
-  try{
-    
-  }
-  catch(error){
-    next(error);
-  }
-});
 
 
 orderRouter.post('/orderlist',async(req,res,next)=>{
