@@ -24,15 +24,9 @@ const ProductSchema = new Schema(
       required: true,
       //unique: true, primary key 설정?
     },
-    sex: {
-      type: String, //w is woman, m is man
-      required: true,
-    },
-    type: {
-      type: String,
-      required: true,
-    },
+  
     stock: {
+      key:{$gte:0},
       type: Number,
       required: true,
     },
