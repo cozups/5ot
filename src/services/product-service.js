@@ -42,6 +42,6 @@ class ProductService {
  
 }
 
-const productService = new UserService(productModel);
+const productService = new ProductService(productModel);
 
-export { produtService };
+export { productService };

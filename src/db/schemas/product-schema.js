@@ -10,6 +10,15 @@ autoIncrement.initialize(mongoose);
 
 const ProductSchema = new Schema(
   {
+    category: {
+      type: new Schema(
+        {
+          sex: String,
+          type: String,
+        },
+      ),
+      required: true,
+    },
     product_name: { //primary key 인데 설정 어떻게 하는지 모름..
       type: String,
       required: true,
@@ -23,12 +32,10 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
-    SizeStockList: [
-      new mongoose.Schema({
-        size: Number, 
-        stock: Number,
-      })
-    ],
+    stock: {
+      type: Number,
+      required: true,
+    },
     price: {
       key:{$gte:0},
       type: Number,
