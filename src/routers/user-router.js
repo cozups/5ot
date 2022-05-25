@@ -138,8 +138,9 @@ userRouter.patch(
 userRouter.get('/unregister', loginRequired, async function (req, res, next) {
   try {
   const password= req.body.password;
+  const email = req.body.email;
     //../services/user-service에  deleteUser 구현 필요 => 박세웅
-  const message= await userService.deleteUser(password)
+  const message= await userService.deleteUser(email, password)
   res.status(200).json(message);
 
   } catch (error) {
