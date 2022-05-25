@@ -12,8 +12,8 @@
     <!-- 폰트 어썸: 아이콘 -->
     <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="mypage.css" />
-    <script src="mypage.js" type="module" defer></script>
+    <link rel="stylesheet" href="register-category.css" />
+    <script src="register-category" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 부분 -->
@@ -49,37 +49,42 @@
       </div>
     </nav>
 
+    <div id="side-menus-wrap">
+      <ul class="side-menus-list">
+        <li>
+          <a href="/mypage/orderlist">
+            <button class="side-menu-element" value="0">주문 조회</button>
+          </a>
+        </li>
+        <li>
+          <a href="/mypage/profile">
+            <button class="side-menu-element" value="1">정보 수정</button>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <button class="side-menu-element selected" value="2">제품 판매</button>
+          </a>
+        </li>
+        <li>
+          <a href="mypage/unregister">
+            <button class="side-menu-element" value="3">회원 탈퇴</button>
+          </a>
+        </li>
+      </ul>
+    </div>
+
     <!-- 본문 -->
     <div class="div-container">
-      <h1>My page</h1>
+      <h1>카테고리 등록</h1>
 
-      <div class="button-grid">
-        <ul class="buttons">
-          <li class="button-menu">
-            <a href="/mypage/orderlist">
-              <i class="fa-solid fa-basket-shopping"></i>
-              <span>주문 조회</span>
-            </a>
-          </li>
-          <li class="button-menu">
-            <a href="/mypage/profile">
-              <i class="fa-solid fa-address-card"></i>
-              <span>정보 수정</span>
-            </a>
-          </li>
-          <li class="button-menu">
-            <a href="/mypage/register">
-              <i class="fa-solid fa-shirt"></i>
-              <span>제품 판매</span>
-            </a>
-          </li>
-          <li class="button-menu">
-            <a href="/mypage/unregister">
-              <i class="fa-solid fa-user-xmark"></i>
-              <span>회원 탈퇴</span>
-            </a>
-          </li>
-        </ul>
+      <div id="sell-form-wrap">
+        <form action="/product/add" method="post" class="sell-form">
+          <label for="product_name">카테고리명</label>
+          <input type="text" name="product_name" id="product_name" />
+
+          <button type="submit" class="register-button">등록하기</button>
+        </form>
       </div>
     </div>
   </body>
