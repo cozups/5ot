@@ -6,24 +6,27 @@ import { ProductSchema } from '../schemas/product-schema';
 
 const Product = model('products', ProductSchema);
 
-export class UserModel {
+export class ProductModel {
+
+  //define
+ 
   async findByEmail(email) {
-    const product = await Product.findOne({ email });
-    return product;
+    const user = await User.findOne({ email });
+    return user;
   }
 
   async findById(userId) {
-    const product = await Product.findOne({ _id: userId });
-    return product;
+    const user = await User.findOne({ _id: userId });
+    return user;
   }
 
   async create(userInfo) {
-    const createdNewUser = await Product.create(userInfo);
+    const createdNewUser = await User.create(userInfo);
     return createdNewUser;
   }
 
   async findAll() {
-    const users = await Product.find({});
+    const users = await User.find({});
     return users;
   }
 
@@ -31,11 +34,12 @@ export class UserModel {
     const filter = { _id: userId };
     const option = { returnOriginal: false };
 
-    const updatedUser = await Product.findOneAndUpdate(filter, update, option);
+    const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
 }
 
-const userModel = new UserModel();
 
-export { userModel };
+const productModel = new ProductModel();
+
+export { productModel };
