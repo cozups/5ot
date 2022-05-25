@@ -43,11 +43,6 @@ body {
   width: 100%;
 }
 
-#slide-buttons {
-  margin: 50px 0 0 0;
-  position: sticky;
-}
-
 #slide-buttons ul li button {
   font-family: 'Helvetica 45 Light', sans-serif;
 }
@@ -67,9 +62,9 @@ body {
 
 #slide-buttons {
   position: fixed;
-  top: 50%;
+  top: 40%;
   left: 10%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -40%);
 }
 
 .slide-button-list {

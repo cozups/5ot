@@ -17,7 +17,7 @@ class ProductService {
   async getItem(req_input){
     const {sex,type,product_id}= req_input;
     const product= await this.productModel.findByProductId(product_id);
-    if(!prodcut){
+    if(!product){
       throw new Error(
         '해당 제품이 존재하지 않습니다. 다시 한 번 확인해 주세요.'
       );
@@ -26,8 +26,9 @@ class ProductService {
   }
   async getItems(req_input){
     const {sex,type}= req_input;
-    const products= await this.productModel.findBySexNType(sex,type);
-    if(!prodcut){
+    const category= {sex,type};
+    const products= await this.productModel.findByCategory(category);
+    if(!products){
       throw new Error(
         '해당 제품이 존재하지 않습니다. 다시 한 번 확인해 주세요.'
       );
