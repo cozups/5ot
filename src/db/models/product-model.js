@@ -20,7 +20,7 @@ export class ProductModel {
   }
 
   async insertItem(product_object){
-    const createdproduct = await Prdocut.create(product_object);
+    const createdproduct = await Product.create(product_object);
     return createdproduct;
   }
   //define
