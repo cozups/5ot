@@ -10,6 +10,8 @@ viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
 viewsRouter.use('/cart', serveStatic('cart'));
+viewsRouter.use('/order', serveStatic('order'));
+viewsRouter.use('/order/complete', serveStatic('complete'));
 viewsRouter.use('/mypage', serveStatic('mypage'));
 viewsRouter.use('/w/new', serveStatic('product-list'));
 viewsRouter.use('/w/beauty', serveStatic('product-list'));
