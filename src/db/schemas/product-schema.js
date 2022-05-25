@@ -41,7 +41,7 @@ const ProductSchema = new Schema(
       required: true,
     },
     product_info: {
-      type: Number,
+      type: String,
       required: true,
     },
     product_image: {
