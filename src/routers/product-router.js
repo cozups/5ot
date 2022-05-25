@@ -4,6 +4,18 @@ import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
 import { productService } from '../services';
+const multer = require('multer');
+const path = require('path'); //dest : 저장 위치
+var storage= multer.diskStorage({
+  destination: function(req,file,cb){
+    cb(null, "public/images/");
+  },
+  filename: function(req,file,cb){
+    const ext= path.extname(file.originalname);
+    cb(null,path.basename(file.originalname, ext)+"-"+Date.now()+ext);
+  },
+});
+var upload= multer({storage: storage});
 
 const productRouter = Router();
 
@@ -42,12 +54,12 @@ productRouter.get('/:sex/:type', async(req,res,next)=>{
 });
 
 
-productRouter.post('/add', async(req,res,next)=>{
+productRouter.post('/add', upload.single("image") , async(req,res,next)=>{
   try{
     const product_name= req.body.product_name;
     const sex= req.body.sex;
     const type= req.body.type;
-    const product_image= req.body.product_image;
+    const product_image= `/images/${req.file.filename}`; // image 경로 만들기
     const price= req.body.price;
     const producer= req.body.producer;
     const stock= req.body.stock;
