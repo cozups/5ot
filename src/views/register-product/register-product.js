@@ -29,10 +29,8 @@ async function postProduct(e) {
   try {
     const data = {
       product_name: productName,
-      category: {
-        sex,
-        type,
-      },
+      sex: sex,
+      type: type,
       producer: producer,
       product_info: productInfo,
       product_image: productImage,
