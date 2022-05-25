@@ -82,12 +82,15 @@ body {
 }
 
 /* product-list-wrap */
+section {
+  display: block;
+}
 
 #product-list-wrap {
+  position: relative;
   width: 800px;
-  margin-top: 40vh;
+  margin-top: 200vh;
   margin-left: 100px;
-  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
