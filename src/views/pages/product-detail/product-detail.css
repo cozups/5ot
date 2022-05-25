@@ -46,42 +46,11 @@ body {
 
 #slide-buttons {
   margin: 50px 0 0 0;
+  position: sticky;
 }
 
 #slide-buttons ul li button {
   font-family: 'Helvetica 45 Light', sans-serif;
-}
-
-#slideShow {
-  width: 800px;
-  height: 500px;
-  overflow: hidden;
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.slides {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: top 0.5s ease-out;
-}
-
-.item-photo {
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.item-photo img {
-  width: 800px;
-  height: 500px;
-  object-fit: contain;
 }
 
 /* slide button 관련 */
@@ -91,7 +60,6 @@ body {
   font-size: 16px;
   margin: 8px 0;
   cursor: pointer;
-  transition: all 0.1s;
 }
 
 .slide-button-element:hover {
@@ -113,6 +81,34 @@ body {
   font-size: 32px;
 }
 
-.button-active {
-  font-weight: bold;
+/* product-detail-wrap */
+#product-detail-wrap {
+  width: 800px;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 100px;
+}
+.product-detail-left {
+  width: 300px;
+  height: 400px;
+  float: left;
+  text-align: center;
+  border: 1px solid black;
+}
+.product-detail-right {
+  width: 400px;
+  height: 400px;
+  margin-left: 50px;
+  float: right;
+  border: 1px solid black;
+}
+.buttons {
+  width: 400px;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
 }

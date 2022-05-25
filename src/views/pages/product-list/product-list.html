@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-데모</title>
+    <title>쇼핑-5팀</title>
     <!-- 아이콘 -->
     <link
       rel="icon"
@@ -11,7 +11,7 @@
       sizes="16x16"
       href="/elice-rabbit-favicon.png"
     />
-    <!-- bulma css 관련 -->
+    <!-- bulma css -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
@@ -23,8 +23,8 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="login.css" />
-    <script src="login.js" type="module" defer></script>
+    <link rel="stylesheet" href="product-list.css" />
+    <script src="product-list.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -33,7 +33,7 @@
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
             <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-데모</span>
+            <span class="has-text-link">쇼핑-5팀</span>
           </a>
 
           <a
@@ -49,9 +49,9 @@
           </a>
         </div>
 
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+          <div class="navbar-end">
             <ul id="navbar">
+              <li><a href="/login">로그인</a></li>
               <li><a href="/register">회원가입</a></li>
               <li>
                 <a href="/cart" aria-current="page">
@@ -67,40 +67,40 @@
       </div>
     </nav>
 
-    <!-- 로그인 폼(Form) -->
-    <div class="login-form-container">
-      <form class="box login-form-box" id="loginForm">
-        <p class="title is-5 has-text-info">로그인</p>
-        <div class="field">
-          <label class="label" for="emailInput">이메일</label>
-          <div class="control">
-            <input
-              class="input"
-              id="emailInput"
-              type="email"
-              placeholder="abc@example.com"
-              autocomplete="on"
-            />
+    <div class="div-container">
+      <!--카테고리 버튼-->
+      <div id="buttons">
+        <h2>Woman</h2>
+        <ul class="slide-button-list">
+          <li><button class="slide-button-element" value="0">new</button></li>
+          <li><button class="slide-button-element" value="1">beauty</button></li>
+          <li><button class="slide-button-element" value="2">shoes</button></li>
+          <li><button class="slide-button-element" value="3">dress</button></li>
+        </ul>
+        <h2>Man</h2>
+        <ul class="slide-button-list">
+          <li><button class="slide-button-element" value="4">new</button></li>
+          <li><button class="slide-button-element" value="5">suit</button></li>
+          <li><button class="slide-button-element" value="6">shoes</button></li>
+          <li><button class="slide-button-element" value="7">athletics</button></li>
+        </ul>
+      </div>
+      <!-- 제품목록 -->
+      <div id="product-list-wrap">
+        <div class="product-list">
+          <div class="product-thumbnail">
+            이미지
+          </div>
+          <div class="product-content">
+            <div class="content">
+              <p class="name">상품명</p>
+              <p class="price">가격</p>
+              <p class="description">설명</p>
+            </div>          
           </div>
         </div>
+      </div>
 
-        <div class="field mb-5">
-          <label class="label" for="passwordInput">비밀번호</label>
-          <div class="control">
-            <input
-              class="input"
-              id="passwordInput"
-              type="password"
-              placeholder="********"
-              autocomplete="on"
-            />
-          </div>
-        </div>
-
-        <button class="button is-info is-fullwidth" id="submitButton">
-          로그인하기
-        </button>
-      </form>
-    </div>
+    </div>  
   </body>
 </html>
