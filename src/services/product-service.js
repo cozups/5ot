@@ -8,11 +8,38 @@ class ProductService {
   constructor(productModel) {
     this.productModel = productModel;
   }
+  //구현필요
   async addOrder(orderInfo){
     const { orderList, email, address, phoneNumber} = orderInfo;
     
   }
 
+  async getItem(req_input){
+    const {sex,type,product_id}= req_input;
+    const product= await this.productModel.findByProductId(product_id);
+    if(!prodcut){
+      throw new Error(
+        '해당 제품이 존재하지 않습니다. 다시 한 번 확인해 주세요.'
+      );
+    }
+    return product;
+  }
+  async getItems(req_input){
+    const {sex,type}= req_input;
+    const products= await this.productModel.findBySexNType(sex,type);
+    if(!prodcut){
+      throw new Error(
+        '해당 제품이 존재하지 않습니다. 다시 한 번 확인해 주세요.'
+      );
+    }
+    return products
+  }
+ async addItems (req_input){
+   const createdproduct = await this.productModel.insertItem(req_input);
+   return createdproduct;
+ }
+
+ 
 }
 
 const productService = new UserService(productModel);

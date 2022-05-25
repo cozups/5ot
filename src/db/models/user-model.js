@@ -31,6 +31,11 @@ export class UserModel {
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
+
+  async deleteUser (email) {
+    const user = await User.deleteOne({ email }); // 객체로 email 받아오는지 확인하기
+    return user.acknowledged;
+  }
 }
 
 const userModel = new UserModel();

@@ -50,12 +50,58 @@ productRouter.get('/order/complete', async(req,res,next)=>{
 });
 
 productRouter.get('/:sex/:type/:product_id', async(req,res,next)=>{
-
+try{
+  const sex= req.params.sex;
+  const type= req.params.type;
+  const product_id= req.params.type;
+  
+  const product_specific = await productService.getItem({
+    sex,type,product_id,
+  });
+  res.status(201).json(product_specific);
+} catch (error){
+  next(error);
+}
 });
 
 productRouter.get('/:sex/:type', async(req,res,next)=>{
+  try{
+    const sex= req.params.sex;
+    const type= req.params.type;
+    
+    const product_lists= await productService.getItems({
+      sex,type,
+    });
 
+    res.status(201).json(product_lists);
+  } catch (error){
+    next(error);
+  }
 });
+
+
+productRouter.post('/add', async(req,res,next)=>{
+  try{
+    const product_name= req.body.product_name;
+    const sex= req.body.sex;
+    const type= req.body.type;
+    const product_image= req.body.product_image;
+    const price= req.body.price;
+    const producer= req.body.producer;
+    const sizeStockList= req.body.sizeStockList;
+    const product_info= req.body.product_info;
+
+
+    const new_product= await productService.addItems({
+      product_name,sex,type,product_image,price, producer, sizeStockList, product_info
+    });
+
+    res.status(201).json(new_product);
+  } catch (error){
+    next(error);
+  }
+});
+
 
 
 export { productRouter };

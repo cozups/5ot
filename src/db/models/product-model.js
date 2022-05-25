@@ -8,17 +8,22 @@ const Product = model('products', ProductSchema);
 
 export class ProductModel {
 
-  //define
  
-  async findByEmail(email) {
-    const user = await User.findOne({ email });
-    return user;
+  async findBySexNType(sex,type) {
+    const products = await Product.find({ sex: sex, type: type });
+    return products;
   }
 
-  async findById(userId) {
-    const user = await User.findOne({ _id: userId });
-    return user;
+  async findByProductID(product_id) {
+    const product = await Product.findOne({product_id});
+    return product;
   }
+
+  async insertItem(product_object){
+    const createdproduct = await Prdocut.create(product_object);
+    return createdproduct;
+  }
+  //define
 
   async create(userInfo) {
     const createdNewUser = await User.create(userInfo);
