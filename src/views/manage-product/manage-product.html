@@ -52,23 +52,18 @@
     <div id="side-menus-wrap">
       <ul class="side-menus-list">
         <li>
-          <a href="/mypage/orderlist">
-            <button class="side-menu-element" value="0">주문 조회</button>
+          <a href="#sell">
+            <button class="side-menu-element" value="2">제품 판매</button>
           </a>
         </li>
         <li>
-          <a href="/mypage/profile">
-            <button class="side-menu-element" value="1">정보 수정</button>
+          <a href="#modify">
+            <button class="side-menu-element" value="3">제품 수정</button>
           </a>
         </li>
         <li>
-          <a href="">
-            <button class="side-menu-element selected" value="2">제품 판매</button>
-          </a>
-        </li>
-        <li>
-          <a href="mypage/unregister">
-            <button class="side-menu-element" value="3">회원 탈퇴</button>
+          <a href="#delete">
+            <button class="side-menu-element" value="3">제품 삭제</button>
           </a>
         </li>
       </ul>
@@ -76,41 +71,45 @@
 
     <!-- 본문 -->
     <div class="div-container">
-      <h1>제품 판매</h1>
+      <div id="sell">
+        <h1>제품 판매</h1>
+        <div class="form-wrap">
+          <form class="sell-form" enctype="multipart/form-data" action="/product/add" method="post">
+            <label for="product_name">제품명</label>
+            <input type="text" name="product_name" id="product_name" />
+            <label for="sex">성별</label>
+            <select name="sex" id="sex">
+              <option value="w">woman</option>
+              <option value="m">man</option>
+            </select>
+            <label for="type">카테고리 선택</label>
+            <select name="type" id="type">
+              <option value="new">new</option>
+            </select>
+            <label for="producer">제조사</label>
+            <input type="text" id="producer" name="producer" />
+            <label for="product_info">설명</label>
+            <textarea name="product_info" id="product_info" cols="50" rows="10"></textarea>
+            <label for="product_image">제품 이미지 첨부</label>
+            <input type="file" name="image" id="product_image" />
+            <label for="stock">재고 수</label>
+            <input type="number" name="stock" id="stock" />
+            <label for="price">가격</label>
+            <input type="number" name="price" id="price" />
+            <button type="submit" id="register-button" onclick="window.location.href = '/mypage';">등록하기</button>
+          </form>
+        </div>
+      </div>
 
-      <div id="sell-form-wrap">
-        <form class="sell-form" enctype="multipart/form-data" action="/product/add" method="post">
-          <label for="product_name">제품명</label>
-          <input type="text" name="product_name" id="product_name" />
+      <div id="modify">
+        <h1>제품 수정</h1>
+      </div>
 
-          <label for="sex">성별</label>
-          <select name="sex" id="sex">
-            <option value="w">woman</option>
-            <option value="m">man</option>
-          </select>
-
-          <label for="type">카테고리 선택</label>
-          <select name="type" id="type">
-            <option value="new">new</option>
-          </select>
-
-          <label for="producer">제조사</label>
-          <input type="text" id="producer" name="producer" />
-
-          <label for="product_info">설명</label>
-          <textarea name="product_info" id="product_info" cols="50" rows="10"></textarea>
-
-          <label for="product_image">제품 이미지 첨부</label>
-          <input type="file" name="image" id="product_image" />
-
-          <label for="stock">재고 수</label>
-          <input type="number" name="stock" id="stock" />
-
-          <label for="price">가격</label>
-          <input type="number" name="price" id="price" />
-
-          <button type="submit" id="register-button" onclick="window.location.href = '/mypage';">등록하기</button>
-        </form>
+      <div id="delete">
+        <h1>제품 삭제</h1>
+        <div class="form-wrap">
+          <ul id="product-list"></ul>
+        </div>
       </div>
     </div>
   </body>
