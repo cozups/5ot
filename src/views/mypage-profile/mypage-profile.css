@@ -81,29 +81,45 @@ body {
   margin-bottom: 50px;
 }
 
+.form-wrap-item {
+  width: 100%;
+}
+
 /* 등록 폼 */
 form {
+  width: fit-content;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-left: 150px;
+  gap: 25px;
 }
 
 label {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 8px;
 }
 
 input,
 textarea,
 select {
-  width: 70%;
-  margin-bottom: 20px;
+  width: 100%;
   border-radius: 4px;
   border: 1px solid #acacac;
   padding: 2px;
+}
+
+.addressWrap {
+  width: 100%;
+}
+
+.addressWrap button {
+  margin-top: 10px;
+}
+
+#address1 {
+  margin-bottom: 10px;
 }
 
 .register-button {
@@ -125,31 +141,4 @@ select {
 
 button {
   padding: 2px;
-}
-
-#change-password-button {
-  margin: 10px 0 20px;
-}
-
-.password-change {
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 10px;
-}
-
-.password-change label {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.password-change input {
-  width: 100%;
-}
-
-.change {
-  margin-bottom: 20px;
 }
