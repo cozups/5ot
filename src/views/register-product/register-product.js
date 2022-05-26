@@ -8,10 +8,10 @@ const productInfoInput = document.querySelector('#product_info');
 const productImageInput = document.querySelector('#product_image');
 const stockInput = document.querySelector('#stock');
 const priceInput = document.querySelector('#price');
-const registerButton = document.querySelector('.register-button');
+const registerButton = document.querySelector('#register-button');
 
 // 이벤트 추가
-registerButton.addEventListener('click', postProduct);
+// registerButton.addEventListener('click', postProduct);
 
 // functions
 async function postProduct(e) {
@@ -26,8 +26,6 @@ async function postProduct(e) {
   const stock = stockInput.value;
   const price = priceInput.value;
 
-  console.log(productImage);
-
   try {
     const data = {
       product_name: productName,
@@ -35,7 +33,6 @@ async function postProduct(e) {
       type: type,
       producer: producer,
       product_info: productInfo,
-      product_image: productImage,
       stock: stock,
       price: price,
     };
@@ -43,7 +40,6 @@ async function postProduct(e) {
     await Api.post('/product/add', data);
 
     alert('상품이 추가되었습니다.');
-
     window.location.href = '/mypage';
   } catch (err) {
     console.error(err.stack);
