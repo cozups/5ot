@@ -33,7 +33,7 @@ export class UserModel {
   }
 
   async deleteUser (email) {
-    const user = await User.deleteOne({ email }); // 객체로 email 받아오는지 확인하기
+    const user = await User.deleteOne({ email: email }); // 객체로 email 받아오는지 확인하기
     return user.acknowledged;
   }
 }
