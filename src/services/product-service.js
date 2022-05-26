@@ -39,7 +39,10 @@ class ProductService {
    const createdproduct = await this.productModel.insertItem(req_input);
    return createdproduct;
  }
-
+  async deleteProduct(product_id){
+    const deletedCount= await this.productModel.deleteProduct(product_id);
+    return deletedCount;
+  }
  
 }
 

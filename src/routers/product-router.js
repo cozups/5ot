@@ -83,4 +83,17 @@ productRouter.post('/add', upload.single('image'), async (req, res, next) => {
   }
 });
 
+productRouter.delete('/', async (req, res, next) => {
+  try {
+    const product_id = req.body.product_id;
+
+    const deletedCount = await productService.deleteProduct({
+      product_id,
+    });
+    
+    res.status(201).json(deletedCount);
+  } catch (error) {
+    next(error);
+  }
+});
 export { productRouter };

@@ -75,7 +75,7 @@ userRouter.get('/userlist', loginRequired, async function (req, res, next) {
   }
 });
 
-userRouter.get('email/:email',loginRequired, async function (req,res,next){
+userRouter.get('/email/:email',loginRequired, async function (req,res,next){
   try {
     // 전체 사용자 목록을 얻음
     const email= req.params.email;
