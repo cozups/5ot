@@ -1,5 +1,6 @@
 import * as Api from '/api.js';
-// html 엘리먼트
+
+// 등록 관련 html 엘리먼트
 const productNameInput = document.querySelector('#product_name');
 const sexInput = document.querySelector('#sex');
 const typeInput = document.querySelector('#type');
@@ -9,6 +10,10 @@ const productImageInput = document.querySelector('#product_image');
 const stockInput = document.querySelector('#stock');
 const priceInput = document.querySelector('#price');
 const registerButton = document.querySelector('#register-button');
+
+getList();
+// 삭제 관련 html 엘리먼트
+const productList = document.querySelector('#product-list');
 
 // 이벤트 추가
 // registerButton.addEventListener('click', postProduct);
@@ -44,5 +49,45 @@ async function postProduct(e) {
   } catch (err) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
+async function getList() {
+  const products = await Api.get('/product/all');
+
+  for (let i = 0; i < products.length; i++) {
+    const { product_id, product_name, stock, price } = products[i];
+    let child = `
+      <tr>
+        <td>${product_name}</td>
+        <td>${stock} 개</td>
+        <td>${price} 원</td>
+        <td>
+          <button class="product-delete-button" value='${product_id}'>삭제하기</button>
+        </td>
+      </tr>
+    `;
+    $('#products').append(child);
+  }
+
+  const deleteButton = document.querySelectorAll('.product-delete-button');
+  for (let i = 0; i < deleteButton.length; i++) {
+    deleteButton[i].addEventListener('click', deleteProduct);
+  }
+}
+
+async function deleteProduct(e) {
+  e.preventDefault();
+
+  const product = this.parentElement.parentElement;
+  const product_id = Number(this.value);
+
+  try {
+    const result = await Api.delete('/product', '', {
+      product_id,
+    });
+    $(product).remove();
+  } catch (err) {
+    console.error(err);
   }
 }

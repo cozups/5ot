@@ -14,6 +14,8 @@
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="manage-product.css" />
     <script src="manage-product.js" type="module" defer></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   </head>
   <body>
     <!-- 헤더 부분 -->
@@ -108,7 +110,17 @@
       <div id="delete">
         <h1>제품 삭제</h1>
         <div class="form-wrap">
-          <ul id="product-list"></ul>
+          <table id="product-list">
+            <thead>
+              <tr>
+                <td>제품명</td>
+                <td>재고</td>
+                <td>가격</td>
+                <td>취소</td>
+              </tr>
+            </thead>
+            <tbody id="products"></tbody>
+          </table>
         </div>
       </div>
     </div>
