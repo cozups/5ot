@@ -1,3 +1,4 @@
+import * as Api from '/api.js';
 const headerMenu = document.querySelectorAll('#navbar a');
 
 // 로그인 상태 체크 -> 로그인 상태에 따른 렌더링을 하는 함수들
@@ -35,3 +36,15 @@ function logout(e) {
 }
 
 loginRender();
+
+// 제품목록 가져오기
+
+async function getProductList() {
+  try {
+    const result = await Api.get('/product', 'w/new');
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+getProductList();
