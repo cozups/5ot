@@ -23,6 +23,22 @@
       src="https://kit.fontawesome.com/7630448495.js"
       crossorigin="anonymous"
     ></script>
+    <!-- Daum 주소 API 사용하기 위한 파일 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+      /** 우편번호 찾기 */
+      function execDaumPostcode() {
+        daum.postcode.load(function () {
+          new daum.Postcode({
+            oncomplete: function (data) {
+              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+              document.querySelector('#postalCode').value = data.zonecode;
+              document.querySelector('#address1').value = data.address;
+            },
+          }).open();
+        });
+      }
+    </script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="mypage-profile.css" />
     <script src="mypage-profile.js" type="module" defer></script>
@@ -75,23 +91,23 @@
         <ul class="side-menus-list">
           <li>
             <a href="/mypage/orderlist">
-              <button class="side-menu-element" value="0">주문 조회</button>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <button class="side-menu-element selected" value="1">
-                정보 수정
+              <button class="side-menu-element" value="0">
+                주문 조회
               </button>
             </a>
           </li>
           <li>
-            <a href="/mypage/register">
-              <button class="side-menu-element" value="2">제품 판매</button>
+            <a href="/mypage/profile">
+              <button class="side-menu-element selected" value="1">정보 수정</button>
             </a>
           </li>
           <li>
-            <a href="mypage/unregister">
+            <a href="/mypage/manage">
+              <button class="side-menu-element" value="2">제품 관리</button>
+            </a>
+          </li>
+          <li>
+            <a href="/mypage/unregister">
               <button class="side-menu-element" value="3">회원 탈퇴</button>
             </a>
           </li>
@@ -108,14 +124,44 @@
           <label for="fullNameInput">이름</label>
           <input type="text" name="fullName" id="fullNameInput" />
 
-          <label for="sex">성별</label>
-          <select name="sex" id="sex">
-            <option value="w">woman</option>
-            <option value="m">man</option>
-          </select>
+          <label for="phoneNumber">전화번호</label>
+          <input type="email" name="email" id="phoneNumber" />
 
-          <label for="emailInput">이메일</label>
-          <input type="email" name="email" id="emailInput" />
+          <label for="address">주소</label>
+          <div class="addressWrap">
+            <input
+              id="postalCode"
+              name="postalCode"
+              type="text"
+              placeholder="주소찾기를 클릭해 주세요."
+              readonly
+            />
+          </div>
+          <button
+            class="button is-light"
+            id="searchAddressButton"
+            onclick="execDaumPostcode()"
+            style="margin-bottom: 20px"
+          >
+            주소찾기
+          </button>
+
+          <input
+            id="address1"
+            name="address1"
+            type="text"
+            placeholder=""
+            autocomplete="on"
+            readonly
+          />
+          <input
+            id="address1"
+            name="address1"
+            type="text"
+            placeholder=""
+            autocomplete="on"
+            readonly
+          />
 
           <label for="passwordInput">비밀번호</label>
           <input type="password" name="password" id="passwordInput" />
