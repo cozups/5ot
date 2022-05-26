@@ -6,27 +6,26 @@ import { categoryService, productService } from '../services';
 
 const categoryRouter = Router();
 
-
-categoryRouter.get('', async(req,res,next)=>{
-try {
-  const categories = await categoryService.getAllCategory();
-  res.status(201).json(categories);
-} catch (error){
-  next(error);
-}
+categoryRouter.get('', async (req, res, next) => {
+  try {
+    const categories = await categoryService.getAllCategory();
+    res.status(201).json(categories);
+  } catch (error) {
+    next(error);
+  }
 });
 
-categoryRouter.post('', async(req,res,next)=>{
-  try{
-
+categoryRouter.post('', async (req, res, next) => {
+  try {
     const { sex, type } = req.body;
 
     const new_category = await categoryService.addCategories({
-      sex, type,
+      sex,
+      type,
     });
 
     res.status(201).json(new_category);
-  } catch (error){
+  } catch (error) {
     next(error);
   }
 });
@@ -34,14 +33,14 @@ categoryRouter.post('', async(req,res,next)=>{
 categoryRouter.delete('', async function (req, res, next) {
   try {
     const { sex, type } = req.body;
-    
-  const message = await categoryService.deleteCategory({ sex, type })
-  res.status(200).json(message);
 
+    const deletedCategory = await categoryService.deleteCategory({ sex, type });
+    const deletedCount = await productService.deleteByCategory({ sex, type });
+
+    res.status(200).json(deletedCategory);
   } catch (error) {
     next(error);
   }
 });
-
 
 export { categoryRouter };

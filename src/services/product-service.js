@@ -44,7 +44,15 @@ class ProductService {
     const allProducts= await this.productModel.findAll();
     return allProducts;
   }
+
+  async deleteByCategory(input){
+    const { sex, type } = input;
+    const deletedCount= await this.productModel.deleteByCategory(input);
+    return deletedCount;
+  }
 }
+
+
 
 const productService = new ProductService(productModel);
 

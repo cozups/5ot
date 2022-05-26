@@ -20,6 +20,12 @@ export class CategoryModel {
     return categories;
   }
 
+  async findByCategory(input) {
+    const { sex, type } = input;
+    const findCategory = await Category.findOne({input}); // 쿼리문안에 들어간다
+    return findCategory;
+  }
+
 
   // async update({ type, sex }) {
   //   const filter = { type };
