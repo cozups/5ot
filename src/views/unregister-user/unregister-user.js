@@ -11,6 +11,7 @@ async function unregister(e) {
   const password = passwordInput.value;
   const email = sessionStorage.getItem('email');
 
+  
   try {
     const userInfo = { email, password };
     await Api.delete('/api/unregister', '', userInfo);
