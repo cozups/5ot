@@ -1,22 +1,24 @@
 import * as Api from '/api.js';
 
-let button = document.getElementById('submit');
+const button = document.querySelector('#submit');
+const passwordInput = document.querySelector('#password');
 
-button.addEventListener('click', async function () {
-  let password = document.getElementById('password').value;
+button.addEventListener('click', unregister);
+
+async function unregister(e) {
+  e.preventDefault();
+
+  const password = passwordInput.value;
   const email = sessionStorage.getItem('email');
 
+  
   try {
-    const userInfo = await Api.get('/api/email', email);
-    const result = await Api.delete('/api/unregister', '', {
-      email,
-      password,
-    });
-    sessionStorage.removeItem('email');
-    sessionStorage.removeItem('token');
+    const userInfo = { email, password };
+    await Api.delete('/api/unregister', '', userInfo);
     alert('성공적으로 탈퇴되었습니다!');
     window.location.href = '/';
   } catch (err) {
     console.error(err);
+    alert(`${err.message}`);
   }
-});
+}
