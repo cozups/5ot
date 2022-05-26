@@ -5,6 +5,8 @@ const changeableElement = document.querySelectorAll('.button-menu')[2].children[
 console.log(changeableElement);
 
 // functions
+
+// 권한이 admin -> 제품 판매 페이지 렌더링, basic-user -> 문의하기 페이지 렌더링
 async function checkRole() {
   const email = sessionStorage.getItem('email');
 
@@ -15,7 +17,7 @@ async function checkRole() {
     if (role === 'admin') {
       changeableElement.href = '/mypage/register';
       changeableElement.innerHTML = `<i class="fa-solid fa-shirt"></i>
-        <span>제품 판매</span>`;
+        <span>제품 관리</span>`;
     } else {
       changeableElement.href = '/mypage/qna';
       changeableElement.innerHTML = `<i class="fa-solid fa-question"></i>
