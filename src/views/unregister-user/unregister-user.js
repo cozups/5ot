@@ -13,6 +13,7 @@ button.addEventListener('click', async function () {
       password,
     });
     alert('성공적으로 탈퇴되었습니다!');
+    window.location.href = '/';
   } catch (err) {
     console.error(err);
   }
