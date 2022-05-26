@@ -15,6 +15,7 @@ async function unregister(e) {
     const userInfo = { email, password };
     await Api.delete('/api/unregister', '', userInfo);
     alert('성공적으로 탈퇴되었습니다!');
+    window.location.href = '/';
   } catch (err) {
     console.error(err);
     alert(`${err.message}`);

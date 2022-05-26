@@ -6,6 +6,17 @@ import { orderService, userService } from '../services';
 
 const orderRouter = Router();
 
+orderRouter.get('/all', loginRequired, async (req, res, next) => {
+  try {
+
+    const orders = await orderService.getAllOrder();
+    
+    res.status(201).json(orders);
+  } catch (error) {
+    next(error);
+  }
+});
+
 orderRouter.post('/',async(req,res,next)=>{
   try{
      const orderList =req.body.orderList;
@@ -48,5 +59,17 @@ orderRouter.get('/email/:email',async(req,res,next)=>{
   }
 });
 
+orderRouter.delete('/',async(req,res,next)=>{
+  try{
+    const order_id = req.body.order_id;
+    const deletedCount = await orderService.deleteOrder(
+      order_id)
+    
+    res.status(201).json(deletedCount);
+
+  } catch(error){
+    next(error);
+  }
+})
 
 export { orderRouter };
