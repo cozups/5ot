@@ -18,7 +18,10 @@ class OrderService{
     const myOrders= await this.orderModel.findByEmail(email);
     return myOrders;
   }
-
+  async deleteOrder(order_id){
+    const deletedCount= await this.ordertModel.deleteOrder(order_id);
+    return deletedCount;
+  }
 }
 
 const orderService = new OrderService(orderModel);
