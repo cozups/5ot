@@ -136,16 +136,28 @@ thead td {
 
 .product-modify-button,
 .product-delete-button {
+  width: 30px;
   padding: 4px;
   border-radius: 6px;
   background-color: #fff;
-  border: 1px solid var(--error-color);
-  color: var(--error-color);
   cursor: pointer;
 }
 
-.product-modify-button:hover,
+.product-modify-button:hover {
+  background-color: var(--main-color);
+  color: white;
+}
 .product-delete-button:hover {
   background-color: var(--error-color);
   color: white;
+}
+
+.product-modify-button {
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
+}
+
+.product-delete-button {
+  border: 1px solid var(--error-color);
+  color: var(--error-color);
 }
