@@ -11,7 +11,7 @@ async function getProductList() {
       let name = result[i].product_name;
       let price = result[i].price.toLocaleString();
       let info = result[i].product_info;
-      let image = './../../..' + result[i].product_image;
+      let image = result[i].product_image;
       console.log(image);
       // 상세페이지 구현 후 a태그 경로 바꿔야함!!!!!
       let HTMLtemplate = `
