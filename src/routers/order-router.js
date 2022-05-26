@@ -28,7 +28,7 @@ orderRouter.post('/',async(req,res,next)=>{
   }
 });
 
-orderRouter.get('email/:email',async(req,res,next)=>{
+orderRouter.get('/email/:email',async(req,res,next)=>{
   try{
     //email is admin
     let orders;
