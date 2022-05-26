@@ -10,7 +10,8 @@ export class ProductModel {
 
  
   async findByCategory(category) {
-    const products = await Product.find({category: category});
+    const {sex,type} =category;
+    const products = await Product.find({category: {sex:sex, type:type}});
     return products;
   }
 
