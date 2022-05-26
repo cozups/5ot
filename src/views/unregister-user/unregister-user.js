@@ -12,6 +12,8 @@ button.addEventListener('click', async function () {
       email,
       password,
     });
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('token');
     alert('성공적으로 탈퇴되었습니다!');
     window.location.href = '/';
   } catch (err) {
