@@ -44,6 +44,10 @@ class ProductService {
     return deletedCount;
   }
  
+  async getAllProduct(){
+    const allProducts= await this.productModel.findAll();
+    return allProducts;
+  }
 }
 
 const productService = new ProductService(productModel);
