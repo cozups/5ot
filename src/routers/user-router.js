@@ -75,10 +75,10 @@ userRouter.get('/userlist', loginRequired, async function (req, res, next) {
   }
 });
 
-userRouter.get('/email',loginRequired, async function (req,res,next){
+userRouter.get('email/:email',loginRequired, async function (req,res,next){
   try {
     // 전체 사용자 목록을 얻음
-    const email= req.body.email;
+    const email= req.params.email;
     const user = await userService.getUserByEmail(email);
 
     // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
@@ -147,7 +147,7 @@ userRouter.patch(
 );
 // user data를 삭제함
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
-userRouter.get('/unregister', loginRequired, async function (req, res, next) {
+userRouter.delete('/unregister', loginRequired, async function (req, res, next) {
   try {
   const password= req.body.password;
   const email = req.body.email;
