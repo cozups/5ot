@@ -35,7 +35,7 @@ body {
 /*  사이드 메뉴 */
 #side-menus-wrap {
   position: fixed;
-  top: 40%;
+  top: 50%;
   left: 10%;
   transform: translate(-50%, -50%);
 }
@@ -63,14 +63,15 @@ body {
 }
 
 .div-container h1 {
+  width: fit-content;
   padding: 0 10px;
   font-size: 36px;
   font-weight: bold;
-  margin-bottom: 50px;
+  margin: 30px auto;
   color: #000;
 }
 
-/* 제품 등록 컨테이너 */
+/* 정보 수정 컨테이너 */
 
 #sell-form-wrap {
   width: 800px;

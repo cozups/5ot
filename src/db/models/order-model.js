@@ -4,33 +4,17 @@ import { OrderSchema } from '../schemas/order-schema';
 const Order = model('orders', OrderSchema);
 
 export class OrderModel {
-  
-  async findByEmail(email) {
-    const order = await Order.findOne({ email });
-    return order;
+  async create(order_info){
+    const createdOrder= await Order.create(order_info);
+    return createdOrder;
   }
-
-  async findById(userId) {
-    const order = await Order.findOne({ _id: userId });
-    return order;
+  async findAllOrder(){
+    const allOrders= await Order.find({})
+    return allOrders;
   }
-
-  async create(userInfo) {
-    const createdNewUser = await Order.create(userInfo);
-    return createdNewUser;
-  }
-
-  async findAll() {
-    const order = await Order.find({});
-    return order;
-  }
-
-  async update({ userId, update }) {
-    const filter = { _id: userId };
-    const option = { returnOriginal: false };
-
-    const updatedUser = await Order.findOneAndUpdate(filter, update, option);
-    return updatedUser;
+  async findByEmail(email){
+    const myOrders = await Order.find({email: email});
+    return myOrders; 
   }
 }
 

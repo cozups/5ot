@@ -9,13 +9,9 @@ class ProductService {
     this.productModel = productModel;
   }
   //구현필요
-  async addOrder(orderInfo){
-    const { orderList, email, address, phoneNumber} = orderInfo;
-    
-  }
+  
 
-  async getItem(req_input){
-    const {sex,type,product_id}= req_input;
+  async getItem(product_id){
     const product= await this.productModel.findByProductId(product_id);
     if(!product){
       throw new Error(
@@ -39,8 +35,15 @@ class ProductService {
    const createdproduct = await this.productModel.insertItem(req_input);
    return createdproduct;
  }
-
+  async deleteProduct(product_id){
+    const deletedCount= await this.productModel.deleteProduct(product_id);
+    return deletedCount;
+  }
  
+  async getAllProduct(){
+    const allProducts= await this.productModel.findAll();
+    return allProducts;
+  }
 }
 
 const productService = new ProductService(productModel);

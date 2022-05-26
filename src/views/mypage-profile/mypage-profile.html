@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>쇼핑 5팀 - mypage</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="mypage-profile.css" />
+    <script src="mypage-profile.js" type="module" defer></script>
+  </head>
+  <body>
+    <!-- 헤더 부분 -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="container mt-3">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="/elice-rabbit.png" width="30" height="30" />
+            <span class="has-text-link">쇼핑-5팀</span>
+          </a>
+
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div class="navbar-end">
+          <ul id="navbar">
+            <li><a href="/login">로그아웃</a></li>
+            <li><a href="/mypage">마이페이지</a></li>
+            <li>
+              <a href="/cart" aria-current="page">
+                <span class="icon">
+                  <i class="fas fa-cart-shopping"></i>
+                </span>
+                <span>카트</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 본문 -->
+    <div class="div-container">
+      <h1 id="mypage-title">정보 수정</h1>
+
+      <div id="side-menus-wrap">
+        <ul class="side-menus-list">
+          <li>
+            <a href="/mypage/orderlist">
+              <button class="side-menu-element" value="0">주문 조회</button>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <button class="side-menu-element selected" value="1">
+                정보 수정
+              </button>
+            </a>
+          </li>
+          <li>
+            <a href="/mypage/register">
+              <button class="side-menu-element" value="2">제품 판매</button>
+            </a>
+          </li>
+          <li>
+            <a href="mypage/unregister">
+              <button class="side-menu-element" value="3">회원 탈퇴</button>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div id="sell-form-wrap">
+        <form
+          class="sell-form"
+          enctype="multipart/form-data"
+          action="/product/add"
+          method="post"
+          onsubmit="return redirect()"
+        >
+          <label for="fullNameInput">이름</label>
+          <input type="text" name="fullName" id="fullNameInput" />
+
+          <label for="sex">성별</label>
+          <select name="sex" id="sex">
+            <option value="w">woman</option>
+            <option value="m">man</option>
+          </select>
+
+          <label for="emailInput">이메일</label>
+          <input type="email" name="email" id="emailInput" />
+
+          <label for="passwordInput">비밀번호</label>
+          <input type="password" name="password" id="passwordInput" />
+
+          <label for="passwordConfirmInput">비밀번호 확인</label>
+          <input type="password" name="password" id="passwordConfirmInput" />
+
+          <button type="submit" id="reviseButton">수정하기</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
