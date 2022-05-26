@@ -16,6 +16,9 @@ const ProductSchema = new Schema(
           sex: String,
           type: String,
         },
+        {
+          _id: false,
+        }
       ),
       required: true,
     },

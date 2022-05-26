@@ -73,7 +73,7 @@ body {
 
 /* 정보 수정 컨테이너 */
 
-#sell-form-wrap {
+#form-wrap {
   width: 800px;
   border-radius: 20px;
   box-shadow: 0px 0px 5px var(--sub2-color);
@@ -81,29 +81,45 @@ body {
   margin-bottom: 50px;
 }
 
+.form-wrap-item {
+  width: 100%;
+}
+
 /* 등록 폼 */
-.sell-form {
+form {
+  width: fit-content;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-left: 150px;
+  gap: 25px;
 }
 
 label {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 8px;
 }
 
 input,
 textarea,
 select {
-  width: 70%;
-  margin-bottom: 20px;
+  width: 100%;
   border-radius: 4px;
   border: 1px solid #acacac;
   padding: 2px;
+}
+
+.addressWrap {
+  width: 100%;
+}
+
+.addressWrap button {
+  margin-top: 10px;
+}
+
+#address1 {
+  margin-bottom: 10px;
 }
 
 .register-button {
@@ -113,4 +129,16 @@ select {
   border-radius: 6px;
   border: none;
   cursor: pointer;
+}
+
+.description {
+  font-size: 12px;
+}
+
+.postal-code-label {
+  font-size: 12px;
+}
+
+button {
+  padding: 2px;
 }

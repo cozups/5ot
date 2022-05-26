@@ -23,9 +23,31 @@
       src="https://kit.fontawesome.com/7630448495.js"
       crossorigin="anonymous"
     ></script>
+    <!-- Daum 주소 API 사용하기 위한 파일 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+      /** 우편번호 찾기 */
+      function execDaumPostcode() {
+        daum.postcode.load(function () {
+          new daum.Postcode({
+            oncomplete: function (data) {
+              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+              document.querySelector('#postalCode').value = data.zonecode;
+              document.querySelector('#address1').value = data.address;
+            },
+          }).open();
+        });
+      }
+    </script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="mypage-profile.css" />
     <script src="mypage-profile.js" type="module" defer></script>
+    <!-- jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <!-- 헤더 부분 -->
@@ -79,51 +101,94 @@
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/mypage/profile">
               <button class="side-menu-element selected" value="1">
                 정보 수정
               </button>
             </a>
           </li>
           <li>
-            <a href="/mypage/register">
-              <button class="side-menu-element" value="2">제품 판매</button>
+            <a href="/mypage/manage">
+              <button class="side-menu-element" value="2">제품 관리</button>
             </a>
           </li>
           <li>
-            <a href="mypage/unregister">
+            <a href="/mypage/unregister">
               <button class="side-menu-element" value="3">회원 탈퇴</button>
             </a>
           </li>
         </ul>
       </div>
-      <div id="sell-form-wrap">
-        <form
-          class="sell-form"
-          enctype="multipart/form-data"
-          action="/product/add"
-          method="post"
-          onsubmit="return redirect()"
-        >
-          <label for="fullNameInput">이름</label>
-          <input type="text" name="fullName" id="fullNameInput" />
+      <div id="form-wrap">
+        <form>
+          <div class="form-wrap-item">
+            <label for="fullNameInput">이름</label>
+            <br />
+            <input type="text" name="fullName" id="fullNameInput" />
+          </div>
 
-          <label for="sex">성별</label>
-          <select name="sex" id="sex">
-            <option value="w">woman</option>
-            <option value="m">man</option>
-          </select>
+          <div class="form-wrap-item">
+            <label for="userId">ID</label>
+            <p id="user-id"></p>
+          </div>
 
-          <label for="emailInput">이메일</label>
-          <input type="email" name="email" id="emailInput" />
+          <div class="form-wrap-item">
+            <label for="passwordInput">현재 비밀번호</label>
+            <input type="password" name="currentPassword" id="currentPassword" />
+          </div>
 
-          <label for="passwordInput">비밀번호</label>
-          <input type="password" name="password" id="passwordInput" />
+          <div class="form-wrap-item">
+            <label for="passwordConfirmInput">새 비밀번호</label>
+            <p class="description">
+              변경을 원치 않는 경우 현재 비밀번호를 입력하세요.
+            </p>
+            <input type="password" name="password" id="newPassword" />
+          </div>
 
-          <label for="passwordConfirmInput">비밀번호 확인</label>
-          <input type="password" name="password" id="passwordConfirmInput" />
+          <div class="form-wrap-item">
+            <label for="phoneNumber">전화번호</label>
+            <p class="description">- 를 포함하여 적어주십시오.</p>
+            <input type="email" name="email" id="phoneNumber" />
+          </div>
 
-          <button type="submit" id="reviseButton">수정하기</button>
+         <div class="form-wrap-item">
+          <label for="address">주소</label>
+          <div class="addressWrap">
+            <input
+              id="postalCode"
+              name="postalCode"
+              type="text"
+              placeholder="주소 찾기를 클릭해 주세요."
+              readonly
+            />
+            <button
+              id="searchAddressButton"
+              onclick="execDaumPostcode()"
+              style="margin-bottom: 20px"
+              type="button"
+            >
+              주소 찾기
+            </button>
+          </div>
+
+          <input
+            id="address1"
+            name="address1"
+            type="text"
+            placeholder=""
+            autocomplete="on"
+            readonly
+          />
+          <input
+            id="address2"
+            name="address2"
+            type="text"
+            placeholder="상세주소를 입력해주세요."
+            autocomplete="on"
+          />
+         </div>
+
+          <button type="button" id="submitButton">수정하기</button>
         </form>
       </div>
     </div>
