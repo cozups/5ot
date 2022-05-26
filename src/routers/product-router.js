@@ -13,6 +13,8 @@ const storage = multer.diskStorage({
     callback(null, file.originalname);
   },
 });
+const fs= require('fs');
+
 const upload = multer({ storage: storage }); //dest : 저장 위치
 
 const productRouter = Router();
@@ -86,7 +88,13 @@ productRouter.post('/add', upload.single('image'), async (req, res, next) => {
 productRouter.delete('/', async (req, res, next) => {
   try {
     const product_id = req.body.product_id;
-
+    const product = await productService.getItem(product_id);
+    fs.unlink(product.product_image, err => {
+    
+      if(err.code == 'ENOENT'){
+          console.log("파일 삭제 Error 발생");
+      }
+    });
     const deletedCount = await productService.deleteProduct({
       product_id,
     });
