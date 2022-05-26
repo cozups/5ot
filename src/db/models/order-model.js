@@ -16,6 +16,10 @@ export class OrderModel {
     const myOrders = await Order.find({email: email});
     return myOrders; 
   }
+  async deleteOrder(order_id){
+    const {deletedCount}= await Product.deleteOne({order_id});
+    return deletedCount;
+    }
 }
 
 const orderModel = new OrderModel();

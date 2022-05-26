@@ -31,7 +31,8 @@ productRouter.get('/all', loginRequired, async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});productRouter.get('/:sex/:type/:product_id', async (req, res, next) => {
+});
+productRouter.get('/:sex/:type/:product_id', async (req, res, next) => {
   try {
     const sex = req.params.sex;
     const type = req.params.type;
