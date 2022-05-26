@@ -38,8 +38,6 @@ productRouter.get('/all', loginRequired, async (req, res, next) => {
     const product_id = req.params.type;
 
     const product_specific = await productService.getItem({
-      sex,
-      type,
       product_id,
     });
     res.status(201).json(product_specific);
@@ -98,7 +96,7 @@ productRouter.post('/add', upload.single('image'), async (req, res, next) => {
 productRouter.delete('/', async (req, res, next) => {
   try {
     const product_id = req.body.product_id;
-    const product = await productService.getItem(product_id);
+    const product = await productService.getItem({product_id});
     fs.unlink(product.product_image, err => {
     
       if(err.code == 'ENOENT'){

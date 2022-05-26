@@ -15,7 +15,7 @@ class ProductService {
   }
 
   async getItem(req_input){
-    const {sex,type,product_id}= req_input;
+    const {product_id}= req_input;
     const product= await this.productModel.findByProductId(product_id);
     if(!product){
       throw new Error(
