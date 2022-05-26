@@ -64,4 +64,23 @@ async function deleteProduct(e) {
   }
 }
 
+const sellForm = document.querySelector('#sell-form');
+
+sellForm.addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(sellForm);
+
+  try {
+    let response = await fetch('/product/add', {
+      method: 'POST',
+      body: formData,
+    });
+    alert('상품 추가 되었습니다.');
+
+    window.location.href = '/mypage/manage/product';
+  } catch (err) {
+    console.error(err);
+  }
+});
 getList();
