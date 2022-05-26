@@ -94,6 +94,7 @@ function logout(e) {
 
   alert('로그아웃 되었습니다.');
   sessionStorage.removeItem('token');
+  sessionStorage.removeItem('email');
 
   window.location.href = '/';
 }
