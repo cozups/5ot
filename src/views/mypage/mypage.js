@@ -15,7 +15,7 @@ async function checkRole() {
     const { role } = userInfo;
 
     if (role === 'admin') {
-      changeableElement.href = '/mypage/register';
+      changeableElement.href = '/mypage/manage';
       changeableElement.innerHTML = `<i class="fa-solid fa-shirt"></i>
         <span>제품 관리</span>`;
     } else {
