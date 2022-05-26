@@ -25,7 +25,7 @@ export class ProductModel {
     return createdproduct;
   }
   async deleteProduct(product_id){
-    const {deletedCount}= await Product.deleteOne({product_id});
+    const {deletedCount}= await Product.deleteOne({product_id: product_id});
     return deletedCount;
   }
 
