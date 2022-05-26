@@ -15,7 +15,7 @@ export class ProductModel {
     return products;
   }
 
-  async findByProductID(product_id) {
+  async findByProductId(product_id) {
     const product = await Product.findOne({product_id});
     return product;
   }
