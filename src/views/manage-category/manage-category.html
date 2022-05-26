@@ -49,42 +49,27 @@
       </div>
     </nav>
 
-    <div id="side-menus-wrap">
-      <ul class="side-menus-list">
-        <li>
-          <a href="/mypage/orderlist">
-            <button class="side-menu-element" value="0">주문 조회</button>
-          </a>
-        </li>
-        <li>
-          <a href="/mypage/profile">
-            <button class="side-menu-element" value="1">정보 수정</button>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <button class="side-menu-element selected" value="2">제품 판매</button>
-          </a>
-        </li>
-        <li>
-          <a href="mypage/unregister">
-            <button class="side-menu-element" value="3">회원 탈퇴</button>
-          </a>
-        </li>
-      </ul>
-    </div>
-
     <!-- 본문 -->
     <div class="div-container">
-      <h1>카테고리 등록</h1>
+      <div id="register-category">
+        <h1>카테고리 등록</h1>
+        <div id="form-wrap">
+          <form action="/product/add" method="post" class="sell-form">
+            <label for="sex">성별</label>
+            <select name="sex" id="sex">
+              <option value="w">woman</option>
+              <option value="m">man</option>
+            </select>
+            <label for="product_name">카테고리명</label>
+            <input type="text" name="product_name" id="product_name" />
+            <button type="submit" class="register-button">등록하기</button>
+          </form>
+        </div>
+      </div>
 
-      <div id="sell-form-wrap">
-        <form action="/product/add" method="post" class="sell-form">
-          <label for="product_name">카테고리명</label>
-          <input type="text" name="product_name" id="product_name" />
-
-          <button type="submit" class="register-button">등록하기</button>
-        </form>
+      <div id="categories">
+        <h1>카테고리</h1>
+        <div id="form-wrap"></div>
       </div>
     </div>
   </body>

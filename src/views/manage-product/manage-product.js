@@ -12,74 +12,34 @@ const priceInput = document.querySelector('#price');
 const registerButton = document.querySelector('#register-button');
 
 // 삭제 관련 html 엘리먼트
-const deleteList = document.querySelector('#delete-product-list');
-const modifyList = document.querySelector('#modify-product-list');
+const productList = document.querySelector('#product-list');
 
 // 이벤트 추가
-// registerButton.addEventListener('click', postProduct);
 
 // functions
-async function postProduct(e) {
-  e.preventDefault();
-
-  const productName = productNameInput.value;
-  const sex = sexInput.value;
-  const type = typeInput.value;
-  const producer = producerInput.value;
-  const productInfo = productInfoInput.value;
-  const productImage = productImageInput.value;
-  const stock = stockInput.value;
-  const price = priceInput.value;
-
-  try {
-    const data = {
-      product_name: productName,
-      sex: sex,
-      type: type,
-      producer: producer,
-      product_info: productInfo,
-      stock: stock,
-      price: price,
-    };
-
-    await Api.post('/product/add', data);
-
-    alert('상품이 추가되었습니다.');
-    window.location.href = '/mypage';
-  } catch (err) {
-    console.error(err.stack);
-    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-  }
-}
 
 async function getList() {
   const products = await Api.get('/product/all');
 
   for (let i = 0; i < products.length; i++) {
     const { product_id, product_name, stock, price } = products[i];
-    let modifyListElement = `
-      <tr>
-        <td>${product_name}</td>
-        <td>${stock} 개</td>
-        <td>${price} 원</td>
-        <td>
-          <button class="product-modify-button" value='${product_id}'>수정하기</button>
-        </td>
-      </tr>
-    `;
 
-    let deleteListElement = `
+    let element = `
     <tr>
       <td>${product_name}</td>
       <td>${stock} 개</td>
       <td>${price} 원</td>
       <td>
-        <button class="product-delete-button" value='${product_id}'>삭제하기</button>
+        <button class="product-modify-button" value='${product_id}'>
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+        <button class="product-delete-button" value='${product_id}'>
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
       </td>
     </tr>
   `;
-    $(modifyList).append(modifyListElement);
-    $(deleteList).append(deleteListElement);
+    $(productList).append(element);
   }
 
   const deleteButton = document.querySelectorAll('.product-delete-button');
