@@ -134,6 +134,7 @@ thead td {
   color: white;
 }
 
+.product-modify-button,
 .product-delete-button {
   padding: 4px;
   border-radius: 6px;
@@ -143,6 +144,7 @@ thead td {
   cursor: pointer;
 }
 
+.product-modify-button:hover,
 .product-delete-button:hover {
   background-color: var(--error-color);
   color: white;

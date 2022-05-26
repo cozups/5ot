@@ -11,9 +11,9 @@ const stockInput = document.querySelector('#stock');
 const priceInput = document.querySelector('#price');
 const registerButton = document.querySelector('#register-button');
 
-getList();
 // 삭제 관련 html 엘리먼트
-const productList = document.querySelector('#product-list');
+const deleteList = document.querySelector('#delete-product-list');
+const modifyList = document.querySelector('#modify-product-list');
 
 // 이벤트 추가
 // registerButton.addEventListener('click', postProduct);
@@ -57,17 +57,29 @@ async function getList() {
 
   for (let i = 0; i < products.length; i++) {
     const { product_id, product_name, stock, price } = products[i];
-    let child = `
+    let modifyListElement = `
       <tr>
         <td>${product_name}</td>
         <td>${stock} 개</td>
         <td>${price} 원</td>
         <td>
-          <button class="product-delete-button" value='${product_id}'>삭제하기</button>
+          <button class="product-modify-button" value='${product_id}'>수정하기</button>
         </td>
       </tr>
     `;
-    $('#products').append(child);
+
+    let deleteListElement = `
+    <tr>
+      <td>${product_name}</td>
+      <td>${stock} 개</td>
+      <td>${price} 원</td>
+      <td>
+        <button class="product-delete-button" value='${product_id}'>삭제하기</button>
+      </td>
+    </tr>
+  `;
+    $(modifyList).append(modifyListElement);
+    $(deleteList).append(deleteListElement);
   }
 
   const deleteButton = document.querySelectorAll('.product-delete-button');
@@ -91,3 +103,5 @@ async function deleteProduct(e) {
     console.error(err);
   }
 }
+
+getList();
