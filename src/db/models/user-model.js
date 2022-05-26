@@ -33,8 +33,8 @@ export class UserModel {
   }
 
   async deleteUser (email) {
-    const user = await User.deleteOne({ email: email }); // 객체로 email 받아오는지 확인하기
-    return user.acknowledged;
+    const { deletedCount } = await User.deleteOne({ email });
+    return deletedCount  //  이렇게 하면 되는건지 확인좀 해주세요
   }
 }
 

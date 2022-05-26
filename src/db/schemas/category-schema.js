@@ -1,9 +1,5 @@
-import { mongoose } from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
+import { Schema } from 'mongoose';
 
-const Schema = mongoose.Schema;
-
-autoIncrement.initialize(mongoose);
 
 const CategorySchema = new Schema(
   {
@@ -20,14 +16,10 @@ const CategorySchema = new Schema(
   {
     unique: true,
     collection: 'Category',
-    timestamps: true,
+    timestamps: false,
   },
 );
-CategorySchema.plugin(autoIncrement.plugin, {
-  model: 'category',
-  field: 'categoryId',
-  startAt: 1,
-  incrementBy: 1
-});
+
+
 
 export { CategorySchema };
