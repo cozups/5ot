@@ -22,7 +22,16 @@ const productRouter = Router();
 // 주문 api (아래는 /register이지만, 실제로는 /product/order 요청해야 함.)
 // orderList, email, address, phonenumber등을 받음
 
-productRouter.get('/:sex/:type/:product_id', async (req, res, next) => {
+productRouter.get('/all', loginRequired, async (req, res, next) => {
+  try {
+
+    const products = await productService.getAllProduct();
+    
+    res.status(201).json(products);
+  } catch (error) {
+    next(error);
+  }
+});productRouter.get('/:sex/:type/:product_id', async (req, res, next) => {
   try {
     const sex = req.params.sex;
     const type = req.params.type;
@@ -84,6 +93,7 @@ productRouter.post('/add', upload.single('image'), async (req, res, next) => {
     next(error);
   }
 });
+
 
 productRouter.delete('/', async (req, res, next) => {
   try {
