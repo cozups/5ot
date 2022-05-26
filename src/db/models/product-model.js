@@ -11,7 +11,7 @@ export class ProductModel {
  
   async findByCategory(category) {
     const {sex,type} =category;
-    const products = await Product.find({category: {sex:sex, type:type}});
+    const products = await Product.find({category});
     return products;
   }
 
