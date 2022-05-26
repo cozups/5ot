@@ -3,7 +3,7 @@ const cart = document.getElementById('cart');
 
 cart.addEventListener('click', function (e) {
   let data = confirm(
-    '장바구니에 성공적으로 담겼습니다. 장바구니로 이동하시겠습니까?'
+    '장바구니에 성공적으로 담겼습니다.\n장바구니로 이동하시겠습니까?'
   );
   if (data) {
     window.location.replace('/cart');
