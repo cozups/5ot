@@ -16,41 +16,8 @@ const deleteList = document.querySelector('#delete-product-list');
 const modifyList = document.querySelector('#modify-product-list');
 
 // 이벤트 추가
-// registerButton.addEventListener('click', postProduct);
 
 // functions
-async function postProduct(e) {
-  e.preventDefault();
-
-  const productName = productNameInput.value;
-  const sex = sexInput.value;
-  const type = typeInput.value;
-  const producer = producerInput.value;
-  const productInfo = productInfoInput.value;
-  const productImage = productImageInput.value;
-  const stock = stockInput.value;
-  const price = priceInput.value;
-
-  try {
-    const data = {
-      product_name: productName,
-      sex: sex,
-      type: type,
-      producer: producer,
-      product_info: productInfo,
-      stock: stock,
-      price: price,
-    };
-
-    await Api.post('/product/add', data);
-
-    alert('상품이 추가되었습니다.');
-    window.location.href = '/mypage';
-  } catch (err) {
-    console.error(err.stack);
-    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-  }
-}
 
 async function getList() {
   const products = await Api.get('/product/all');
