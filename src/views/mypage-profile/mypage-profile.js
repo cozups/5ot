@@ -1,65 +1,66 @@
 import * as Api from '/api.js';
-import { validateEmail } from '/useful-functions.js';
 
-// 요소(element), input 혹은 상수
-const fullNameInput = document.querySelector('#fullNameInput');
-const phoneNumber = document.querySelector('#phoneNumber');
-const address = document.querySelector('#address');
-const passwordInput = document.querySelector('#passwordInput');
-const passwordConfirmInput = document.querySelector('#passwordConfirmInput');
-const reviseButton = document.querySelector('#reviseButton');
+// 변수
+let user = null;
 
-addAllElements();
-addAllEvents();
+// html 엘리먼트
+const nameField = document.querySelector('#fullNameInput');
+const phoneNumberField = document.querySelector('#phoneNumber');
+const idField = document.querySelector('#user-id');
 
-// html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-async function addAllElements() {}
+const submitButton = document.querySelector('#submitButton');
 
-// 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-function addAllEvents() {
-  reviseButton.addEventListener('click', handleSubmit);
+// 이벤트 추가
+submitButton.addEventListener('click', patchUserInfo);
+
+// functions
+// 기본적으로 표시되게 할 정보들을 표시한다.
+async function setDefaultInfo() {
+  const userEmail = sessionStorage.getItem('email');
+
+  user = await Api.get('/api/email', userEmail);
+  const { fullName, phoneNumber, email } = user;
+
+  nameField.value = fullName;
+  phoneNumberField.value = phoneNumber || '';
+  idField.innerHTML = email;
 }
 
-// 회원가입 진행
-async function handleSubmit(e) {
+// 폼 제출이 되었을 때, 유저 정보를 변경한다.
+async function patchUserInfo(e) {
   e.preventDefault();
 
-  const fullName = fullNameInput.value;
-  const phoneNumber = phoneNumber.value;
-  const address = address.value;
-  const password = passwordInput.value;
-  const passwordConfirm = passwordConfirmInput.value;
+  const userId = user._id;
 
-  // 잘 입력했는지 확인
-  const isFullNameValid = fullName.length >= 2;
-  const isEmailValid = validateEmail(email);
-  const isPasswordValid = password.length >= 4;
-  const isPasswordSame = password === passwordConfirm;
+  const name = nameField.value;
+  const phone = phoneNumberField.value || '';
+  const currentPassword = document.querySelector('#currentPassword').value;
+  const newPassword = document.querySelector('#newPassword').value;
+  const role = user.role;
+  const postalCode = document.querySelector('#postalCode').value;
+  const address1 = document.querySelector('#address1').value;
+  const address2 = document.querySelector('#address2').value;
 
-  if (!isFullNameValid || !isPasswordValid) {
-    return alert('이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.');
-  }
+  const data = {
+    fullName: name,
+    currentPassword,
+    password: newPassword,
+    address: {
+      postalCode,
+      address1,
+      address2,
+    },
+    phoneNumber: phone || '',
+    role,
+  };
 
-  if (!isEmailValid) {
-    return alert('이메일 형식이 맞지 않습니다.');
-  }
-
-  if (!isPasswordSame) {
-    return alert('비밀번호가 일치하지 않습니다.');
-  }
-
-  // api 요청
+  alert('수정 완료되었습니다.');
+  location.reload();
   try {
-    const data = { fullName, email, password };
-
-    await Api.post('/api/register', data);
-
-    alert(`정상적으로 정보수정이 완료 되었습니다.`);
-
-    // 로그인 페이지 이동
-    window.location.href = '/mypage';
+    const result = await Api.patch('/api/users', userId, data);
   } catch (err) {
-    console.error(err.stack);
-    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+    console.error(err);
   }
 }
+
+setDefaultInfo();

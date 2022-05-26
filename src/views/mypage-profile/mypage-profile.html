@@ -6,23 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>쇼핑 5팀 - mypage</title>
     <!-- 아이콘 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/elice-rabbit-favicon.png"
-    />
+    <link rel="icon" type="image/png" sizes="16x16" href="/elice-rabbit-favicon.png" />
     <!-- bulma css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
     <!-- 폰트 어썸: 아이콘 -->
-    <script
-      defer
-      src="https://kit.fontawesome.com/7630448495.js"
-      crossorigin="anonymous"
-    ></script>
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
     <!-- Daum 주소 API 사용하기 위한 파일 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
@@ -42,6 +30,8 @@
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="mypage-profile.css" />
     <script src="mypage-profile.js" type="module" defer></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   </head>
   <body>
     <!-- 헤더 부분 -->
@@ -53,13 +43,7 @@
             <span class="has-text-link">쇼핑-5팀</span>
           </a>
 
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -91,9 +75,7 @@
         <ul class="side-menus-list">
           <li>
             <a href="/mypage/orderlist">
-              <button class="side-menu-element" value="0">
-                주문 조회
-              </button>
+              <button class="side-menu-element" value="0">주문 조회</button>
             </a>
           </li>
           <li>
@@ -113,63 +95,37 @@
           </li>
         </ul>
       </div>
-      <div id="sell-form-wrap">
-        <form
-          class="sell-form"
-          enctype="multipart/form-data"
-          action="/product/add"
-          method="post"
-          onsubmit="return redirect()"
-        >
+      <div id="form-wrap">
+        <form>
           <label for="fullNameInput">이름</label>
           <input type="text" name="fullName" id="fullNameInput" />
 
+          <label for="userId">ID</label>
+          <p id="user-id"></p>
+
+          <label for="passwordInput">현재 비밀번호</label>
+          <input type="password" name="currentPassword" id="currentPassword" />
+
+          <label for="passwordConfirmInput">새 비밀번호</label>
+          <p class="description">변경을 원치 않는 경우 현재 비밀번호를 입력하세요.</p>
+          <input type="password" name="password" id="newPassword" />
+
           <label for="phoneNumber">전화번호</label>
+          <p class="description">- 를 포함하여 적어주십시오.</p>
           <input type="email" name="email" id="phoneNumber" />
 
           <label for="address">주소</label>
           <div class="addressWrap">
-            <input
-              id="postalCode"
-              name="postalCode"
-              type="text"
-              placeholder="주소찾기를 클릭해 주세요."
-              readonly
-            />
+            <label for="postalCode" class="postal-code-label">우편 번호</label>
+            <br />
+            <input id="postalCode" name="postalCode" type="text" placeholder="주소 찾기를 클릭해 주세요." readonly />
+            <button id="searchAddressButton" onclick="execDaumPostcode()" style="margin-bottom: 20px" type="button">주소 찾기</button>
           </div>
-          <button
-            class="button is-light"
-            id="searchAddressButton"
-            onclick="execDaumPostcode()"
-            style="margin-bottom: 20px"
-          >
-            주소찾기
-          </button>
 
-          <input
-            id="address1"
-            name="address1"
-            type="text"
-            placeholder=""
-            autocomplete="on"
-            readonly
-          />
-          <input
-            id="address1"
-            name="address1"
-            type="text"
-            placeholder=""
-            autocomplete="on"
-            readonly
-          />
+          <input id="address1" name="address1" type="text" placeholder="" autocomplete="on" readonly />
+          <input id="address2" name="address2" type="text" placeholder="상세주소를 입력해주세요." autocomplete="on" />
 
-          <label for="passwordInput">비밀번호</label>
-          <input type="password" name="password" id="passwordInput" />
-
-          <label for="passwordConfirmInput">비밀번호 확인</label>
-          <input type="password" name="password" id="passwordConfirmInput" />
-
-          <button type="submit" id="reviseButton">수정하기</button>
+          <button type="button" id="submitButton">수정하기</button>
         </form>
       </div>
     </div>
