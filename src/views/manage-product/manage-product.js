@@ -1,15 +1,7 @@
 import * as Api from '/api.js';
 
 // 등록 관련 html 엘리먼트
-const productNameInput = document.querySelector('#product_name');
-const sexInput = document.querySelector('#sex');
-const typeInput = document.querySelector('#type');
-const producerInput = document.querySelector('#producer');
-const productInfoInput = document.querySelector('#product_info');
-const productImageInput = document.querySelector('#product_image');
-const stockInput = document.querySelector('#stock');
-const priceInput = document.querySelector('#price');
-const registerButton = document.querySelector('#register-button');
+const sellForm = document.querySelector('#sell-form');
 
 // 삭제 관련 html 엘리먼트
 const productList = document.querySelector('#product-list');
@@ -51,10 +43,17 @@ async function getList() {
 async function deleteProduct(e) {
   e.preventDefault();
 
+  const answer = confirm('정말로 삭제하시겠습니까?');
+
+  if (!answer) {
+    return;
+  }
+
   const product = this.parentElement.parentElement;
   const product_id = Number(this.value);
 
   try {
+    alert('삭제 되었습니다.');
     const result = await Api.delete('/product', '', {
       product_id,
     });
@@ -62,9 +61,8 @@ async function deleteProduct(e) {
   } catch (err) {
     console.error(err);
   }
+  location.reload();
 }
-
-const sellForm = document.querySelector('#sell-form');
 
 sellForm.addEventListener('submit', async function (e) {
   e.preventDefault();
