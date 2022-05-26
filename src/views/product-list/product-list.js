@@ -41,7 +41,7 @@ loginRender();
 
 async function getProductList() {
   try {
-    const result = await Api.get('/product', 'w/new');
+    const result = await Api.get('/product', 'w/new/');
     console.log(result);
   } catch (error) {
     console.log(error);
