@@ -6,16 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>쇼핑 5팀 - mypage</title>
     <!-- 아이콘 -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/elice-rabbit-favicon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
     <!-- bulma css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
     <!-- 폰트 어썸: 아이콘 -->
-    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="manage-product.css" />
     <script src="manage-product.js" type="module" defer></script>
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <!-- 헤더 부분 -->
@@ -27,7 +43,13 @@
             <span class="has-text-link">쇼핑-5팀</span>
           </a>
 
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -56,7 +78,7 @@
       <div id="sell">
         <h1>제품 판매</h1>
         <div class="form-wrap">
-          <form class="sell-form" enctype="multipart/form-data" action="/product/add" method="post">
+          <form class="sell-form" id="sell-form" enctype="multipart/form-data">
             <label for="product_name">제품명</label>
             <input type="text" name="product_name" id="product_name" />
 
@@ -75,7 +97,12 @@
             <input type="text" id="producer" name="producer" />
 
             <label for="product_info">설명</label>
-            <textarea name="product_info" id="product_info" cols="50" rows="10"></textarea>
+            <textarea
+              name="product_info"
+              id="product_info"
+              cols="50"
+              rows="10"
+            ></textarea>
 
             <label for="product_image">제품 이미지 첨부</label>
             <input type="file" name="image" id="product_image" />
@@ -86,7 +113,7 @@
             <label for="price">가격</label>
             <input type="number" name="price" id="price" />
 
-            <button type="submit" id="register-button" onclick="window.location.href = '/mypage';">등록하기</button>
+            <button type="submit" id="register-button">등록하기</button>
           </form>
         </div>
       </div>
