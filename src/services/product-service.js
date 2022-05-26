@@ -9,13 +9,9 @@ class ProductService {
     this.productModel = productModel;
   }
   //구현필요
-  async addOrder(orderInfo){
-    const { orderList, email, address, phoneNumber} = orderInfo;
-    
-  }
+  
 
-  async getItem(req_input){
-    const {product_id}= req_input;
+  async getItem(product_id){
     const product= await this.productModel.findByProductId(product_id);
     if(!product){
       throw new Error(
