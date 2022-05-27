@@ -127,17 +127,18 @@ productRouter.patch(
         );
       }
 
-      const product_id = req.params.product_id; // product_id는 수정할 대상
+      const product_id = req.body.product_id; // product_id는 수정할 대상
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
       const product_name = req.body.product_name;
       const sex = req.body.sex;
       const type = req.body.type;
       //product_image
-      const product_image = req.body.product_image;
-      if(product_image){
-      //local에 있는 이미지 지우고 새로 받아야와야 함
-      }
+
+      // const product_image = req.body.product_image;
+      // if(product_image){
+      // //local에 있는 이미지 지우고 새로 받아야와야 함
+      // }
       const price = req.body.price;
       const producer = req.body.producer;
       const product_info = req.body.product_info;
