@@ -18,7 +18,7 @@ async function getProductList() {
       // 상세페이지 구현 후 a태그 경로 바꿔야함!!!!!
       let HTMLtemplate = `
         <div id="product-list-wrap">
-          <a href="/${sex}/${type}/${productId}"> 
+          <a href="/list/${sex}/${type}/${productId}"> 
             <div class="product-list">
             <img class="product-thumbnail" src="${image}"/>
               <div class="product-content">
