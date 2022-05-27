@@ -81,9 +81,14 @@ body {
 table {
   width: 100%;
   text-align: center;
+  vertical-align: middle;
 }
 
 thead td {
   background-color: var(--sub-color);
   color: white;
+}
+
+table td {
+  vertical-align: middle;
 }
