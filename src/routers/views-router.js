@@ -22,7 +22,7 @@ viewsRouter.use('/m/new', serveStatic('product-list'));
 viewsRouter.use('/m/suit', serveStatic('product-list'));
 viewsRouter.use('/m/shoes', serveStatic('product-list'));
 viewsRouter.use('/m/athletics', serveStatic('product-list'));
-viewsRouter.use('/product-detail', serveStatic('product-detail'));
+viewsRouter.use('/w/new/64', serveStatic('product-detail'));
 
 viewsRouter.use('/mypage/orderlist', serveStatic('orderlist'));
 viewsRouter.use('/mypage/manage', serveStatic('manage-select-page'));

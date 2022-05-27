@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html>
   <head>
     <meta charset="utf-8" />
@@ -49,20 +51,19 @@
           </a>
         </div>
 
-          <div class="navbar-end">
-            <ul id="navbar">
-              <li><a href="/login">로그인</a></li>
-              <li><a href="/register">회원가입</a></li>
-              <li>
-                <a href="/cart" aria-current="page">
-                  <span class="icon">
-                    <i class="fas fa-cart-shopping"></i>
-                  </span>
-                  <span>카트</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+        <div class="navbar-end">
+          <ul id="navbar">
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/register">회원가입</a></li>
+            <li>
+              <a href="/cart" aria-current="page">
+                <span class="icon">
+                  <i class="fas fa-cart-shopping"></i>
+                </span>
+                <span>카트</span>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -72,40 +73,69 @@
       <div id="slide-buttons">
         <h2>Woman</h2>
         <ul class="slide-button-list">
-          <li><a href="/w/new"><button class="slide-button-element">new</button></a></li>
-          <li><a href="/w/beauty"><button class="slide-button-element">beauty</button></a></li>
-          <li><a href="/w/shoes"><button class="slide-button-element">shoes</button></a></li>
-          <li><a href="/w/dress"><button class="slide-button-element">dress</button></a></li>
+          <li>
+            <a href="/w/new"
+              ><button class="slide-button-element">new</button></a
+            >
+          </li>
+          <li>
+            <a href="/w/beauty"
+              ><button class="slide-button-element">beauty</button></a
+            >
+          </li>
+          <li>
+            <a href="/w/shoes"
+              ><button class="slide-button-element">shoes</button></a
+            >
+          </li>
+          <li>
+            <a href="/w/dress"
+              ><button class="slide-button-element">dress</button></a
+            >
+          </li>
         </ul>
         <h2>Man</h2>
         <ul class="slide-button-list">
-          <li><a href="/m/new"><button class="slide-button-element">new</button></a></li>
-          <li><a href="/m/suit"><button class="slide-button-element">suit</button></a></li>
-          <li><a href="/m/shoes"><button class="slide-button-element">shoes</button></a></li>
-          <li><a href="/m/athletics"><button class="slide-button-element">athletics</button></a></li>
+          <li>
+            <a href="/m/new"
+              ><button class="slide-button-element">new</button></a
+            >
+          </li>
+          <li>
+            <a href="/m/suit"
+              ><button class="slide-button-element">suit</button></a
+            >
+          </li>
+          <li>
+            <a href="/m/shoes"
+              ><button class="slide-button-element">shoes</button></a
+            >
+          </li>
+          <li>
+            <a href="/m/athletics"
+              ><button class="slide-button-element">athletics</button></a
+            >
+          </li>
         </ul>
       </div>
       <!-- 제품상세 -->
       <div id="product-detail-wrap">
-          <div class="product-detail-left">
-            이미지
+        <img id="product-thumbnail" src=""></img>
+        <div class="product-detail-right">
+          <p id="producer"></p>
+          <div class="content">
+            <p id="name"></p>
+            <p id="price"></p>
+            <p id="description"></p>
           </div>
-          <div class="product-detail-right">
-            <p id="producer">제조사</p>
-            <div class="content">
-              <p id="name">상품명</p>
-              <p id="price">가격</p>
-              <p id="description">설명</p>
-            </div>
-            <div class="buttons">
-              <a href="/order"><button type="button" id="purchase">구매하기</button></a>
-              <button type="button" id="cart">장바구니</button>
-            </div>
-
+          <div class="buttons">
+            <a href="/order"
+              ><button type="button" id="purchase">구매하기</button></a
+            >
+            <button type="button" id="cart">장바구니</button>
           </div>
-
+        </div>
       </div>
-
-    </div>  
+    </div>
   </body>
 </html>
