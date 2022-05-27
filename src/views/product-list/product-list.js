@@ -15,7 +15,7 @@ async function getProductList() {
       let image = result[i].product_image;
       let productId = result[i].product_id;
       console.log(productId);
-      // 상세페이지 구현 후 a태그 경로 바꿔야함!!!!!
+
       let HTMLtemplate = `
         <div id="product-list-wrap">
           <a href="/list/${sex}/${type}/${productId}"> 
