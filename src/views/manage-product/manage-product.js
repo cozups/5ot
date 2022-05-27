@@ -1,13 +1,23 @@
 import * as Api from '/api.js';
 
+// 변수
+let productToModify = null;
+
 // 등록 관련 html 엘리먼트
 const sellForm = document.querySelector('#sell-form');
 
 // 삭제 관련 html 엘리먼트
 const productList = document.querySelector('#product-list');
 
-// 이벤트 추가
+// 수정 관련 html 엘리먼트
+const modal = document.querySelector('#modal');
+const modalModifyButton = document.querySelector('#modal-button');
+const modalCloseButton = document.querySelector('.close-button');
+const modalForm = document.querySelector('.modal-content form');
 
+// 이벤트 추가
+modalCloseButton.addEventListener('click', closeModal);
+modalModifyButton.addEventListener('click', patchRequest);
 // functions
 
 async function getList() {
@@ -38,6 +48,10 @@ async function getList() {
   for (let i = 0; i < deleteButton.length; i++) {
     deleteButton[i].addEventListener('click', deleteProduct);
   }
+  const modifyButton = document.querySelectorAll('.product-modify-button');
+  for (let i = 0; i < deleteButton.length; i++) {
+    modifyButton[i].addEventListener('click', modifyProduct);
+  }
 }
 
 async function deleteProduct(e) {
@@ -57,11 +71,10 @@ async function deleteProduct(e) {
     const result = await Api.delete('/product', '', {
       product_id,
     });
-    $(product).remove();
+    location.reload();
   } catch (err) {
     console.error(err);
   }
-  location.reload();
 }
 
 sellForm.addEventListener('submit', async function (e) {
@@ -81,4 +94,45 @@ sellForm.addEventListener('submit', async function (e) {
     console.error(err);
   }
 });
+
+// 상품 수정
+async function modifyProduct(e) {
+  e.preventDefault();
+
+  modal.style.display = 'block';
+
+  const product_id = Number(this.value);
+
+  // 프로덕트 정보 가져오기
+  try {
+    productToModify = await Api.get('/product', product_id);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function patchRequest(e) {
+  e.preventDefault();
+  const formData = new FormData(modalForm);
+
+  let data = {};
+  for (let [name, value] of formData) {
+    data[name] = value;
+  }
+  data['product_id'] = productToModify.product_id;
+
+  try {
+    let result = await Api.patch('/product', '', data);
+    alert('상품 수정 되었습니다.');
+
+    closeModal();
+    location.reload();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function closeModal() {
+  modal.style.display = 'none';
+}
 getList();
