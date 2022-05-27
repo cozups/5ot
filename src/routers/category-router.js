@@ -20,9 +20,9 @@ categoryRouter.post('/', async (req, res, next) => {
     const sex = req.body.sex;
     const type = req.body.type;
 
-    console.log(sex,type);
     const new_category = await categoryService.addCategories({
-      sex, type,
+      sex,
+      type,
     });
 
     res.status(201).json(new_category);
@@ -33,11 +33,10 @@ categoryRouter.post('/', async (req, res, next) => {
 
 categoryRouter.delete('/', async function (req, res, next) {
   try {
-    
     const category_id = req.body.category_id;
-    const sex= req.body.sex;
-    const type= req.body.type;
-    
+    const sex = req.body.sex;
+    const type = req.body.type;
+
     const deletedCategory = await categoryService.deleteCategory(category_id);
     const deletedCount = await productService.deleteByCategory({ sex, type });
     console.log(deletedCategory);
@@ -49,25 +48,22 @@ categoryRouter.delete('/', async function (req, res, next) {
 
 categoryRouter.patch('/', async function (req, res, next) {
   try {
-
     const sex = req.body.sex;
     const type = req.body.type;
     const updateSex = req.body.updateSex;
     const updateType = req.body.updateType;
 
-    const categoryRequired={ sex, type }
+    const categoryRequired = { sex, type };
 
     const toUpdate = {
       ...(updateSex && { updateSex }),
       ...(updateType && { updateType }),
     };
 
-  
     const updatedCategoryInfo = await categoryService.setCategory(
       categoryRequired,
       toUpdate
     );
-
 
     res.status(200).json(updatedCategoryInfo);
   } catch (error) {
