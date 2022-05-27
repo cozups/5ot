@@ -19,6 +19,7 @@ const modalForm = document.querySelector('.modal-content form');
 // 이벤트 추가
 modalCloseButton.addEventListener('click', closeModal);
 modalModifyButton.addEventListener('click', patchRequest);
+
 // functions
 // 카테고리 동적 렌더링
 async function categoryRendering() {
@@ -49,8 +50,8 @@ async function getList() {
     let element = `
     <tr>
       <td>${product_name}</td>
-      <td>${stock} 개</td>
-      <td>${price} 원</td>
+      <td>${stock}개</td>
+      <td>${price}원</td>
       <td>
         <button class="product-modify-button" value='${product_id}'>
           <i class="fa-solid fa-pencil"></i>
@@ -74,6 +75,7 @@ async function getList() {
   }
 }
 
+// 상품 삭제
 async function deleteProduct(e) {
   e.preventDefault();
 
@@ -97,6 +99,7 @@ async function deleteProduct(e) {
   }
 }
 
+// 상품 추가
 sellForm.addEventListener('submit', async function (e) {
   e.preventDefault();
 
@@ -107,7 +110,7 @@ sellForm.addEventListener('submit', async function (e) {
       method: 'POST',
       body: formData,
     });
-    alert('상품 추가 되었습니다.');
+    alert('상품이 추가 되었습니다.');
 
     window.location.href = '/mypage/manage/product';
   } catch (err) {
@@ -194,7 +197,7 @@ async function patchRequest(e) {
   data['product_id'] = productToModify.product_id;
   try {
     let result = await Api.patch('/product', '', data);
-    alert('상품 수정 되었습니다.');
+    alert('상품이 수정 되었습니다.');
 
     closeModal();
     location.reload();
