@@ -25,6 +25,8 @@ async function categoryRendering() {
   try {
     const categories = await Api.get('/category');
     categoryList = categories.map(obj => obj.type);
+    let categoryUnique = new Set(categoryList);
+    categoryList = [...categoryUnique];
 
     const categoryField = document.querySelector('#type');
 
@@ -162,8 +164,6 @@ function setDefaultInfo() {
   const categoryOptions = document.querySelectorAll(
     '.modal-content #type option'
   );
-
-  console.log(modalCategory);
 
   for (let i = 0; i < categoryList.length; i++) {
     let optionElement = `<option value='${categoryList[i]}'>${categoryList[i]}</option>`;
