@@ -10,8 +10,8 @@ export class CategoryModel {
     return category;
   }
 
-  async create(categoryInfo) {
-    const createdNewCategory = await Category.create(categoryInfo);
+  async insertCategory(category) {
+    const createdNewCategory = await Category.create(category);
     return createdNewCategory;
   }
 

@@ -25,8 +25,8 @@ class CategoryService {
     return categories;
   }
 
-  async addCategories(req_input) {
-    const createdcategory = await this.categoryModel.create(req_input);
+  async addCategories(category) {
+    const createdcategory = await this.categoryModel.insertCategory(category);
     return createdcategory;
   }
 
