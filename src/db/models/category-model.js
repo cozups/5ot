@@ -36,10 +36,9 @@ export class CategoryModel {
   }
 
 
-  async deleteCategory (input) {
-    const { sex, type } = input;
-    const { deletedCount } = await Category.deleteOne({ category: {sex: sex, type: type} });
+  async deleteCategory (category_id) {
 
+    const { deletedCount } = await Category.deleteOne({category_id});
     return deletedCount
   }
 }

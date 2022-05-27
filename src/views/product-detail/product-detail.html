@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-
 <html>
   <head>
     <meta charset="utf-8" />
@@ -120,13 +119,18 @@
       </div>
       <!-- 제품상세 -->
       <div id="product-detail-wrap">
-        <img id="product-thumbnail" src=""></img>
+        <img id="product-thumbnail" src="" />
         <div class="product-detail-right">
           <p id="producer"></p>
           <div class="content">
             <p id="name"></p>
             <p id="price"></p>
             <p id="description"></p>
+          </div>
+          <div class="quantity">
+            <button id="minus" disabled><i class="fas fa-minus"></i></button>
+            <span id="qty">0</span>
+            <button id="plus"><i class="fas fa-plus"></i></button>
           </div>
           <div class="buttons">
             <a href="/order"

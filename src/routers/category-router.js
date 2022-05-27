@@ -33,11 +33,14 @@ categoryRouter.post('/', async (req, res, next) => {
 
 categoryRouter.delete('/', async function (req, res, next) {
   try {
-    const { sex, type } = req.body;
-
-    const deletedCategory = await categoryService.deleteCategory({ sex, type });
+    
+    const category_id = req.body.category_id;
+    const sex= req.body.sex;
+    const type= req.body.type;
+    
+    const deletedCategory = await categoryService.deleteCategory(category_id);
     const deletedCount = await productService.deleteByCategory({ sex, type });
-
+    console.log(deletedCategory);
     res.status(200).json(deletedCategory);
   } catch (error) {
     next(error);

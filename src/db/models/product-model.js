@@ -40,7 +40,7 @@ export class ProductModel {
 
   async deleteByCategory(input) {
     const { sex, type } = input;
-    const {deletedCount}= await Product.deleteMany({ category: input });
+    const {deletedCount}= await Product.deleteMany({ category: {sex: sex, type:type } } );
     return deletedCount;
   }
 

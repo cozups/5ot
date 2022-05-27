@@ -1,7 +1,6 @@
 import * as Api from '/api.js';
 
 // 등록 관련 html 엘리먼트
-const sellForm = document.querySelector('#sell-form');
 const registerButton = document.querySelector('#register-button');
 const sexInput = document.querySelector('#sex');
 const categorynameInput = document.querySelector('#category_name');
@@ -17,17 +16,17 @@ async function getCategoryList() {
   const categories = await Api.get('/category');
 
   for (let i = 0; i < categories.length; i++) {
-    const { new_category, sex, category_name } = categories[i];
+    const { category_id, sex, category_name } = categories[i];
 
     let element = `
     <tr>
       <td>${sex}</td>
-      <td>${category_name} 개</td>
+      <td>${category_name}</td>
       <td>
-        <button class="category-modify-button" value='${new_category}'>
+        <button class="category-modify-button" value='${category_id}'>
           <i class="fa-solid fa-pencil"></i>
         </button>
-        <button class="category-delete-button" value='${new_category}'>
+        <button class="category-delete-button" value='${category_id}'>
           <i class="fa-solid fa-trash-can"></i>
         </button>
       </td>
@@ -51,12 +50,16 @@ async function deleteCategory(e) {
   }
 
   const category = this.parentElement.parentElement;
-  const new_category = this.value;
+  const category_id = Number(this.value);
+  const sex = sexInput.value;
+  const type = categorynameInput.value;
 
   try {
     alert('삭제 되었습니다.');
     const result = await Api.delete('/category', '', {
-      new_category,
+      category_id,
+      sex,
+      type,
     });
     $(category).remove();
   } catch (err) {
