@@ -48,16 +48,16 @@ categoryRouter.delete('/', async function (req, res, next) {
 
 categoryRouter.patch('/', async function (req, res, next) {
   try {
-    const sex = req.body.sex;
-    const type = req.body.type;
-    const updateSex = req.body.updateSex;
-    const updateType = req.body.updateType;
+    const sex_YetUpdated = req.body.sex;
+    const type_YetUpdated = req.body.type;
+    const sex = req.body.updateSex;
+    const type = req.body.updateType;
 
-    const categoryRequired = { sex, type };
+    const categoryRequired = { sex_YetUpdated, type_YetUpdated };
 
     const toUpdate = {
-      ...(updateSex && { updateSex }),
-      ...(updateType && { updateType }),
+      ...(sex && { sex }),
+      ...(type && { type }),
     };
 
     const updatedCategoryInfo = await categoryService.setCategory(

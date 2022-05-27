@@ -28,7 +28,8 @@ export class CategoryModel {
 
 
   async update({ categoryRequired, update }) {
-    const filter = { category: categoryRequired };
+    const {sex_YetUpdated, type_YetUpdated}= categoryRequired
+    const filter = { sex: sex_YetUpdated, type: type_YetUpdated };
     const option = { returnOriginal: false };
 
     const updatedCategory = await Category.findOneAndUpdate(filter, update, option);
