@@ -7,6 +7,9 @@ const name = document.getElementById('name');
 const price = document.getElementById('price');
 const description = document.getElementById('description');
 
+let minus = document.getElementById('minus');
+let plus = document.getElementById('plus');
+
 const cart = document.getElementById('cart');
 const url = Number(window.location.pathname.split('/')[3]);
 
@@ -25,6 +28,27 @@ async function getProductDetail() {
 }
 
 getProductDetail();
+
+//수량
+
+minus.addEventListener('click', () => {
+  let number = Number(document.getElementById('qty').innerText);
+  let result = document.getElementById('qty');
+  if (number === 1) {
+    minus.disabled = true;
+  }
+  number = number - 1;
+  result.innerText = number;
+});
+plus.addEventListener('click', () => {
+  let number = Number(document.getElementById('qty').innerText);
+  let result = document.getElementById('qty');
+  if (number >= 0) {
+    minus.disabled = false;
+  }
+  number = number + 1;
+  result.innerText = number;
+});
 
 //장바구니 누르면 장바구니로 이동
 cart.addEventListener('click', function (e) {
