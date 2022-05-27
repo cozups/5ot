@@ -51,6 +51,15 @@ export class ProductModel {
     const {deletedCount}= await Product.deleteMany({ category: input });
     return deletedCount;
   }
+
+  async update({ product_id, update }) {
+    const filter = { product_id: product_id };
+    const option = { returnOriginal: false };
+
+    const updatedProduct = await User.findOneAndUpdate(filter, update, option);
+    return updatedProduct;
+  }
+
 }
 
 
