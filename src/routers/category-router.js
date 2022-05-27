@@ -18,10 +18,9 @@ categoryRouter.get('/', async (req, res, next) => {
 categoryRouter.post('/', async (req, res, next) => {
   try {
     const { sex, type } = req.body;
-
+    const category = { sex, type };
     const new_category = await categoryService.addCategories({
-      sex,
-      type,
+      category,
     });
 
     res.status(201).json(new_category);
