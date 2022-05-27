@@ -45,8 +45,8 @@ class CategoryService {
 
 
   //category 정보 삭제
-  async deleteCategory(type) {
-    const deletedCount = await this.categoryModel.deleteCategory(type);
+  async deleteCategory(category_id) {
+    const deletedCount = await this.categoryModel.deleteCategory(category_id);
 
     if (!deletedCount) {
       throw new Error('삭제에 실패했습니다. 다시 한 번 확인해 주세요.');
