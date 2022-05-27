@@ -2,6 +2,7 @@ import * as Api from '/api.js';
 
 // 변수
 let productToModify = null;
+let categoryList = null;
 
 // 등록 관련 html 엘리먼트
 const sellForm = document.querySelector('#sell-form');
@@ -19,7 +20,24 @@ const modalForm = document.querySelector('.modal-content form');
 modalCloseButton.addEventListener('click', closeModal);
 modalModifyButton.addEventListener('click', patchRequest);
 // functions
+// 카테고리 동적 렌더링
+async function categoryRendering() {
+  try {
+    const categories = await Api.get('/category');
+    categoryList = categories.map(obj => obj.type);
 
+    const categoryField = document.querySelector('#type');
+
+    for (let i = 0; i < categoryList.length; i++) {
+      let optionElement = `<option value='${categoryList[i]}'>${categoryList[i]}</option>`;
+      categoryField.innerHTML += optionElement;
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// 상품 리스트 불러오기
 async function getList() {
   const products = await Api.get('/product/all');
 
@@ -140,9 +158,17 @@ function setDefaultInfo() {
 
   // select 옵션 값 설정
   const sexOptions = document.querySelectorAll('.modal-content #sex option');
+  const modalCategory = document.querySelector('.modal-content #type');
   const categoryOptions = document.querySelectorAll(
     '.modal-content #type option'
   );
+
+  console.log(modalCategory);
+
+  for (let i = 0; i < categoryList.length; i++) {
+    let optionElement = `<option value='${categoryList[i]}'>${categoryList[i]}</option>`;
+    modalCategory.innerHTML += optionElement;
+  }
 
   for (let i = 0; i < sexOptions.length; i++) {
     if (sexOptions[i].value === sex) {
@@ -181,3 +207,4 @@ function closeModal() {
   modal.style.display = 'none';
 }
 getList();
+categoryRendering();
