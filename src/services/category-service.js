@@ -35,7 +35,7 @@ class CategoryService {
     const { sex, type } = categoryRequired;
 
     // 업데이트 진행
-    category = await this.categoryModel.update({
+    const category = await this.categoryModel.update({
       categoryRequired,
       update: toUpdate,
     });
