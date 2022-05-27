@@ -38,7 +38,7 @@ categoryRouter.delete('/', async function (req, res, next) {
     const sex= req.body.sex;
     const type= req.body.type;
     
-    const deletedCategory = await categoryService.deleteCategory({category_id});
+    const deletedCategory = await categoryService.deleteCategory(category_id);
     const deletedCount = await productService.deleteByCategory({ sex, type });
     console.log(deletedCategory);
     res.status(200).json(deletedCategory);
