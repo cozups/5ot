@@ -12,11 +12,12 @@ async function getProductList() {
       let price = result[i].price.toLocaleString();
       let info = result[i].product_info;
       let image = result[i].product_image;
+      let productId = result[i].product_id;
       console.log(image);
       // 상세페이지 구현 후 a태그 경로 바꿔야함!!!!!
       let HTMLtemplate = `
         <div id="product-list-wrap">
-          <a href="/product-detail"> 
+          <a href="/w/new/${productId}"> 
             <div class="product-list">
             <img class="product-thumbnail" src="${image}"/>
               <div class="product-content">
@@ -34,7 +35,7 @@ async function getProductList() {
       section.innerHTML += HTMLtemplate;
     }
   } catch (error) {
-    console.log(error);
+    console.log(`error : ${error}`);
   }
 }
 getProductList();
