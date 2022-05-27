@@ -6,7 +6,7 @@ import { categoryService, productService } from '../services';
 
 const categoryRouter = Router();
 
-categoryRouter.get('', async (req, res, next) => {
+categoryRouter.get('/', async (req, res, next) => {
   try {
     const categories = await categoryService.getAllCategory();
     res.status(201).json(categories);
@@ -15,7 +15,7 @@ categoryRouter.get('', async (req, res, next) => {
   }
 });
 
-categoryRouter.post('', async (req, res, next) => {
+categoryRouter.post('/', async (req, res, next) => {
   try {
     const { sex, type } = req.body;
 
@@ -30,7 +30,7 @@ categoryRouter.post('', async (req, res, next) => {
   }
 });
 
-categoryRouter.delete('', async function (req, res, next) {
+categoryRouter.delete('/', async function (req, res, next) {
   try {
     const { sex, type } = req.body;
 

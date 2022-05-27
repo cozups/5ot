@@ -99,12 +99,12 @@ productRouter.delete('/', async (req, res, next) => {
     const product_id = req.body.product_id;
     const product = await productService.getItem(product_id);
     console.log(product);
-    console.log('.'+product.product_image);
+    console.log('./src/views'+product.product_image);
     
     const deletedCount = await productService.deleteProduct(
       product_id);
 
-    fs.unlinkSync('.'+product.product_image, err => {
+    fs.unlinkSync('./src/views'+product.product_image, err => {
     
       if(err.code == 'ENOENT'){
             console.log("파일 삭제 Error 발생");
