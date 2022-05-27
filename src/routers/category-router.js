@@ -48,34 +48,31 @@ categoryRouter.delete('/', async function (req, res, next) {
 });
 
 categoryRouter.patch('/', async function (req, res, next) {
-    try {
-      // body data 로부터 업데이트할 sex, type을 추출함.
-      const sex = req.body.sex;
-      const type = req.body.type;
-      const updateSex = req.body.updateSex;
-      const updateType = req.body.updateType;
+  try {
 
-      const categoryRequired={ sex, type }
+    const sex = req.body.sex;
+    const type = req.body.type;
+    const updateSex = req.body.updateSex;
+    const updateType = req.body.updateType;
 
-      const toUpdate = {
-        ...(updateSex && { updateSex }),
-        ...(updateType && { updateType }),
-      };
+    const categoryRequired={ sex, type }
 
-      // 사용자 정보를 업데이트함.
-      const updatedCategoryInfo = await categoryService.setCategory(
-        categoryRequired,
-        toUpdate
-      );
-      const updatedProductInfo = await productService.setProduct({ sex, type });
-      
+    const toUpdate = {
+      ...(updateSex && { updateSex }),
+      ...(updateType && { updateType }),
+    };
 
-      // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
-      res.status(200).json(updatedCategoryInfo);
-    } catch (error) {
-      next(error);
-    }
+  
+    const updatedCategoryInfo = await categoryService.setCategory(
+      categoryRequired,
+      toUpdate
+    );
+
+
+    res.status(200).json(updatedCategoryInfo);
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 export { categoryRouter };
