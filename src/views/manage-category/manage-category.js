@@ -17,7 +17,7 @@ async function getCategoryList() {
   const categories = await Api.get('/category');
 
   for (let i = 0; i < categories.length; i++) {
-    const { new_category, sex, category_name } = categories[i];
+    const { sex, category_name } = categories[i];
 
     let element = `
     <tr>
