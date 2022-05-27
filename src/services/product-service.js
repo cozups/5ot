@@ -50,6 +50,16 @@ class ProductService {
     const deletedCount= await this.productModel.deleteByCategory(input);
     return deletedCount;
   }
+
+  async setProduct(product_id,toUpdate) {
+ 
+    const updatedProduct = await this.productModel.update({
+      product_id,
+      update: toUpdate,
+    });
+
+    return updatedProduct;
+  }
 }
 
 
