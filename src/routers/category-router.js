@@ -17,11 +17,12 @@ categoryRouter.get('/', async (req, res, next) => {
 
 categoryRouter.post('/', async (req, res, next) => {
   try {
-    const { sex, type } = req.body;
+    const sex = req.body.sex;
+    const type = req.body.type;
 
+    console.log(sex,type);
     const new_category = await categoryService.addCategories({
-      sex,
-      type,
+      sex, type,
     });
 
     res.status(201).json(new_category);
@@ -32,15 +33,49 @@ categoryRouter.post('/', async (req, res, next) => {
 
 categoryRouter.delete('/', async function (req, res, next) {
   try {
-    const { sex, type } = req.body;
-
-    const deletedCategory = await categoryService.deleteCategory({ sex, type });
+    
+    const category_id = req.body.category_id;
+    const sex= req.body.sex;
+    const type= req.body.type;
+    
+    const deletedCategory = await categoryService.deleteCategory(category_id);
     const deletedCount = await productService.deleteByCategory({ sex, type });
-
+    console.log(deletedCategory);
     res.status(200).json(deletedCategory);
   } catch (error) {
     next(error);
   }
 });
+
+categoryRouter.patch('/', async function (req, res, next) {
+    try {
+      // body data 로부터 업데이트할 sex, type을 추출함.
+      const sex = req.body.sex;
+      const type = req.body.type;
+      const updateSex = req.body.updateSex;
+      const updateType = req.body.updateType;
+
+      const categoryRequired={ sex, type }
+
+      const toUpdate = {
+        ...(updateSex && { updateSex }),
+        ...(updateType && { updateType }),
+      };
+
+      // 사용자 정보를 업데이트함.
+      const updatedCategoryInfo = await categoryService.setCategory(
+        categoryRequired,
+        toUpdate
+      );
+      const updatedProductInfo = await productService.setProduct({ sex, type });
+      
+
+      // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
+      res.status(200).json(updatedCategoryInfo);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 export { categoryRouter };

@@ -25,14 +25,28 @@ class CategoryService {
     return categories;
   }
 
-  async addCategories(req_input) {
-    const createdcategory = await this.categoryModel.create(req_input);
+  async addCategories(category) {
+    const createdcategory = await this.categoryModel.insertCategory(category);
     return createdcategory;
   }
 
+  async setCategory (categoryRequired, toUpdate) {
+    // 객체 destructuring
+    const { sex, type } = categoryRequired;
+
+    // 업데이트 진행
+    category = await this.categoryModel.update({
+      categoryRequired,
+      update: toUpdate,
+    });
+
+    return category;
+  }
+
+
   //category 정보 삭제
-  async deleteCategory(type) {
-    const deletedCount = await this.categoryModel.deleteCategory(type);
+  async deleteCategory(category_id) {
+    const deletedCount = await this.categoryModel.deleteCategory(category_id);
 
     if (!deletedCount) {
       throw new Error('삭제에 실패했습니다. 다시 한 번 확인해 주세요.');
