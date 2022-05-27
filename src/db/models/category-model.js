@@ -27,13 +27,14 @@ export class CategoryModel {
   }
 
 
-  // async update({ type, sex }) {
-  //   const filter = { type };
-  //   const option = { sex };
+  async update({ categoryRequired, update }) {
+    const filter = { category: categoryRequired };
+    const option = { returnOriginal: false };
 
-  //   const updatedCategory = await User.findOneAndUpdate(filter, update, option);
-  //   return updatedCategory;
-  // }
+    const updatedCategory = await Category.findOneAndUpdate(filter, update, option);
+    return updatedCategory;
+  }
+
 
   async deleteCategory (input) {
     const { sex, type } = input;
