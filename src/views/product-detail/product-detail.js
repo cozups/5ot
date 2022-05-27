@@ -12,7 +12,7 @@ const url = Number(window.location.pathname.split('/')[3]);
 
 async function getProductDetail() {
   try {
-    const result = await Api.get('/product', `w/new/${url}`);
+    const result = await Api.get('/product', `${url}`);
     image.src = result.product_image;
     image.innerHTML = result.src;
     producer.innerHTML = result.producer;
