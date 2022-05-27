@@ -25,10 +25,24 @@ class CategoryService {
     return categories;
   }
 
-  async addCategories(req_input) {
-    const createdcategory = await this.categoryModel.create(req_input);
+  async addCategories(category) {
+    const createdcategory = await this.categoryModel.insertCategory(category);
     return createdcategory;
   }
+
+  async setCategory (categoryRequired, toUpdate) {
+    // 객체 destructuring
+    const { sex, type } = categoryRequired;
+
+    // 업데이트 진행
+    category = await this.categoryModel.update({
+      categoryRequired,
+      update: toUpdate,
+    });
+
+    return category;
+  }
+
 
   //category 정보 삭제
   async deleteCategory(type) {

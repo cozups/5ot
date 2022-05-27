@@ -38,14 +38,6 @@ export class ProductModel {
     return createdNewUser;
   }
 
-  async update({ userId, update }) {
-    const filter = { _id: userId };
-    const option = { returnOriginal: false };
-
-    const updatedUser = await User.findOneAndUpdate(filter, update, option);
-    return updatedUser;
-  }
-
   async deleteByCategory(input) {
     const { sex, type } = input;
     const {deletedCount}= await Product.deleteMany({ category: input });
@@ -56,7 +48,7 @@ export class ProductModel {
     const filter = { product_id: product_id };
     const option = { returnOriginal: false };
 
-    const updatedProduct = await User.findOneAndUpdate(filter, update, option);
+    const updatedProduct = await Product.findOneAndUpdate(filter, update, option);
     return updatedProduct;
   }
 

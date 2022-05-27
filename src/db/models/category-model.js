@@ -10,8 +10,8 @@ export class CategoryModel {
     return category;
   }
 
-  async create(categoryInfo) {
-    const createdNewCategory = await Category.create(categoryInfo);
+  async insertCategory(category) {
+    const createdNewCategory = await Category.create(category);
     return createdNewCategory;
   }
 
@@ -27,13 +27,14 @@ export class CategoryModel {
   }
 
 
-  // async update({ type, sex }) {
-  //   const filter = { type };
-  //   const option = { sex };
+  async update({ categoryRequired, update }) {
+    const filter = { category: categoryRequired };
+    const option = { returnOriginal: false };
 
-  //   const updatedCategory = await User.findOneAndUpdate(filter, update, option);
-  //   return updatedCategory;
-  // }
+    const updatedCategory = await Category.findOneAndUpdate(filter, update, option);
+    return updatedCategory;
+  }
+
 
   async deleteCategory (input) {
     const { sex, type } = input;
