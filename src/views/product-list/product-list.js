@@ -2,8 +2,8 @@ import * as Api from '/api.js';
 const headerMenu = document.querySelectorAll('#navbar a');
 const section = document.getElementsByTagName('section')[0];
 
-const sex = window.location.pathname.split('/')[1];
-const type = window.location.pathname.split('/')[2];
+const sex = window.location.pathname.split('/')[2];
+const type = window.location.pathname.split('/')[3];
 // 제품목록 가져오기
 async function getProductList() {
   try {

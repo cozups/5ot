@@ -4,26 +4,6 @@ import path from 'path';
 
 const viewsRouter = express.Router();
 
-//모든 제품 목록 요청
-async function getProductAll() {
-  try {
-    const Presult = await Api.get('/product/all');
-    const Cresult = await Api.get('/category');
-
-    for (let i = 0; i < Cresult.length; i++) {
-      const sex = Cresult[i].sex;
-      const type = Cresult[i].type;
-
-      const url = `/${sex}/${type}`;
-
-      viewsRouter.use(url, serveStatic('product-list'));
-    }
-  } catch (error) {
-    console.log(`error : ${error}`);
-  }
-}
-getProductAll();
-
 // 페이지별로 html, css, js 파일들을 라우팅함
 // 아래와 같이 하면, http://localhost:5000/ 에서는 views/home/home.html 파일을,
 // http://localhost:5000/register 에서는 views/register/register.html 파일을 화면에 띄움
@@ -36,7 +16,7 @@ viewsRouter.use('/order/complete', serveStatic('complete'));
 viewsRouter.use('/mypage', serveStatic('mypage'));
 viewsRouter.use('/mypage/profile', serveStatic('mypage-profile'));
 
-// viewsRouter.use('/w/new', serveStatic('product-list'));
+viewsRouter.use('/list/:sex/:type', serveStatic('product-list'));
 
 viewsRouter.use('/mypage/orderlist', serveStatic('orderlist'));
 viewsRouter.use('/mypage/manage', serveStatic('manage-select-page'));
