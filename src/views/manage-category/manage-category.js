@@ -3,7 +3,6 @@ import * as Api from '/api.js';
 let sexValue = null;
 let typeValue = null;
 let category_ids = [];
-let productToModify = null;
 let categoryToModify = null;
 
 // 등록 관련 html 엘리먼트
@@ -158,6 +157,9 @@ async function patchRequest(e) {
   for (let [name, value] of formData) {
     data[name] = value;
   }
+  data['sex'] = categoryToModify.sex;
+  data['type'] = categoryToModify.type;
+
   try {
     let result = await Api.patch('/category', '', data);
     alert('카테고리가 수정 되었습니다.');
