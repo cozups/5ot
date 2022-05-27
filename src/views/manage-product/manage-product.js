@@ -106,8 +106,54 @@ async function modifyProduct(e) {
   // 프로덕트 정보 가져오기
   try {
     productToModify = await Api.get('/product', product_id);
+
+    setDefaultInfo();
   } catch (err) {
     console.error(err);
+  }
+}
+
+function setDefaultInfo() {
+  const { product_name, stock, price, product_info, producer } =
+    productToModify;
+
+  const sex = productToModify.category.sex;
+  const category = productToModify.category.type;
+
+  // input 필드 선택
+  const productNameField = document.querySelector(
+    '.modal-content #product_name'
+  );
+  const producerField = document.querySelector('.modal-content #producer');
+  const productInfoField = document.querySelector(
+    '.modal-content #product_info'
+  );
+  const stockField = document.querySelector('.modal-content #stock');
+  const priceField = document.querySelector('.modal-content #price');
+
+  // 값 채우기
+  productNameField.value = product_name;
+  producerField.value = producer;
+  productInfoField.value = product_info;
+  stockField.value = stock;
+  priceField.value = price;
+
+  // select 옵션 값 설정
+  const sexOptions = document.querySelectorAll('.modal-content #sex option');
+  const categoryOptions = document.querySelectorAll(
+    '.modal-content #type option'
+  );
+
+  for (let i = 0; i < sexOptions.length; i++) {
+    if (sexOptions[i].value === sex) {
+      sexOptions[i].selected = true;
+    }
+  }
+
+  for (let i = 0; i < categoryOptions.length; i++) {
+    if (categoryOptions[i].value === sex) {
+      categoryOptions[i].selected = true;
+    }
   }
 }
 
@@ -120,7 +166,6 @@ async function patchRequest(e) {
     data[name] = value;
   }
   data['product_id'] = productToModify.product_id;
-
   try {
     let result = await Api.patch('/product', '', data);
     alert('상품 수정 되었습니다.');
