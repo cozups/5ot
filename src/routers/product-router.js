@@ -133,6 +133,8 @@ productRouter.patch(
       const product_name = req.body.product_name;
       const sex = req.body.sex;
       const type = req.body.type;
+      const stock = req.body.stock;
+
       const category= {sex,type};
       //product_image
 
@@ -153,6 +155,8 @@ productRouter.patch(
         ...(category && { category }),
         // ...(type && { type }),
         // ...(product_image && { product_image }),
+        ...(stock && { stock }),
+
         ...(price && { price }),
         ...(producer && { producer }),
         ...(product_info && { product_info }),
