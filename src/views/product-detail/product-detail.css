@@ -121,6 +121,23 @@ body {
   font-size: 25px;
 }
 
+.quantity {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 50px;
+}
+.quantity * {
+  margin: 5px;
+}
+.quantity #minus,
+.quantity #plus {
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  width: 25px;
+  height: 25px;
+}
 .buttons {
   width: 400px;
   height: 100px;
