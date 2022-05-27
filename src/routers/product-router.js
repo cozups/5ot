@@ -133,6 +133,7 @@ productRouter.patch(
       const product_name = req.body.product_name;
       const sex = req.body.sex;
       const type = req.body.type;
+      const category= {sex,type};
       //product_image
 
       // const product_image = req.body.product_image;
@@ -149,9 +150,9 @@ productRouter.patch(
       // 보내주었다면, 업데이트용 객체에 삽입함.
       const toUpdate = {
         ...(product_name && { product_name }),
-        ...(sex && { sex }),
-        ...(type && { type }),
-        ...(product_image && { product_image }),
+        ...(category && { category }),
+        // ...(type && { type }),
+        // ...(product_image && { product_image }),
         ...(price && { price }),
         ...(producer && { producer }),
         ...(product_info && { product_info }),
