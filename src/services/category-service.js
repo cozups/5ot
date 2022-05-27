@@ -30,6 +30,20 @@ class CategoryService {
     return createdcategory;
   }
 
+  async setCategory (categoryRequired, toUpdate) {
+    // 객체 destructuring
+    const { sex, type } = categoryRequired;
+
+    // 업데이트 진행
+    category = await this.categoryModel.update({
+      categoryRequired,
+      update: toUpdate,
+    });
+
+    return category;
+  }
+
+
   //category 정보 삭제
   async deleteCategory(type) {
     const deletedCount = await this.categoryModel.deleteCategory(type);

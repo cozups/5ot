@@ -9,6 +9,9 @@ const CategorySchema = new Schema(
           sex: String,
           type: String,
         },
+        {
+          _id: false,
+        }
       ),
       required: true,
     },
