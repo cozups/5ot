@@ -3,24 +3,19 @@ import { Schema } from 'mongoose';
 
 const CategorySchema = new Schema(
   {
-    category: {
-      type: new Schema(
-        {
-          sex: String,
-          type: String,
-        },
-        {
-          _id: false,
-        }
-      ),
+    sex: {
+      type: String,
       required: true,
     },
-  }, 
-  {
-    unique: true,
-    collection: 'Category',
-    timestamps: false,
+    type: {
+      type: String,
+      required: true,
+    },
   },
+    {
+    collection: 'categories',
+    timestamps: false,
+  }
 );
 
 
