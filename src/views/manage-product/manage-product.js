@@ -164,9 +164,7 @@ function setDefaultInfo() {
   // select 옵션 값 설정
   const sexOptions = document.querySelectorAll('.modal-content #sex option');
   const modalCategory = document.querySelector('.modal-content #type');
-  const categoryOptions = document.querySelectorAll(
-    '.modal-content #type option'
-  );
+  const modalCategoryOptions = document.querySelector('.modal-content #type');
 
   for (let i = 0; i < categoryList.length; i++) {
     let optionElement = `<option value='${categoryList[i]}'>${categoryList[i]}</option>`;
@@ -179,9 +177,10 @@ function setDefaultInfo() {
     }
   }
 
-  for (let i = 0; i < categoryOptions.length; i++) {
-    if (categoryOptions[i].value === sex) {
-      categoryOptions[i].selected = true;
+  console.log(modalCategoryOptions);
+  for (let i = 0; i < modalCategoryOptions.length; i++) {
+    if (modalCategoryOptions[i].value === category) {
+      modalCategoryOptions[i].selected = true;
     }
   }
 }
