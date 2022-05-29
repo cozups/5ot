@@ -352,6 +352,10 @@ input[type='number']::-webkit-outer-spin-button {
   margin-left: 16px;
 }
 
+.cart-item-info button {
+  cursor: pointer;
+}
+
 .item-total-price {
   position: absolute;
   bottom: 0px;
@@ -369,8 +373,8 @@ input[type='number']::-webkit-outer-spin-button {
   width: 80px;
 }
 
-.item-quantity #minus,
-.item-quantity #plus {
+.item-quantity .minus,
+.item-quantity .plus {
   border: none;
   background-color: transparent;
   font-size: 20px;
@@ -378,7 +382,7 @@ input[type='number']::-webkit-outer-spin-button {
   height: 24px;
 }
 
-#cancel {
+.cancel {
   color: var(--error-color);
   background-color: transparent;
   border: none;

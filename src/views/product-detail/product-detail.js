@@ -55,16 +55,10 @@ plus.addEventListener('click', () => {
 
 //장바구니 누르면 장바구니로 이동
 cart.addEventListener('click', function (e) {
-  const cartLength = localStorage.length - 1; // 1을 빼는 이유는 localStorage에 randid라는 값이 들어가 있기 때문에
-  const quantity = Number(document.getElementById('qty').innerText);
-  let cartToAdd = {
-    product_image: productData.product_image,
-    product_name: productData.product_name,
-    quantity: quantity,
-    price: productData.price,
-  };
-  localStorage.setItem(`myCart[${cartLength}]`, JSON.stringify(cartToAdd));
-
+  const result = addCart();
+  if (!result) {
+    return;
+  }
   let data = confirm(
     '장바구니에 성공적으로 담겼습니다.\n장바구니로 이동하시겠습니까?'
   );
@@ -72,6 +66,38 @@ cart.addEventListener('click', function (e) {
     window.location.replace('/cart');
   }
 });
+
+// 장바구니 추가
+function addCart() {
+  let isExist = false;
+  const cart = JSON.parse(localStorage.getItem('myCart'));
+  const quantity = Number(document.getElementById('qty').innerText);
+  if (!quantity) {
+    alert('개수는 1개 이상이어야 합니다.');
+    return false;
+  }
+  let cartToAdd = {
+    product_image: productData.product_image,
+    product_name: productData.product_name,
+    quantity: quantity,
+    price: productData.price,
+  };
+
+  // 이미 카트에 있는 경우
+  cart.forEach(item => {
+    if (item.product_name === cartToAdd.product_name) {
+      item.quantity += cartToAdd.quantity;
+      isExist = true;
+    }
+  });
+
+  if (!isExist) {
+    cart.push(cartToAdd);
+  }
+
+  localStorage.setItem(`myCart`, JSON.stringify(cart));
+  return true;
+}
 
 // 로그인 상태 체크 -> 로그인 상태에 따른 렌더링을 하는 함수들
 function checkLogin() {
