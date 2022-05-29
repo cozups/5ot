@@ -69,6 +69,7 @@ cart.addEventListener('click', function (e) {
 
 // 장바구니 추가
 function addCart() {
+  let isExist = false;
   const cart = JSON.parse(localStorage.getItem('myCart'));
   const quantity = Number(document.getElementById('qty').innerText);
   if (!quantity) {
@@ -81,7 +82,19 @@ function addCart() {
     quantity: quantity,
     price: productData.price,
   };
-  cart.push(cartToAdd);
+
+  // 이미 카트에 있는 경우
+  cart.forEach(item => {
+    if (item.product_name === cartToAdd.product_name) {
+      item.quantity += cartToAdd.quantity;
+      isExist = true;
+    }
+  });
+
+  if (!isExist) {
+    cart.push(cartToAdd);
+  }
+
   localStorage.setItem(`myCart`, JSON.stringify(cart));
   return true;
 }

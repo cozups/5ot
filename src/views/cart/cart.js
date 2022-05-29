@@ -26,6 +26,7 @@ function cartRendering() {
 
     const element = `
       <li>
+          <input type="checkbox" value="${i}"/>
           <img
             src="${product_image}"
             alt=""
@@ -33,15 +34,15 @@ function cartRendering() {
           <div class="cart-item-info">
             <h3>${product_name}</h3>
             <div class="item-quantity">
-              <button class="minus" value=${i}>
+              <button class="minus" value="${i}">
                 <i class="fas fa-minus"></i>
               </button>
               <span class="qty">${quantity}</span>
-              <button class="plus" value=${i}><i class="fas fa-plus"></i></button>
+              <button class="plus" value="${i}"><i class="fas fa-plus"></i></button>
             </div>
             <span class="item-price">${Util.addCommas(price)}</span>
             <span class="item-total-price">총 ${total}원</span>
-            <button class='cancel' value=${i}><i class="fa-solid fa-trash-can"></i></buttonc>
+            <button class='cancel' value="${i}"><i class="fa-solid fa-trash-can"></i></buttonc>
           </div>
           </li>
           `;
@@ -76,8 +77,6 @@ function setOrderInfo() {
 
 function clickHandler(e) {
   const btn = e.target.parentElement; // e.target이 i 태그이기 때문에 parent를 가리켜야함.. (font-awesome 때문)
-  console.log(btn.value);
-  const cancelButtons = document.querySelectorAll('.cancel');
   const idx = Number(btn.value);
 
   if (btn.tagName !== 'BUTTON') {
