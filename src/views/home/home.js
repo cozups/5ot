@@ -99,6 +99,16 @@ function logout(e) {
   window.location.href = '/';
 }
 
+// home에 들어갈 때마다 cart 확인
+// cart가 비어있지 않다면 myCart = [] 로 초기화 하지 않음
+function checkCart() {
+  const cart = localStorage.getItem('myCart');
+  if (!cart || cart.length === 1) {
+    localStorage.setItem('myCart', JSON.stringify([]));
+  }
+}
+
 loginRender();
 setActive(0);
 scrollByTime();
+checkCart();

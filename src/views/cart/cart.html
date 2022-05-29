@@ -27,6 +27,12 @@
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="cart.css" />
     <script src="cart.js" type="module" defer></script>
+    <!-- jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -53,7 +59,7 @@
 
         <div class="navbar-end">
           <ul id="navbar">
-            <li><a href="/login">로그아웃</a></li>
+            <li><a href="/logout">로그아웃</a></li>
             <li><a href="/mypage">마이페이지</a></li>
             <li>
               <a href="/cart" aria-current="page">
@@ -76,11 +82,14 @@
             <p class="is-size-4">장바구니</p>
           </div>
           <div class="product-count">
-            <span class="is-size-6">n개 상품</span>
+            <span class="is-size-6"></span>
           </div>
         </div>
 
-        <div class="tile is-ancestor cart-container" style="width: 80%; margin: auto;">
+        <div
+          class="tile is-ancestor cart-container"
+          style="width: 80%; margin: auto"
+        >
           <div class="tile is-8 is-parent cart-products">
             <!-- 장바구니에 담긴 상품 모음 -->
             <div class="cart-products-container" id="cartProductsContainer">
@@ -98,6 +107,9 @@
               </div>
 
               <!-- 장바구니에 담긴 상품들의 html 요소(카드 형태)가 주입되는 곳 -->
+              <div id="cart-list-wrap">
+                <ul id="cart-list"></ul>
+              </div>
             </div>
           </div>
 
@@ -126,9 +138,7 @@
                 </div>
                 <div class="purchase">
                   <a href="/order">
-                    <button class="button" id="purchaseButton">
-                      구매하기
-                    </button>
+                    <button class="button" id="purchaseButton">구매하기</button>
                   </a>
                 </div>
               </div>
