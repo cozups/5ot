@@ -1,3 +1,4 @@
+import * as Api from './../views/api.js';
 import express from 'express';
 import path from 'path';
 
@@ -14,15 +15,9 @@ viewsRouter.use('/order', serveStatic('order'));
 viewsRouter.use('/order/complete', serveStatic('complete'));
 viewsRouter.use('/mypage', serveStatic('mypage'));
 viewsRouter.use('/mypage/profile', serveStatic('mypage-profile'));
-viewsRouter.use('/w/new', serveStatic('product-list'));
-viewsRouter.use('/w/beauty', serveStatic('product-list'));
-viewsRouter.use('/w/shoes', serveStatic('product-list'));
-viewsRouter.use('/w/dress', serveStatic('product-list'));
-viewsRouter.use('/m/new', serveStatic('product-list'));
-viewsRouter.use('/m/suit', serveStatic('product-list'));
-viewsRouter.use('/m/shoes', serveStatic('product-list'));
-viewsRouter.use('/m/athletics', serveStatic('product-list'));
-viewsRouter.use('/w/new/64', serveStatic('product-detail'));
+
+viewsRouter.use('/list/:sex/:type', serveStatic('product-list'));
+viewsRouter.use('/list/:sex/:type/:product_id', serveStatic('product-detail'));
 
 viewsRouter.use('/mypage/orderlist', serveStatic('orderlist'));
 viewsRouter.use('/mypage/manage', serveStatic('manage-select-page'));

@@ -11,7 +11,7 @@ let minus = document.getElementById('minus');
 let plus = document.getElementById('plus');
 
 const cart = document.getElementById('cart');
-const url = Number(window.location.pathname.split('/')[3]);
+const url = Number(window.location.pathname.split('/')[4]);
 
 async function getProductDetail() {
   try {

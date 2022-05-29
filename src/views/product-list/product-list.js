@@ -1,23 +1,24 @@
 import * as Api from '/api.js';
 const headerMenu = document.querySelectorAll('#navbar a');
 const section = document.getElementsByTagName('section')[0];
+
+const sex = window.location.pathname.split('/')[2];
+const type = window.location.pathname.split('/')[3];
 // 제품목록 가져오기
 async function getProductList() {
   try {
-    const result = await Api.get('/product', 'w/new');
-    console.log(result);
-    console.log(result[0].product_name);
+    const result = await Api.get('/product', `${sex}/${type}`);
     for (let i = 0; i < result.length; i++) {
       let name = result[i].product_name;
       let price = result[i].price.toLocaleString();
       let info = result[i].product_info;
       let image = result[i].product_image;
       let productId = result[i].product_id;
-      console.log(image);
-      // 상세페이지 구현 후 a태그 경로 바꿔야함!!!!!
+      console.log(productId);
+
       let HTMLtemplate = `
         <div id="product-list-wrap">
-          <a href="/w/new/${productId}"> 
+          <a href="/list/${sex}/${type}/${productId}"> 
             <div class="product-list">
             <img class="product-thumbnail" src="${image}"/>
               <div class="product-content">

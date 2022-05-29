@@ -19,6 +19,7 @@ const modalForm = document.querySelector('.modal-content form');
 // 이벤트 추가
 modalCloseButton.addEventListener('click', closeModal);
 modalModifyButton.addEventListener('click', patchRequest);
+
 // functions
 // 카테고리 동적 렌더링
 async function categoryRendering() {
@@ -49,8 +50,8 @@ async function getList() {
     let element = `
     <tr>
       <td>${product_name}</td>
-      <td>${stock} 개</td>
-      <td>${price} 원</td>
+      <td>${stock}개</td>
+      <td>${price}원</td>
       <td>
         <button class="product-modify-button" value='${product_id}'>
           <i class="fa-solid fa-pencil"></i>
@@ -74,6 +75,7 @@ async function getList() {
   }
 }
 
+// 상품 삭제
 async function deleteProduct(e) {
   e.preventDefault();
 
@@ -97,6 +99,7 @@ async function deleteProduct(e) {
   }
 }
 
+// 상품 추가
 sellForm.addEventListener('submit', async function (e) {
   e.preventDefault();
 
@@ -107,7 +110,7 @@ sellForm.addEventListener('submit', async function (e) {
       method: 'POST',
       body: formData,
     });
-    alert('상품 추가 되었습니다.');
+    alert('상품이 추가 되었습니다.');
 
     window.location.href = '/mypage/manage/product';
   } catch (err) {
@@ -161,9 +164,7 @@ function setDefaultInfo() {
   // select 옵션 값 설정
   const sexOptions = document.querySelectorAll('.modal-content #sex option');
   const modalCategory = document.querySelector('.modal-content #type');
-  const categoryOptions = document.querySelectorAll(
-    '.modal-content #type option'
-  );
+  const modalCategoryOptions = document.querySelector('.modal-content #type');
 
   for (let i = 0; i < categoryList.length; i++) {
     let optionElement = `<option value='${categoryList[i]}'>${categoryList[i]}</option>`;
@@ -176,9 +177,10 @@ function setDefaultInfo() {
     }
   }
 
-  for (let i = 0; i < categoryOptions.length; i++) {
-    if (categoryOptions[i].value === sex) {
-      categoryOptions[i].selected = true;
+  console.log(modalCategoryOptions);
+  for (let i = 0; i < modalCategoryOptions.length; i++) {
+    if (modalCategoryOptions[i].value === category) {
+      modalCategoryOptions[i].selected = true;
     }
   }
 }
@@ -194,7 +196,7 @@ async function patchRequest(e) {
   data['product_id'] = productToModify.product_id;
   try {
     let result = await Api.patch('/product', '', data);
-    alert('상품 수정 되었습니다.');
+    alert('상품이 수정 되었습니다.');
 
     closeModal();
     location.reload();
