@@ -1,19 +1,19 @@
 import * as Api from '/api.js';
 const headerMenu = document.querySelectorAll('#navbar a');
 const section = document.getElementsByTagName('section')[0];
-
-const sex = window.location.pathname.split('/')[2];
-const type = window.location.pathname.split('/')[3];
+const pathname = window.location.pathname.split('/');
+const sex = pathname[2];
+const type = pathname[3];
 // 제품목록 가져오기
 async function getProductList() {
   try {
     const result = await Api.get('/product', `${sex}/${type}`);
     for (let i = 0; i < result.length; i++) {
-      let name = result[i].product_name;
-      let price = result[i].price.toLocaleString();
-      let info = result[i].product_info;
-      let image = result[i].product_image;
-      let productId = result[i].product_id;
+      const name = result[i].product_name;
+      const price = result[i].price.toLocaleString();
+      const info = result[i].product_info;
+      const image = result[i].product_image;
+      const productId = result[i].product_id;
       console.log(productId);
 
       let HTMLtemplate = `

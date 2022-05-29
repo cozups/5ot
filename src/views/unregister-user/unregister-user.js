@@ -1,6 +1,6 @@
 import * as Api from '/api.js';
 
-const button = document.querySelector('#submit');
+const button = document.getElementById('submit');
 const passwordInput = document.querySelector('#password');
 
 button.addEventListener('click', unregister);
