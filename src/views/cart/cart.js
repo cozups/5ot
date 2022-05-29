@@ -2,6 +2,7 @@ import * as Util from '/useful-functions.js';
 
 // 변수
 let cart = JSON.parse(localStorage.getItem(`myCart`));
+let deleteList = [];
 
 // html 엘리먼트 선택
 const cartList = document.getElementById('cart-list');
@@ -26,7 +27,7 @@ function cartRendering() {
 
     const element = `
       <li>
-          <input type="checkbox" value="${i}"/>
+          <input type="checkbox" class="list-checkbox" value="${i}"/>
           <img
             src="${product_image}"
             alt=""
@@ -76,6 +77,22 @@ function setOrderInfo() {
 }
 
 function clickHandler(e) {
+  if (e.target.tagName === 'INPUT') {
+    // checkbox
+    const checkbox = e.target;
+    const value = Number(checkbox.value);
+    if (checkbox.checked) {
+      deleteList.push(value);
+    } else {
+      deleteList = deleteList.filter(idx => idx !== value);
+    }
+
+    if (deleteList.length === cart.length) {
+      allSelectCheckbox.checked = true;
+    } else {
+      allSelectCheckbox.checked = false;
+    }
+  }
   const btn = e.target.parentElement; // e.target이 i 태그이기 때문에 parent를 가리켜야함.. (font-awesome 때문)
   const idx = Number(btn.value);
 
@@ -84,18 +101,17 @@ function clickHandler(e) {
   }
 
   if (btn.className === 'cancel') {
-    cancelOrder(idx);
+    deleteList.push(idx);
+    cancelOrder();
+    location.reload();
   } else {
     changeQuantity(btn.className, idx);
   }
 }
 
-function cancelOrder(idxToDelete) {
-  cart = cart.filter((item, idx) => idx !== idxToDelete);
-
+function cancelOrder() {
+  cart = cart.filter((item, idx) => deleteList.indexOf(idx) < 0);
   localStorage.setItem('myCart', JSON.stringify(cart));
-
-  location.reload();
 }
 
 function changeQuantity(type, idxToChange) {
@@ -115,4 +131,30 @@ function changeQuantity(type, idxToChange) {
   cart[idxToChange].quantity = quantity;
   localStorage.setItem('myCart', JSON.stringify(cart));
   cartRendering();
+}
+
+// 전체, 선택 삭제
+const allSelectCheckbox = document.getElementById('allSelectCheckbox');
+const checkList = document.querySelectorAll('.list-checkbox');
+const partialDeleteLabel = document.getElementById('partialDeleteLabel');
+
+allSelectCheckbox.addEventListener('click', selectAllHandler);
+partialDeleteLabel.addEventListener('click', deleteSelected);
+
+function selectAllHandler() {
+  if (allSelectCheckbox.checked === true) {
+    checkList.forEach(elem => {
+      elem.checked = true;
+      deleteList.push(Number(elem.value));
+    });
+  } else {
+    checkList.forEach(elem => (elem.checked = false));
+    deleteList = [];
+  }
+}
+
+function deleteSelected() {
+  cancelOrder();
+
+  location.reload();
 }
