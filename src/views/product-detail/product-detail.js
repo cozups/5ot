@@ -31,23 +31,29 @@ getProductDetail();
 
 //수량
 
-minus.addEventListener('click', () => {
+function count(type) {
   let number = Number(document.getElementById('qty').innerText);
   let result = document.getElementById('qty');
-  if (number === 1) {
-    minus.disabled = true;
+  if (type === 'minus') {
+    if (number === 1) {
+      minus.disabled = true;
+    }
+    number -= 1;
+    result.innerText = number;
+  } else if (type === 'plus') {
+    if (number >= 0) {
+      minus.disabled = false;
+    }
+    number += 1;
+    result.innerText = number;
   }
-  number = number - 1;
-  result.innerText = number;
+}
+
+minus.addEventListener('click', () => {
+  count('minus');
 });
 plus.addEventListener('click', () => {
-  let number = Number(document.getElementById('qty').innerText);
-  let result = document.getElementById('qty');
-  if (number >= 0) {
-    minus.disabled = false;
-  }
-  number = number + 1;
-  result.innerText = number;
+  count('plus');
 });
 
 //장바구니 누르면 장바구니로 이동
