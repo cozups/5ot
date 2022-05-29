@@ -1,7 +1,6 @@
 import * as Util from '/useful-functions.js';
 
 // 변수
-let prices = [];
 let cart = JSON.parse(localStorage.getItem(`myCart`));
 
 // html 엘리먼트 선택
@@ -14,14 +13,15 @@ cartList.addEventListener('click', clickHandler);
 // functions
 //장바구니 리스트 렌더링하기
 cartRendering();
-setOrderInfo();
 
 function cartRendering() {
+  let i = 0;
+  cartList.innerHTML = '';
+
   cartCountField.innerText = `${cart.length}개 상품`;
 
   cart.forEach(item => {
     const { product_image, product_name, quantity, price } = item;
-    prices.push(price * quantity);
     const total = Util.addCommas(price * quantity);
 
     const element = `
@@ -33,21 +33,24 @@ function cartRendering() {
           <div class="cart-item-info">
             <h3>${product_name}</h3>
             <div class="item-quantity">
-              <button class="minus" disabled>
+              <button class="minus" value=${i}>
                 <i class="fas fa-minus"></i>
               </button>
-              <span id="qty">${quantity}</span>
-              <button class="plus"><i class="fas fa-plus"></i></button>
+              <span class="qty">${quantity}</span>
+              <button class="plus" value=${i}><i class="fas fa-plus"></i></button>
             </div>
             <span class="item-price">${Util.addCommas(price)}</span>
             <span class="item-total-price">총 ${total}원</span>
-            <button class='cancel'><i class="fa-solid fa-trash-can"></i></buttonc>
+            <button class='cancel' value=${i}><i class="fa-solid fa-trash-can"></i></buttonc>
           </div>
           </li>
           `;
 
     cartList.innerHTML += element;
+    i++;
   });
+
+  setOrderInfo();
 }
 
 function setOrderInfo() {
@@ -58,41 +61,37 @@ function setOrderInfo() {
   );
   const totalPriceToPay = document.getElementById('orderTotal');
   let totalOrderPrice = 0;
-  if (prices.length > 0) {
-    totalOrderPrice = prices.reduce((acc, cur) => (acc += cur));
+  if (cart.length > 0) {
+    totalOrderPrice = cart.reduce(
+      (acc, cur) => (acc += cur.price * cur.quantity),
+      0
+    );
   }
 
-  productCount.innerText = prices.length + '개';
-  productsTotal.innerText = totalOrderPrice + '원';
-  totalPriceToPay.innerText = totalOrderPrice + deliveryFee + '원';
+  productCount.innerText = cart.length + '개';
+  productsTotal.innerText = Util.addCommas(totalOrderPrice) + '원';
+  totalPriceToPay.innerText =
+    Util.addCommas(totalOrderPrice + deliveryFee) + '원';
 }
 
 function clickHandler(e) {
   const btn = e.target.parentElement; // e.target이 i 태그이기 때문에 parent를 가리켜야함.. (font-awesome 때문)
+  console.log(btn.value);
   const cancelButtons = document.querySelectorAll('.cancel');
-  let idx = 0;
+  const idx = Number(btn.value);
 
   if (btn.tagName !== 'BUTTON') {
     return;
   }
 
-  for (let i = 0; i < cancelButtons.length; i++) {
-    if (cancelButtons[i] === btn) {
-      idx = i;
-      break;
-    }
-  }
-
   if (btn.className === 'cancel') {
     cancelOrder(idx);
   } else {
-    changeQuantity(btn.className);
+    changeQuantity(btn.className, idx);
   }
 }
 
 function cancelOrder(idxToDelete) {
-  let cart = JSON.parse(localStorage.getItem('myCart'));
-
   cart = cart.filter((item, idx) => idx !== idxToDelete);
 
   localStorage.setItem('myCart', JSON.stringify(cart));
@@ -100,10 +99,21 @@ function cancelOrder(idxToDelete) {
   location.reload();
 }
 
-function changeQuantity(type) {
+function changeQuantity(type, idxToChange) {
+  const quantityField = document.querySelectorAll('.qty');
+  let quantity = Number(quantityField[idxToChange].innerText);
   if (type === 'minus') {
-    console.log('minus');
+    if (quantity === 0) {
+      return;
+    } else {
+      quantity--;
+    }
   } else {
-    console.log('plus');
+    quantity++;
   }
+
+  quantityField[idxToChange].innerText = quantity;
+  cart[idxToChange].quantity = quantity;
+  localStorage.setItem('myCart', JSON.stringify(cart));
+  cartRendering();
 }
