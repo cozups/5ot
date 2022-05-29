@@ -1,5 +1,8 @@
 import * as Api from '/api.js';
 import * as Util from '/useful-functions.js';
+
+let productData = null; // 다른 함수에서도 상품 데이터를 필요로 하기 때문에 let 사용
+
 const headerMenu = document.querySelectorAll('#navbar a');
 const image = document.getElementById('product-thumbnail');
 const producer = document.getElementById('producer');
@@ -15,13 +18,13 @@ const url = Number(window.location.pathname.split('/')[4]);
 
 async function getProductDetail() {
   try {
-    const result = await Api.get('/product', `${url}`);
-    image.src = result.product_image;
-    image.innerHTML = result.src;
-    producer.innerHTML = result.producer;
-    name.innerHTML = result.product_name;
-    price.innerHTML = `${Util.addCommas(result.price)}원`;
-    description.innerHTML = result.product_info;
+    productData = await Api.get('/product', `${url}`);
+    image.src = productData.product_image;
+    image.innerHTML = productData.src;
+    producer.innerHTML = productData.producer;
+    name.innerHTML = productData.product_name;
+    price.innerHTML = `${Util.addCommas(productData.price)}원`;
+    description.innerHTML = productData.product_info;
   } catch (error) {
     console.log(`error : ${error}`);
   }
@@ -52,6 +55,16 @@ plus.addEventListener('click', () => {
 
 //장바구니 누르면 장바구니로 이동
 cart.addEventListener('click', function (e) {
+  const cartLength = localStorage.length - 1; // 1을 빼는 이유는 localStorage에 randid라는 값이 들어가 있기 때문에
+  const quantity = Number(document.getElementById('qty').innerText);
+  let cartToAdd = {
+    product_image: productData.product_image,
+    product_name: productData.product_name,
+    quantity: quantity,
+    price: productData.price,
+  };
+  localStorage.setItem(`myCart[${cartLength}]`, JSON.stringify(cartToAdd));
+
   let data = confirm(
     '장바구니에 성공적으로 담겼습니다.\n장바구니로 이동하시겠습니까?'
   );
