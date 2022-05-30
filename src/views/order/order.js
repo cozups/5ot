@@ -89,18 +89,18 @@ async function postOrder(e) {
     address2: address2.value,
   };
   console.log(data);
-  // try {
-  //   const result = await Api.post('/order', data);
-  //   if (storageStatus === 'purchase') {
-  //     sessionStorage.removeItem('productInfo');
-  //   } else {
-  //     localStorage.setItem('myCart', JSON.stringify([]));
-  //   }
+  try {
+    const result = await Api.post('/order', data);
+    if (storageStatus === 'purchase') {
+      sessionStorage.removeItem('productInfo');
+    } else {
+      localStorage.setItem('myCart', JSON.stringify([]));
+    }
 
-  //   // window.location.href = '/order/complete';
-  // } catch (err) {
-  //   console.log(err);
-  // }
+    // window.location.href = '/order/complete';
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 purchaseButton.addEventListener('click', postOrder);
