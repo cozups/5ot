@@ -48,7 +48,7 @@ const ProductSchema = new Schema(
       required: true,
     },
     product_image: {
-      type: String, // 넣을수 있는지 확인
+      type: String, 
       required: true,
     },
     producer: {

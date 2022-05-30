@@ -16,15 +16,10 @@ orderRouter.get('/all', loginRequired, async (req, res, next) => {
   }
 });
 
-orderRouter.post('/', async (req, res, next) => {
+orderRouter.post('/', loginRequired, async (req, res, next) => {
   try {
-    const OrderList = req.body.orderList;
-    const email = req.body.email;
-    const fullName = req.body.fullName;
-    const phoneNumber = req.body.phoneNumber;
-    const postalCode = req.body.postalCode;
-    const address1 = req.body.address1;
-    const address2 = req.body.address2;
+    const { OrderList, email, fullName, phoneNumber, postalCode, address1, address2 } = req.body;
+
     const address = { postalCode, address1, address2 };
 
     const createdOrder = await orderService.addOrder({
@@ -41,7 +36,7 @@ orderRouter.post('/', async (req, res, next) => {
   }
 });
 
-orderRouter.get('/email/:email', async (req, res, next) => {
+orderRouter.get('/email/:email', loginRequired, async (req, res, next) => {
   try {
     //email is admin
     let orders;
@@ -61,7 +56,7 @@ orderRouter.get('/email/:email', async (req, res, next) => {
   }
 });
 
-orderRouter.delete('/', async (req, res, next) => {
+orderRouter.delete('/', loginRequired, async (req, res, next) => {
   try {
     const order_id = req.body.order_id;
     const deletedCount = await orderService.deleteOrder(order_id);
