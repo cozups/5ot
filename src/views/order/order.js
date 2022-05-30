@@ -59,6 +59,7 @@ async function postOrder(e) {
     orderList = [
       {
         product_id: productInfo.product_id,
+        product_name: productInfo.product_name,
         quantity: productInfo.quantity,
         price: productInfo.price,
       },
@@ -67,6 +68,7 @@ async function postOrder(e) {
     orderList = cart.map((itemObj) => {
       return {
         product_id: itemObj.product_id,
+        product_name: itemObj.product_name,
         quantity: itemObj.quantity,
         price: itemObj.price,
       };
