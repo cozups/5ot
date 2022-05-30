@@ -1,4 +1,3 @@
-import { json } from 'express/lib/response';
 import * as Api from '/api.js';
 import * as Util from '/useful-functions.js';
 
@@ -67,7 +66,7 @@ const productInfo = JSON.parse(localStorage.getItem('productInfo'));
 purchase.addEventListener('click', () => {});
 
 //장바구니 누르면 장바구니로 이동
-cart.addEventListener('click', function () {
+cart.addEventListener('click', () => {
   const result = addCart();
   if (!result) {
     return;
