@@ -9,15 +9,10 @@ const address2Input = document.querySelector('#address2');
 const requestSelectBoxInput = document.querySelector('#requestSelectBox');
 const purchaseButton = document.querySelector('#purchaseButton');
 
-// const quantity = document.getElementById('qty').innerText;
 const productsCount = document.getElementById('productsCount');
 const productsTotal = document.getElementById('productsTotal').value;
 const deliveryFee = document.getElementById('deliveryFee').value;
 const orderTotal = document.getElementById('orderTotal').value;
-
-// productsCount.innerText = quantity;
-
-// console.log(quantity);
 
 addAllElements();
 addAllEvents();
