@@ -4,83 +4,48 @@ import * as Api from '/api.js';
 const cancelButton = document.querySelectorAll('.order-cancel');
 const listTable = document.querySelector('.order-list');
 
-// 이벤트 추가
-
-// functions  추가해야함
-async function checkRole() {
-  const email = sessionStorage.getItem('email');
-
+//계정따라 로드구현 달라지게 하기
+async function loadData() {
   try {
-    const userInfo = await Api.get('/api/email', email);
-    const { role } = userInfo;
+    const email = sessionStorage.getItem('email');
+    const received = await Api.get('/order/email', email);
+    console.log(received);
 
-    if (role === 'admin') {
-      loadDataAdmin();
-    } else {
-    }
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-async function loadDataAdmin() {
-  const received = [
-    //db에 데이터가 없어서 임의로 만듬 실제로 받을 땐 db에서 가져오는 코드로 바꿔야함
-    {
-      OrderList: [
-        {
-          product_id: 64,
-          quantity: 3,
-          price: 55000,
-        },
-      ],
-      order_id: 1,
-      email: 'test@team5.com',
-      fullName: '김미소',
-      phoneNumber: '010-1111-2222',
-      address: {
-        postalCode: '01234',
-        address1: '서울특별시 강남구 테헤란로 53길 16',
-        address2: '예안빌딩 B1층',
-      },
-    },
-  ];
-
-  const product_id = received[0].OrderList[0].product_id; //들어오는 형태를 봐야 함
-  try {
-    const data = await Api.get('/product', product_id);
-
-    console.log(data);
-
+    //정보 가져와서 화면에 구현
     for (let i = 0; i < received.length; i++) {
-      const userId = received[i].email;
-      const count = received[i].OrderList[0].quantity;
-      const address1 = received[i].address.address1;
-      const address2 = received[i].address.address2;
-      const totalPrice = count * received[i].OrderList[0].price;
-      const listElement = `
-      <tr>
-      <td class="product-name" rowspan='2' align='center'>${data.product_name}</td>
+      for (let j = 0; j < received[i].OrderList.length; j++) {
+        const productName = received[i].OrderList[j].product_name;
+        const userId = received[i].email;
+        const count = received[i].OrderList[j].quantity;
+        const address1 = received[i].address.address1;
+        const address2 = received[i].address.address2;
+        const totalPrice = count * received[i].OrderList[j].price;
+        const listElement = `
+        <tr>
+          <td class="product-name" rowspan='2' align='center'>${productName}</td>
           <td class="user" rowspan='2' align='center'>${userId}</td>
           <td class="count" rowspan='2' align='center'>${count}</td>
           <td class="address1">${address1}</td>
           <td class="total-price" rowspan='2' align='center'>${totalPrice}</td>
           <td class="cancel-button" rowspan='2' align='center'>
-          <button type='button'>취소하기</button>
+          <button type='button'>취소</button>
           </td>
-          </tr>
-          <tr>
-        <td class='address2' rowspan='2'>${address2}</td>
         </tr>
-      `;
+        <tr>
+          <td class='address2'>${address2}</td>
+        </tr>
+        `;
 
-      listTable.innerHTML += listElement;
+        listTable.innerHTML += listElement;
+      }
     }
   } catch (err) {
     console.error(err);
   }
 }
+loadData();
 
+//주문취소
 for (let i = 0; i < cancelButton.length; i++) {
   cancelButton[i].addEventListener('click', () => {
     const data = confirm('주문을 취소하시겠습니까?');
@@ -91,5 +56,3 @@ for (let i = 0; i < cancelButton.length; i++) {
     }
   });
 }
-
-checkRole();
