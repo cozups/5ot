@@ -1,15 +1,17 @@
 import * as Api from '/api.js';
-
+// 변수
+let received = null;
+let email = '';
 // HTML 엘리먼트
 const cancelButton = document.querySelectorAll('.order-cancel');
 const listTable = document.querySelector('.order-list');
 
 //계정따라 로드구현 달라지게 하기
 async function loadData() {
+  let rowIdx = 0;
   try {
-    const email = sessionStorage.getItem('email');
-    const received = await Api.get('/order/email', email);
-    console.log(received);
+    email = sessionStorage.getItem('email');
+    received = await Api.get('/order/email', email);
 
     //정보 가져와서 화면에 구현
     for (let i = 0; i < received.length; i++) {
@@ -20,6 +22,9 @@ async function loadData() {
         const address1 = received[i].address.address1;
         const address2 = received[i].address.address2;
         const totalPrice = count * received[i].OrderList[j].price;
+
+        const idxPair = { i, j };
+
         const listElement = `
         <tr>
           <td class="product-name" rowspan='2' align='center'>${productName}</td>
@@ -28,7 +33,7 @@ async function loadData() {
           <td class="address1">${address1}</td>
           <td class="total-price" rowspan='2' align='center'>${totalPrice}</td>
           <td class="cancel-button" rowspan='2' align='center'>
-          <button type='button'>취소</button>
+          <button type='button' value='${i}'>취소</button>
           </td>
         </tr>
         <tr>
@@ -45,14 +50,24 @@ async function loadData() {
 }
 loadData();
 
-//주문취소
-for (let i = 0; i < cancelButton.length; i++) {
-  cancelButton[i].addEventListener('click', () => {
-    const data = confirm('주문을 취소하시겠습니까?');
-    const orderList = document.getElementsByClassName('order-list');
-    if (data) {
-      orderList.splice(i, 1);
-      console.log('cancel the order');
-    }
-  });
+// 주문 취소
+listTable.addEventListener('click', cancelOrder);
+
+async function cancelOrder(e) {
+  const idxToDelete = Number(e.target.value);
+  console.log(idxToDelete);
+  const selectedOrderId = received[idxToDelete].order_id;
+  console.log(typeof selectedOrderId);
+
+  try {
+    const result = await Api.delete('/order', '', {
+      order_id: selectedOrderId,
+    });
+    console.log(`${result}: 주문이 삭제되었습니다.`);
+    alert('주문이 삭제되었습니다.');
+
+    location.reload();
+  } catch (err) {
+    console.error(err);
+  }
 }
