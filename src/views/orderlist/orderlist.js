@@ -23,8 +23,6 @@ async function loadData() {
         const address2 = received[i].address.address2;
         const totalPrice = count * received[i].OrderList[j].price;
 
-        const idxPair = { i, j };
-
         const listElement = `
         <tr>
           <td class="product-name" rowspan='2' align='center'>${productName}</td>
