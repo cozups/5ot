@@ -1,3 +1,4 @@
+import * as Api from '/api.js';
 import * as Util from '/useful-functions.js';
 
 // 변수
@@ -21,7 +22,7 @@ function cartRendering() {
 
   cartCountField.innerText = `${cart.length}개 상품`;
 
-  cart.forEach(item => {
+  cart.forEach((item) => {
     const { product_image, product_name, quantity, price } = item;
     const total = Util.addCommas(price * quantity);
 
@@ -84,7 +85,7 @@ function clickHandler(e) {
     if (checkbox.checked) {
       deleteList.push(value);
     } else {
-      deleteList = deleteList.filter(idx => idx !== value);
+      deleteList = deleteList.filter((idx) => idx !== value);
     }
 
     if (deleteList.length === cart.length) {
@@ -142,15 +143,10 @@ allSelectCheckbox.addEventListener('click', selectAllHandler);
 partialDeleteLabel.addEventListener('click', deleteSelected);
 
 function selectAllHandler() {
-  if (allSelectCheckbox.checked === true) {
-    checkList.forEach(elem => {
-      elem.checked = true;
-      deleteList.push(Number(elem.value));
-    });
-  } else {
-    checkList.forEach(elem => (elem.checked = false));
-    deleteList = [];
-  }
+  console.log('select all');
+  checkList.forEach((checkbox) => {
+    checkbox.checked = allSelectCheckbox.checked;
+  });
 }
 
 function deleteSelected() {
