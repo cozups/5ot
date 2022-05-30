@@ -97,7 +97,7 @@ async function postOrder(e) {
       localStorage.setItem('myCart', JSON.stringify([]));
     }
 
-    // window.location.href = '/order/complete';
+    window.location.href = '/order/complete';
   } catch (err) {
     console.log(err);
   }
