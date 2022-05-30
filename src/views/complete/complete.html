@@ -71,11 +71,14 @@
       <div class="container">
         <div class="cart-header">
           <div class="title">
-            <p class="is-size-4" style="text-align: center;">주문완료</p>
+            <p class="is-size-4" style="text-align: center">주문완료</p>
           </div>
         </div>
 
-        <div class="order-complete-container cart-container" style="width: 30%; margin: 130px auto;">
+        <div
+          class="order-complete-container cart-container"
+          style="width: 30%; margin: 130px auto"
+        >
           <div class="box order-complete">
             <div class="icon-text">
               <span class="icon has-text-success">
@@ -83,19 +86,24 @@
               </span>
               <span>주문이 완료되었습니다!</span>
             </div>
+
             <div class="buttons-container">
-              <button
-                class="button is-medium is-fullwidth"
-                id="orderDetailButton"
-              >
-                주문내역 보기
-              </button>
-              <button
-                class="button is-medium is-fullwidth"
-                id="shoppingButton"
-              >
-                쇼핑 계속하기
-              </button>
+              <a class="anchor" href="/mypage/orderlist">
+                <button
+                  class="button is-medium is-fullwidth"
+                  id="orderDetailButton"
+                >
+                  주문내역 보기
+                </button>
+              </a>
+              <a class="anchor" href="/">
+                <button
+                  class="button is-medium is-fullwidth"
+                  id="shoppingButton"
+                >
+                  쇼핑 계속하기
+                </button>
+              </a>
             </div>
           </div>
         </div>
