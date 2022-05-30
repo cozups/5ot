@@ -18,7 +18,7 @@ orderRouter.get('/all', loginRequired, async (req, res, next) => {
 
 orderRouter.post('/', async (req, res, next) => {
   try {
-    const orderList = req.body.orderList;
+    const OrderList = req.body.orderList;
     const email = req.body.email;
     const fullName = req.body.fullName;
     const phoneNumber = req.body.phoneNumber;
@@ -28,7 +28,7 @@ orderRouter.post('/', async (req, res, next) => {
     const address = { postalCode, address1, address2 };
 
     const createdOrder = await orderService.addOrder({
-      orderList,
+      OrderList,
       email,
       fullName,
       phoneNumber,
