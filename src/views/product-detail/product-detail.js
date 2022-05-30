@@ -1,3 +1,4 @@
+import { json } from 'express/lib/response';
 import * as Api from '/api.js';
 import * as Util from '/useful-functions.js';
 
@@ -9,9 +10,11 @@ const producer = document.getElementById('producer');
 const name = document.getElementById('name');
 const price = document.getElementById('price');
 const description = document.getElementById('description');
+const quantity = document.getElementById('qty').innerText;
 let minus = document.getElementById('minus');
 let plus = document.getElementById('plus');
 
+const purchase = document.getElementById('purchase');
 const cart = document.getElementById('cart');
 const url = Number(window.location.pathname.split('/')[4]);
 
@@ -57,8 +60,14 @@ plus.addEventListener('click', () => {
   count('plus');
 });
 
+//구매하기 누르면 주문페이지로 이동
+
+const productInfo = JSON.parse(localStorage.getItem('productInfo'));
+
+purchase.addEventListener('click', () => {});
+
 //장바구니 누르면 장바구니로 이동
-cart.addEventListener('click', function (e) {
+cart.addEventListener('click', function () {
   const result = addCart();
   if (!result) {
     return;
@@ -81,6 +90,7 @@ function addCart() {
     return false;
   }
   let cartToAdd = {
+    product_id: productData.product_id,
     product_image: productData.product_image,
     product_name: productData.product_name,
     quantity: quantity,
