@@ -38,7 +38,7 @@ function count(type) {
   let number = Number(document.getElementById('qty').innerText);
   let result = document.getElementById('qty');
   if (type === 'minus') {
-    if (number === 1) {
+    if (number === 2) {
       minus.disabled = true;
     }
     number -= 1;
@@ -90,7 +90,7 @@ function addCart() {
   };
 
   // 이미 카트에 있는 경우
-  cart.forEach(item => {
+  cart.forEach((item) => {
     if (item.product_name === cartToAdd.product_name) {
       item.quantity += cartToAdd.quantity;
       isExist = true;
