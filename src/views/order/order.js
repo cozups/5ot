@@ -28,6 +28,7 @@ function checkStatus() {
   }
 }
 checkStatus();
+setPurchaseInfo();
 
 function setPurchaseInfo() {
   if (storageStatus === 'purchase') {
@@ -39,6 +40,15 @@ function setPurchaseInfo() {
     orderTotal.innerText = totalPrice + deliveryFee + '원';
   } else {
     // 카트에서 주문할 때
+    const totalPrice = cart.reduce(
+      (acc, cur) => (acc += cur.price * cur.quantity),
+      0
+    );
+    const totalQuantity = cart.reduce((acc, cur) => (acc += cur.quantity), 0);
+    productsCount.innerText = totalQuantity + '개';
+    productsTotal.innerText = totalPrice + '원';
+
+    orderTotal.innerText = totalPrice + deliveryFee + '원';
   }
 }
 
@@ -76,7 +86,13 @@ async function postOrder(e) {
   console.log(data);
   try {
     const result = await Api.post('/order', data);
-    console.log(result);
+    if (storageStatus === 'purchase') {
+      sessionStorage.removeItem('productInfo');
+    } else {
+      localStorage.setItem('myCart', JSON.stringify([]));
+    }
+
+    window.location.href = '/order/complete';
   } catch (err) {
     console.log(err);
   }
