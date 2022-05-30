@@ -55,6 +55,7 @@ function setPurchaseInfo() {
 async function postOrder(e) {
   e.preventDefault();
   let orderList = [];
+  console.log(storageStatus);
   if (storageStatus === 'purchase') {
     orderList = [
       {
@@ -66,6 +67,7 @@ async function postOrder(e) {
     ];
   } else {
     orderList = cart.map((itemObj) => {
+      console.log(itemObj);
       return {
         product_id: itemObj.product_id,
         product_name: itemObj.product_name,
@@ -74,8 +76,9 @@ async function postOrder(e) {
       };
     });
   }
+  console.log(orderList);
   const data = {
-    orderList: orderList,
+    OrderList: orderList,
 
     email: sessionStorage.getItem('email'),
     fullName: receiverName.value,
