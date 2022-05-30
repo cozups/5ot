@@ -9,6 +9,16 @@ const address2Input = document.querySelector('#address2');
 const requestSelectBoxInput = document.querySelector('#requestSelectBox');
 const purchaseButton = document.querySelector('#purchaseButton');
 
+// const quantity = document.getElementById('qty').innerText;
+const productsCount = document.getElementById('productsCount');
+const productsTotal = document.getElementById('productsTotal').value;
+const deliveryFee = document.getElementById('deliveryFee').value;
+const orderTotal = document.getElementById('orderTotal').value;
+
+// productsCount.innerText = quantity;
+
+// console.log(quantity);
+
 addAllElements();
 addAllEvents();
 
@@ -31,16 +41,16 @@ async function handleSubmit(e) {
   const address2 = address2Input.value;
   const requestSelectBox = requestSelectBoxInput.value;
 
-  // const isFullNameValid = receiverName.length >= 2;
+  //   const isFullNameValid = receiverName.length >= 2;
 
-  // if (!isFullNameValid) {
-  //   return alert('이름은 2글자 이상이어야 합니다.');
-  // }
-  // if (!receiverName || !receiverPhoneNumber || !postalCode || !address1) {
-  //   return alert('모든 정보를 입력해주세요.');
-  // }
+  //   if (!isFullNameValid) {
+  //     return alert('이름은 2글자 이상이어야 합니다.');
+  //   }
+  //   if (!receiverName || !receiverPhoneNumber || !postalCode || !address1) {
+  //     return alert('모든 정보를 입력해주세요.');
+  //   }
 
-  // 주문 api 요청
+  //   // 주문 api 요청
   try {
     const address = { postalCode, address1, address2 };
     const data = {
@@ -50,8 +60,8 @@ async function handleSubmit(e) {
       requestSelectBox,
     };
 
-    await Api.post('/api/order', data);
-
+    const result = await Api.post('/api/order', data);
+    console.log(result);
     alert(`정상적으로 주문이 완료되었습니다.`);
 
     // 로그인 페이지 이동
