@@ -25,6 +25,8 @@
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="login.css" />
     <script src="login.js" type="module" defer></script>
+    <!-- 카카오 로그인 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -97,10 +99,58 @@
           </div>
         </div>
 
+        <div style="text-align: center">
+          <a id="kakao-login-btn"></a>
+        </div>
+        <div id="result"></div>
+
         <button class="button is-fullwidth" id="submitButton">
           로그인하기
         </button>
       </form>
     </div>
+
+    <script type="text/javascript">
+      function unlinkApp() {
+        Kakao.API.request({
+          url: '/v1/user/unlink',
+          success: function (res) {
+            alert('success: ' + JSON.stringify(res));
+          },
+          fail: function (err) {
+            alert('fail: ' + JSON.stringify(err));
+          },
+        });
+      }
+    </script>
+
+    <script type="text/javascript">
+      Kakao.init('d8889d25a173eb9ac8cd38c5e8d50054');
+      console.log(Kakao.isInitialized());
+
+      Kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function (authObj) {
+          Kakao.API.request({
+            url: '/v2/user/me',
+            success: function (result) {
+              Kakao.Auth.setAccessToken(authObj.access_token);
+              sessionStorage.setItem('token', authObj.access_token);
+              alert(`정상적으로 로그인되었습니다.`);
+              window.location.href = '/';
+            },
+            fail: function (error) {
+              alert(
+                'login success, but failed to request user information: ' +
+                  JSON.stringify(error)
+              );
+            },
+          });
+        },
+        fail: function (err) {
+          alert('failed to login: ' + JSON.stringify(err));
+        },
+      });
+    </script>
   </body>
 </html>
