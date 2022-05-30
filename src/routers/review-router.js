@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
-//import { loginRequired } from '../middlewares';
+import { loginRequired } from '../middlewares';
 import { categoryService, reviewService ,userService} from '../services';
 
 const reviewRouter = Router();
 
-reviewRouter.get('/', async (req, res, next) => {
+reviewRouter.get('/', loginRequired, async (req, res, next) => {
   try {
     const product_id= req.body.product_id; 
     const reviews = await reviewService.getReviews(product_id);
@@ -16,7 +16,7 @@ reviewRouter.get('/', async (req, res, next) => {
   }
 });
 
-reviewRouter.post('/', async (req, res, next) => {
+reviewRouter.post('/', loginRequired, async (req, res, next) => {
   try {
     const {product_id, email, userName,rate,review} = req.body
 
@@ -30,7 +30,7 @@ reviewRouter.post('/', async (req, res, next) => {
   }
 });
 
-reviewRouter.delete('/', async function (req, res, next) {
+reviewRouter.delete('/', loginRequired, async function (req, res, next) {
   try {
     const {review_id, email}= req.body;
 
@@ -48,7 +48,7 @@ reviewRouter.delete('/', async function (req, res, next) {
   }
 });
 
-reviewRouter.patch('/', async function (req, res, next) {
+reviewRouter.patch('/', loginRequired, async (req, res, next) => {
   try {
     const {review_id, email, rate, review}= req.body;
 

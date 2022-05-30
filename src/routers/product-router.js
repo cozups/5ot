@@ -47,8 +47,7 @@ productRouter.get('/:product_id', async (req, res, next) => {
 
 productRouter.get('/:sex/:type', async (req, res, next) => {
   try {
-    const sex = req.params.sex;
-    const type = req.params.type;
+    const { sex, type } = req.params;
 
     const product_lists = await productService.getItems({
       sex,
@@ -61,18 +60,14 @@ productRouter.get('/:sex/:type', async (req, res, next) => {
   }
 });
 
-productRouter.post('/add', upload.single('image'), async (req, res, next) => {
+productRouter.post('/add', upload.single('image'), loginRequired, async (req, res, next) => {
   try {
     console.log(req.file);
 
-    const product_name = req.body.product_name;
-    const sex = req.body.sex;
-    const type = req.body.type;
+    const { product_name, sex, type, price, producer, stock, product_info } = req.body;
+
     const product_image = `/images/${req.file.filename}`; // image 경로 만들기
-    const price = req.body.price;
-    const producer = req.body.producer;
-    const stock = req.body.stock;
-    const product_info = req.body.product_info;
+
     const category = { sex, type };
 
     const new_product = await productService.addItems({
@@ -92,7 +87,7 @@ productRouter.post('/add', upload.single('image'), async (req, res, next) => {
 });
 
 
-productRouter.delete('/', async (req, res, next) => {
+productRouter.delete('/', loginRequired, async (req, res, next) => {
   try {
     const product_id = req.body.product_id;
     const product = await productService.getItem(product_id);
