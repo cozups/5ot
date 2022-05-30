@@ -9,7 +9,7 @@ const producer = document.getElementById('producer');
 const name = document.getElementById('name');
 const price = document.getElementById('price');
 const description = document.getElementById('description');
-const quantity = document.getElementById('qty').innerText;
+let quantity = document.getElementById('qty').innerText;
 let minus = document.getElementById('minus');
 let plus = document.getElementById('plus');
 
@@ -61,9 +61,12 @@ plus.addEventListener('click', () => {
 
 //구매하기 누르면 주문페이지로 이동
 
-const productInfo = JSON.parse(localStorage.getItem('productInfo'));
-
-purchase.addEventListener('click', () => {});
+purchase.addEventListener('click', () => {
+  quantity = Number(document.getElementById('qty').innerText);
+  let data = productData;
+  data['quantity'] = quantity;
+  sessionStorage.setItem('productInfo', JSON.stringify(data));
+});
 
 //장바구니 누르면 장바구니로 이동
 cart.addEventListener('click', () => {
