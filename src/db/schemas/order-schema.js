@@ -10,6 +10,7 @@ const OrderSchema = new Schema(
     OrderList: [
       new mongoose.Schema({
         product_id: Number, 
+        productut_name: String,
         quantity: Number,
         price: Number,
       })
