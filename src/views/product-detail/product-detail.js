@@ -9,7 +9,6 @@ const producer = document.getElementById('producer');
 const name = document.getElementById('name');
 const price = document.getElementById('price');
 const description = document.getElementById('description');
-
 let minus = document.getElementById('minus');
 let plus = document.getElementById('plus');
 
@@ -32,8 +31,7 @@ async function getProductDetail() {
 
 getProductDetail();
 
-//수량
-
+//수량 선택하기
 function count(type) {
   let number = Number(document.getElementById('qty').innerText);
   let result = document.getElementById('qty');
