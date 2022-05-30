@@ -1,5 +1,4 @@
 import * as Api from '/api.js';
-import * as Util from '/useful-functions.js';
 
 // 변수
 let cart = JSON.parse(localStorage.getItem(`myCart`));
@@ -24,7 +23,7 @@ function cartRendering() {
 
   cart.forEach((item) => {
     const { product_image, product_name, quantity, price } = item;
-    const total = Util.addCommas(price * quantity);
+    const total = price * quantity;
 
     const element = `
       <li>
@@ -42,7 +41,7 @@ function cartRendering() {
               <span class="qty">${quantity}</span>
               <button class="plus" value="${i}"><i class="fas fa-plus"></i></button>
             </div>
-            <span class="item-price">${Util.addCommas(price)}</span>
+            <span class="item-price">${price}</span>
             <span class="item-total-price">총 ${total}원</span>
             <button class='cancel' value="${i}"><i class="fa-solid fa-trash-can"></i></buttonc>
           </div>
@@ -72,9 +71,8 @@ function setOrderInfo() {
   }
 
   productCount.innerText = cart.length + '개';
-  productsTotal.innerText = Util.addCommas(totalOrderPrice) + '원';
-  totalPriceToPay.innerText =
-    Util.addCommas(totalOrderPrice + deliveryFee) + '원';
+  productsTotal.innerText = totalOrderPrice + '원';
+  totalPriceToPay.innerText = totalOrderPrice + deliveryFee + '원';
 }
 
 function clickHandler(e) {
