@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
-//import { loginRequired } from '../middlewares';
+import { loginRequired } from '../middlewares';
 import { categoryService, productService } from '../services';
 
 const categoryRouter = Router();
@@ -15,10 +15,9 @@ categoryRouter.get('/', async (req, res, next) => {
   }
 });
 
-categoryRouter.post('/', async (req, res, next) => {
+categoryRouter.post('/', loginRequired, async (req, res, next) => {
   try {
-    const sex = req.body.sex;
-    const type = req.body.type;
+    const { sex, type } = req.body;
 
     const new_category = await categoryService.addCategories({
       sex,
@@ -31,11 +30,9 @@ categoryRouter.post('/', async (req, res, next) => {
   }
 });
 
-categoryRouter.delete('/', async function (req, res, next) {
+categoryRouter.delete('/', loginRequired, async (req, res, next) => {
   try {
-    const category_id = req.body.category_id;
-    const sex = req.body.sex;
-    const type = req.body.type;
+    const { category_id, sex, type } = req.body;
 
     const deletedCategory = await categoryService.deleteCategory(category_id);
     const deletedCount = await productService.deleteByCategory({ sex, type });
@@ -46,7 +43,7 @@ categoryRouter.delete('/', async function (req, res, next) {
   }
 });
 
-categoryRouter.patch('/', async function (req, res, next) {
+categoryRouter.patch('/', loginRequired, async (req, res, next) => {
   try {
     const sex_YetUpdated = req.body.sex;
     const type_YetUpdated = req.body.type;
