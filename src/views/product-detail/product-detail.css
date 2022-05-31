@@ -41,6 +41,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-top: 50px;
 }
 
 #slide-buttons {
@@ -84,24 +85,30 @@ body {
 #product-detail-wrap {
   width: 800px;
   height: 500px;
-  overflow: hidden;
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin-left: 150px;
 }
+
+#product-detail {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 #product-thumbnail {
   width: 300px;
   height: 400px;
-  float: left;
   text-align: center;
+  object-fit: contain;
 }
 .product-detail-right {
   width: 400px;
   height: 400px;
   margin-left: 50px;
-  float: right;
 }
 
 .content {
@@ -141,8 +148,7 @@ body {
 .buttons {
   width: 400px;
   height: 100px;
-  position: absolute;
-  top: 370px;
+  margin-top: 60px;
 }
 
 .buttons #purchase,
@@ -163,4 +169,61 @@ body {
 .buttons #cart {
   background-color: #1d3557;
   border: 1px solid #1d3557;
+}
+
+#review {
+  margin-top: 50px;
+  width: 90%;
+}
+
+#review-input {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+#rate {
+  margin-right: 10px;
+}
+
+#review-content {
+  width: 80%;
+  margin-right: 10px;
+}
+
+#review-input button {
+  border: none;
+  color: white;
+  background-color: var(--main-color);
+  padding: 4px;
+  border-radius: 4px;
+}
+
+#review h1 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.user-review {
+  position: relative;
+  margin: 16px;
+}
+
+.user-review h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: var(--sub2-color);
+}
+
+.user-rate {
+  font-size: 14px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.user-review-content {
+  font-size: 14px;
 }

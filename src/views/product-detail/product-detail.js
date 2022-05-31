@@ -12,14 +12,18 @@ const description = document.getElementById('description');
 let quantity = document.getElementById('qty').innerText;
 let minus = document.getElementById('minus');
 let plus = document.getElementById('plus');
+const reviewButton = document.querySelector('#review-input button');
+const reviewList = document.getElementById('reviews');
 
 const purchase = document.getElementById('purchase');
 const cart = document.getElementById('cart');
-const url = Number(window.location.pathname.split('/')[4]);
+const product_id = Number(window.location.pathname.split('/')[4]);
+
+reviewButton.addEventListener('click', postReview);
 
 async function getProductDetail() {
   try {
-    productData = await Api.get('/product', `${url}`);
+    productData = await Api.get('/product', `${product_id}`);
     image.src = productData.product_image;
     image.innerHTML = productData.src;
     producer.innerHTML = productData.producer;
@@ -149,4 +153,61 @@ function logout(e) {
   window.location.href = '/';
 }
 
+async function postReview(e) {
+  e.preventDefault();
+
+  const email = sessionStorage.getItem('email');
+  const rate = Number(document.getElementById('rate').value);
+  const review = document.getElementById('review-content').value;
+  const userName = sessionStorage.getItem('userName');
+
+  const data = {
+    product_id,
+    email,
+    userName,
+    rate,
+    review,
+  };
+
+  try {
+    const result = await Api.post('/review', data);
+    alert('리뷰가 작성되었습니다.');
+    location.reload();
+  } catch (err) {
+    console.error(err);
+    alert(err);
+  }
+}
+
+async function reviewRender() {
+  try {
+    const reviews = await Api.get('/review', product_id);
+
+    const reviewTitle = document.querySelector('#review h1');
+    reviewTitle.innerHTML = `후기 (${reviews.length}건)`;
+
+    let reviewAll = [];
+    reviews.forEach((review) => {
+      let rate = '';
+      for (let i = 0; i < review.rate; i++) {
+        rate += '⭐';
+      }
+      const element = `
+        <li class="user-review">
+          <h3>${review.userName} (${review.email})</h3>
+          <p class="user-rate">${rate}</p>
+          <p class="user-review-content">${review.review}</p>
+        </li>
+      `;
+
+      reviewAll.push(element);
+    });
+
+    reviewList.innerHTML = reviewAll.join('');
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 loginRender();
+reviewRender();
