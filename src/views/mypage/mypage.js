@@ -20,8 +20,12 @@ async function checkRole() {
         <span>제품 관리</span>`;
     } else {
       changeableElement.href = '/mypage/qna';
-      changeableElement.innerHTML = `<i class="fa-solid fa-question"></i>
-      <span>문의 하기</span>`;
+      changeableElement.innerHTML = `
+      <a href="mailto:admin@gmail.com">
+      <i class="fa-solid fa-question"></i>
+      <span>문의 하기</span></a>
+      `;
+
     }
   } catch (err) {
     console.error(err);
