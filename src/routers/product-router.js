@@ -23,7 +23,7 @@ const productRouter = Router();
 // 주문 api (아래는 /register이지만, 실제로는 /product/order 요청해야 함.)
 // orderList, email, address, phonenumber등을 받음
 
-productRouter.get('/all', async (req, res, next) => {
+productRouter.get('/all', loginRequired, async (req, res, next) => {
   try {
     const products = await productService.getAllProduct();
 
@@ -125,7 +125,7 @@ productRouter.patch(
       // body data 로부터 업데이트할 사용자 정보를 추출함.
       const { product_name, sex, type, stock } = req.body;
 
-      const category= {sex,type};
+      const category = { sex, type };
       //product_image
 
       // const product_image = req.body.product_image;
@@ -157,6 +157,7 @@ productRouter.patch(
       );
     }
   }
+
 );
 
 productRouter.patch(
