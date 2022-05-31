@@ -3,6 +3,7 @@ import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
 import { orderService, userService } from '../services';
+import { adminRequired } from '../middlewares/admin-required';
 
 const orderRouter = Router();
 
@@ -36,7 +37,7 @@ orderRouter.post('/', loginRequired, async (req, res, next) => {
   }
 });
 
-orderRouter.get('/email/:email', loginRequired, async (req, res, next) => {
+orderRouter.get('/email/:email', loginRequired, adminRequired, async (req, res, next) => {
   try {
     //email is admin
     let orders;
@@ -56,7 +57,7 @@ orderRouter.get('/email/:email', loginRequired, async (req, res, next) => {
   }
 });
 
-orderRouter.delete('/', loginRequired, async (req, res, next) => {
+orderRouter.delete('/', loginRequired, adminRequired, async (req, res, next) => {
   try {
     const order_id = req.body.order_id;
     const deletedCount = await orderService.deleteOrder(order_id);
