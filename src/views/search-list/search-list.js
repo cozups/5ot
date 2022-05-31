@@ -1,4 +1,3 @@
-import * as Api from '/api.js';
 const headerMenu = document.querySelectorAll('#navbar a');
 const section = document.getElementsByTagName('section')[0];
 const product = JSON.parse(sessionStorage.getItem('searchProducts'));

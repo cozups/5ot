@@ -84,6 +84,12 @@
                 <span>카트</span>
               </a>
             </li>
+            <li>
+              <a href="/search"
+                ><span class="magnify"
+                  ><i class="fa-solid fa-magnifying-glass"></i></span
+              ></a>
+            </li>
           </ul>
         </div>
       </div>
@@ -134,7 +140,11 @@
 
           <div class="form-wrap-item">
             <label for="passwordInput">현재 비밀번호</label>
-            <input type="password" name="currentPassword" id="currentPassword" />
+            <input
+              type="password"
+              name="currentPassword"
+              id="currentPassword"
+            />
           </div>
 
           <div class="form-wrap-item">
@@ -151,42 +161,42 @@
             <input type="email" name="email" id="phoneNumber" />
           </div>
 
-         <div class="form-wrap-item">
-          <label for="address">주소</label>
-          <div class="addressWrap">
+          <div class="form-wrap-item">
+            <label for="address">주소</label>
+            <div class="addressWrap">
+              <input
+                id="postalCode"
+                name="postalCode"
+                type="text"
+                placeholder="주소 찾기를 클릭해 주세요."
+                readonly
+              />
+              <button
+                id="searchAddressButton"
+                onclick="execDaumPostcode()"
+                style="margin-bottom: 20px"
+                type="button"
+              >
+                주소 찾기
+              </button>
+            </div>
+
             <input
-              id="postalCode"
-              name="postalCode"
+              id="address1"
+              name="address1"
               type="text"
-              placeholder="주소 찾기를 클릭해 주세요."
+              placeholder=""
+              autocomplete="on"
               readonly
             />
-            <button
-              id="searchAddressButton"
-              onclick="execDaumPostcode()"
-              style="margin-bottom: 20px"
-              type="button"
-            >
-              주소 찾기
-            </button>
+            <input
+              id="address2"
+              name="address2"
+              type="text"
+              placeholder="상세주소를 입력해주세요."
+              autocomplete="on"
+            />
           </div>
-
-          <input
-            id="address1"
-            name="address1"
-            type="text"
-            placeholder=""
-            autocomplete="on"
-            readonly
-          />
-          <input
-            id="address2"
-            name="address2"
-            type="text"
-            placeholder="상세주소를 입력해주세요."
-            autocomplete="on"
-          />
-         </div>
 
           <button type="button" id="submitButton">수정하기</button>
         </form>
