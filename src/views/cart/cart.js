@@ -7,6 +7,7 @@ let deleteList = [];
 // html 엘리먼트 선택
 const cartList = document.getElementById('cart-list');
 const cartCountField = document.querySelector('.is-size-6');
+const purchaseButton = document.getElementById('purchaseButton');
 
 // 이벤트 추가
 
@@ -220,3 +221,17 @@ function logout(e) {
 
   window.location.href = '/';
 }
+
+//로그인,로그아웃상태에따라 구매하기 버튼 달라지는 function
+function goToOrder() {
+  if (checkLogin()) {
+    window.location.href = '/order';
+  } else {
+    const alert = confirm(
+      '로그인 해주시기 바랍니다. 로그인 페이지로 이동하시겠습니까?'
+    );
+    if (alert) window.location.href = '/login';
+  }
+}
+
+purchaseButton.addEventListener('click', goToOrder);

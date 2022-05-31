@@ -68,15 +68,6 @@ plus.addEventListener('click', () => {
   count('plus');
 });
 
-//구매하기 누르면 주문페이지로 이동
-
-purchase.addEventListener('click', () => {
-  quantity = Number(document.getElementById('qty').innerText);
-  let data = productData;
-  data['quantity'] = quantity;
-  sessionStorage.setItem('productInfo', JSON.stringify(data));
-});
-
 //장바구니 누르면 장바구니로 이동
 cart.addEventListener('click', () => {
   const result = addCart();
@@ -157,6 +148,25 @@ function logout(e) {
 
   window.location.href = '/';
 }
+
+//로그인,로그아웃상태에따라 구매하기 버튼 달라지는 function
+function goToOrder() {
+  if (checkLogin()) {
+    //구매하기 누르면 주문페이지로 이동
+    quantity = Number(document.getElementById('qty').innerText);
+    let data = productData;
+    data['quantity'] = quantity;
+    sessionStorage.setItem('productInfo', JSON.stringify(data));
+    window.location.href = '/order';
+  } else {
+    const alert = confirm(
+      '로그인 해주시기 바랍니다. 로그인 페이지로 이동하시겠습니까?'
+    );
+    if (alert) window.location.href = '/login';
+  }
+}
+
+purchase.addEventListener('click', goToOrder);
 
 async function postReview(e) {
   e.preventDefault();
