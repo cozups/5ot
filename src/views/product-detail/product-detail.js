@@ -225,7 +225,9 @@ async function reviewRender() {
 }
 
 function whatButton(targetButton) {
-  if (targetButton.classList.contains('modify-review')) {
+  if (targetButton.classList.contains('disabled')) {
+    return 'disabled';
+  } else if (targetButton.classList.contains('modify-review')) {
     return 'modify';
   } else if (targetButton.classList.contains('delete-review')) {
     return 'delete';
