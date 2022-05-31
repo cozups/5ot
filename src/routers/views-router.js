@@ -21,6 +21,7 @@ viewsRouter.use('/mypage/profile', serveStatic('mypage-profile'));
 viewsRouter.use('/list/:sex/:type', serveStatic('product-list'));
 viewsRouter.use('/list/:sex/:type/:product_id', serveStatic('product-detail'));
 
+viewsRouter.use('/orderlist', serveStatic('orderlist'));
 viewsRouter.use('/mypage/orderlist', serveStatic('orderlist'));
 viewsRouter.use('/mypage/manage', serveStatic('manage-select-page'));
 viewsRouter.use('/mypage/manage/category', serveStatic('manage-category'));

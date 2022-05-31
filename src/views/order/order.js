@@ -136,3 +136,14 @@ function loginRender() {
   }
 }
 loginRender();
+
+// 로그아웃 function
+function logout(e) {
+  e.preventDefault();
+
+  alert('로그아웃 되었습니다.');
+  sessionStorage.removeItem('token');
+  sessionStorage.removeItem('email');
+
+  window.location.href = '/';
+}
