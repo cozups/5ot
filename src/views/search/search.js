@@ -4,6 +4,7 @@ const headerMenu = document.querySelectorAll('#navbar a');
 const search = document.getElementById('search');
 const submit = document.getElementById('submit');
 
+//검색기능
 async function searchProducts() {
   const input = search.value;
   const result = await Api.get('/product/all');
@@ -11,14 +12,13 @@ async function searchProducts() {
   console.log(result);
   for (let i = 0; i < result.length; i++) {
     const name = result[i].product_name.trim();
-    const sex = result[i].category.sex;
-    const type = result[i].category.type;
-    const id = result[i].product_id;
     if (name.indexOf(input.toUpperCase()) !== -1) {
-      data.push({ sex, type, id });
+      data.push(result[i]);
     }
   }
   console.log(data);
+
+  //세션스토리지에 저장
   sessionStorage.setItem('searchProducts', JSON.stringify(data));
 }
 

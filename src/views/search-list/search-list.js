@@ -3,24 +3,17 @@ const headerMenu = document.querySelectorAll('#navbar a');
 const section = document.getElementsByTagName('section')[0];
 const product = JSON.parse(sessionStorage.getItem('searchProducts'));
 console.log(product);
-const result = [];
 // 제품목록 가져오기
 async function getProductList() {
   try {
     for (let i = 0; i < product.length; i++) {
-      const id = product[i].id;
-      result.push(await Api.get(`/product/${id}`));
-    }
-    console.log(result);
-
-    for (let j = 0; j < result.length; j++) {
-      const sex = result[j].category.sex;
-      const type = result[j].category.type;
-      const name = result[j].product_name;
-      const price = result[j].price.toLocaleString();
-      const info = result[j].product_info;
-      const image = result[j].product_image;
-      const product_id = result[j].product_id;
+      const sex = product[i].category.sex;
+      const type = product[i].category.type;
+      const name = product[i].product_name;
+      const price = product[i].price.toLocaleString();
+      const info = product[i].product_info;
+      const image = product[i].product_image;
+      const product_id = product[i].product_id;
       let HTMLtemplate = `
         <div id="product-list-wrap">
           <a href="/list/${sex}/${type}/${product_id}">
