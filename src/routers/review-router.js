@@ -6,7 +6,7 @@ import { categoryService, reviewService, userService } from '../services';
 
 const reviewRouter = Router();
 
-reviewRouter.get('/:product_id', loginRequired, async (req, res, next) => {
+reviewRouter.get('/:product_id', async (req, res, next) => {
   try {
     const product_id = req.params.product_id;
     const reviews = await reviewService.getReviews(product_id);
