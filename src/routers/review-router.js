@@ -56,10 +56,10 @@ reviewRouter.patch('/', loginRequired, async (req, res, next) => {
   try {
     const { review_id, email, rate, review } = req.body;
 
-    const { originEmail } = await reviewService.getReview(review_id);
+    const review_origin = await reviewService.getReview(review_id);
     const { role } = await userService.getUserByEmail(email);
 
-    if (originEmail !== email && role !== 'admin') {
+    if (review_origin.email !== email && role !== 'admin') {
       throw new Error('리뷰를 수정할 권한이 없습니다.');
     }
 
