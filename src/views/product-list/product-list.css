@@ -103,6 +103,7 @@ section {
   width: 250px;
   height: 325px;
   margin-left: 30px;
+  object-fit: contain;
 }
 
 .product-content {
