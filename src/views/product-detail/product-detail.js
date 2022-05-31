@@ -2,6 +2,8 @@ import * as Api from '/api.js';
 import * as Util from '/useful-functions.js';
 
 let productData = null; // 다른 함수에서도 상품 데이터를 필요로 하기 때문에 let 사용
+let reviews = []; // 다른 함수에서도 리뷰 정보가 필요함
+const myEmail = sessionStorage.getItem('email');
 
 const headerMenu = document.querySelectorAll('#navbar a');
 const image = document.getElementById('product-thumbnail');
@@ -12,7 +14,7 @@ const description = document.getElementById('description');
 let quantity = document.getElementById('qty').innerText;
 let minus = document.getElementById('minus');
 let plus = document.getElementById('plus');
-const reviewButton = document.querySelector('#review-input button');
+const reviewButton = document.querySelector('.review-submit');
 const reviewList = document.getElementById('reviews');
 
 const purchase = document.getElementById('purchase');
@@ -20,6 +22,7 @@ const cart = document.getElementById('cart');
 const product_id = Number(window.location.pathname.split('/')[4]);
 
 reviewButton.addEventListener('click', postReview);
+reviewList.addEventListener('click', reviewHandler);
 
 async function getProductDetail() {
   try {
@@ -36,6 +39,8 @@ async function getProductDetail() {
 }
 
 getProductDetail();
+loginRender();
+reviewRender();
 
 //수량 선택하기
 function count(type) {
@@ -156,14 +161,13 @@ function logout(e) {
 async function postReview(e) {
   e.preventDefault();
 
-  const email = sessionStorage.getItem('email');
   const rate = Number(document.getElementById('rate').value);
   const review = document.getElementById('review-content').value;
   const userName = sessionStorage.getItem('userName');
 
   const data = {
     product_id,
-    email,
+    email: myEmail,
     userName,
     rate,
     review,
@@ -181,33 +185,137 @@ async function postReview(e) {
 
 async function reviewRender() {
   try {
-    const reviews = await Api.get('/review', product_id);
-
-    const reviewTitle = document.querySelector('#review h1');
-    reviewTitle.innerHTML = `후기 (${reviews.length}건)`;
+    reviews = await Api.get('/review', product_id);
+    let totalRate = 0;
 
     let reviewAll = [];
+    let idx = 0;
     reviews.forEach((review) => {
+      totalRate += review.rate;
       let rate = '';
       for (let i = 0; i < review.rate; i++) {
         rate += '⭐';
       }
-      const element = `
+      let element = `
         <li class="user-review">
-          <h3>${review.userName} (${review.email})</h3>
-          <p class="user-rate">${rate}</p>
-          <p class="user-review-content">${review.review}</p>
+          <h3>${review.userName} (${review.email})</h3>`;
+      if (review.email === myEmail) {
+        element += `<button class="modify-review" value="${idx}"><i class="fa-solid fa-pencil"></i></button>
+        <button class="delete-review" value="${idx++}"><i class="fa-solid fa-xmark"></i></button>`;
+      } else {
+        element += `<button class="modify-review disabled" value="${idx}" disabled><i class="fa-solid fa-pencil"></i></button>
+        <button class="delete-review disabled" value="${idx++}" disabled><i class="fa-solid fa-xmark"></i></button>`;
+      }
+      element += `<p class="user-rate">${rate}</p>
+          <div class="user-review-content">${review.review}</div>
         </li>
       `;
 
       reviewAll.push(element);
     });
 
+    const reviewTitle = document.querySelector('#review h1');
+    const averageRate = Math.round((totalRate / reviews.length) * 100) / 100;
+    reviewTitle.innerHTML = `후기 (${reviews.length}건) ⭐${averageRate}`;
     reviewList.innerHTML = reviewAll.join('');
   } catch (err) {
     console.error(err);
   }
 }
 
-loginRender();
-reviewRender();
+function whatButton(targetButton) {
+  if (targetButton.classList.contains('modify-review')) {
+    return 'modify';
+  } else if (targetButton.classList.contains('delete-review')) {
+    return 'delete';
+  }
+}
+
+async function modifyReview(modifyData) {
+  const newRate = Number(document.querySelector('.modify-rate').value);
+  const newReview = document.querySelector('.modify-review-content').value;
+
+  const data = {
+    review_id: modifyData.review_id,
+    email: myEmail,
+    rate: newRate,
+    review: newReview,
+  };
+
+  try {
+    const result = await Api.patch('/review', '', data);
+    alert('리뷰 수정 완료되었습니다.');
+
+    location.reload();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function reviewHandler(e) {
+  e.preventDefault();
+
+  const targetButton = e.target.parentElement;
+  const buttonType = whatButton(targetButton);
+  const newInput = document.querySelectorAll('.user-review-content');
+
+  switch (buttonType) {
+    case 'modify':
+      // 수정 기능
+      const idxToModify = targetButton.value;
+      console.log(idxToModify);
+      console.log(reviews[idxToModify]);
+      const dataToModify = reviews[idxToModify];
+
+      if (!targetButton.disabled) {
+        newInput[idxToModify].innerHTML = `
+        <div class="review-input">
+          <select name="modify-rate" class="modify-rate">
+            <option value="5" selected>5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select>
+          <textarea
+            class="modify-review-content"
+            cols="30"
+            rows="5"
+          >${dataToModify.review}</textarea>
+          <button class="review-modify-submit">제출</button>
+        </div>
+      `;
+      }
+
+      const modifySubmit = document.querySelector('.review-modify-submit');
+
+      modifySubmit.addEventListener('click', function (e) {
+        e.preventDefault();
+        modifyReview(dataToModify);
+      });
+      break;
+
+    case 'delete':
+      // 삭제 기능
+      const idxToDelete = targetButton.value;
+      console.log(reviews[idxToDelete]);
+      const dataToDelete = reviews[idxToDelete];
+
+      const data = {
+        review_id: dataToDelete.review_id,
+        email: myEmail,
+      };
+
+      try {
+        const result = await Api.delete('/review', '', data);
+        alert('리뷰가 삭제되었습니다.');
+        location.reload();
+      } catch (err) {
+        console.error(err);
+      }
+      break;
+
+    default:
+      break;
+  }
+}
