@@ -216,6 +216,7 @@ async function reviewRender() {
 
     const reviewTitle = document.querySelector('#review h1');
     const averageRate = Math.round((totalRate / reviews.length) * 100) / 100;
+    if (reviews.length === 0) averageRate = '';
     reviewTitle.innerHTML = `후기 (${reviews.length}건) ⭐${averageRate}`;
     reviewList.innerHTML = reviewAll.join('');
   } catch (err) {
