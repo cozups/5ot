@@ -58,9 +58,14 @@ productRouter.get('/:sex/:type', async (req, res, next) => {
   }
 });
 
-productRouter.post('/insertion', upload.single('image'), loginRequired, adminRequired, async (req, res, next) => {
-  try {
-    console.log(req.file);
+productRouter.post(
+  '/insertion',
+  upload.single('image'),
+  loginRequired,
+  adminRequired,
+  async (req, res, next) => {
+    try {
+      console.log(req.file);
 
       const { product_name, sex, type, price, producer, stock, product_info } =
         req.body;
@@ -86,78 +91,29 @@ productRouter.post('/insertion', upload.single('image'), loginRequired, adminReq
   }
 );
 
-productRouter.delete('/', loginRequired, adminRequired, async (req, res, next) => {
-  try {
-    const product_id = req.body.product_id;
-    const product = await productService.getItem(product_id);
-    console.log(product);
-    console.log('./src/views' + product.product_image);
-
-      const deletedCount = await productService.deleteProduct(product_id);
-
-    fs.unlinkSync('./src/views' + product.product_image, (err) => {
-      if (err.code == 'ENOENT') {
-        console.log('파일 삭제 Error 발생');
-      }
-    });
-    res.status(201).json(deletedCount);
-  } catch (error) {
-    next(error);
-  }
-});
-
-productRouter.patch(
+productRouter.delete(
   '/',
   loginRequired,
   adminRequired,
-  async function (req, res, next) {
+  async (req, res, next) => {
     try {
-      // content-type 을 application/json 로 프론트에서
-      // 설정 안 하고 요청하면, body가 비어 있게 됨.
-      if (is.emptyObject(req.body)) {
-        throw new Error(
-          'headers의 Content-Type을 application/json으로 설정해주세요'
-        );
-      }
+      const product_id = req.body.product_id;
+      const product = await productService.getItem(product_id);
+      console.log(product);
+      console.log('./src/views' + product.product_image);
 
-      const product_id = req.body.product_id; // product_id는 수정할 대상
+      const deletedCount = await productService.deleteProduct(product_id);
 
-      // body data 로부터 업데이트할 사용자 정보를 추출함.
-      const { product_name, sex, type, stock } = req.body;
-
-      const category = { sex, type };
-      //product_image
-
-      // const product_image = req.body.product_image;
-      // if(product_image){
-      // //local에 있는 이미지 지우고 새로 받아야와야 함
-      // }
-      const { price, producer, product_info } = req.body;
-
-      // const userInfoRequired = { userId, currentPassword };
-
-      // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
-      // 보내주었다면, 업데이트용 객체에 삽입함.
-      const toUpdate = {
-        ...(product_name && { product_name }),
-        ...(category && { category }),
-        // ...(type && { type }),
-        // ...(product_image && { product_image }),
-        ...(stock && { stock }),
-
-        ...(price && { price }),
-        ...(producer && { producer }),
-        ...(product_info && { product_info }),
-      };
-
-      // 사용자 정보를 업데이트함.
-      const updatedProductInfo = await productService.setProduct(
-        product_id,
-        toUpdate
-      );
+      fs.unlinkSync('./src/views' + product.product_image, (err) => {
+        if (err.code == 'ENOENT') {
+          console.log('파일 삭제 Error 발생');
+        }
+      });
+      res.status(201).json(deletedCount);
+    } catch (error) {
+      next(error);
     }
   }
-
 );
 
 productRouter.patch(
