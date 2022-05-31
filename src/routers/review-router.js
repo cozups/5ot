@@ -38,10 +38,10 @@ reviewRouter.delete('/', loginRequired, async function (req, res, next) {
   try {
     const { review_id, email } = req.body;
 
-    const { originEmail } = await reviewService.getReview(review_id);
+    const review = await reviewService.getReview(review_id);
     const { role } = await userService.getUserByEmail(email);
 
-    if (originEmail !== email && role !== 'admin') {
+    if (review.email !== email && role !== 'admin') {
       throw new Error('리뷰를 삭제할 권한이 없습니다.');
     }
 
