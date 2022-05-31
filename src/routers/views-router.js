@@ -20,6 +20,7 @@ viewsRouter.use('/list/:sex/:type', serveStatic('product-list'));
 viewsRouter.use('/list/:sex/:type/:product_id', serveStatic('product-detail'));
 
 viewsRouter.use('/mypage/orderlist', serveStatic('orderlist'));
+viewsRouter.use('/mypage/qna', serveStatic('mypage-qna'));
 viewsRouter.use('/mypage/manage', serveStatic('manage-select-page'));
 viewsRouter.use('/mypage/manage/category', serveStatic('manage-category'));
 viewsRouter.use('/mypage/manage/product', serveStatic('manage-product'));
