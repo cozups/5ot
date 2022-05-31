@@ -176,23 +176,26 @@ body {
   width: 90%;
 }
 
-#review-input {
+.review-input {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-#rate {
+#rate,
+.modify-rate {
   margin-right: 10px;
 }
 
-#review-content {
+#review-content,
+.modify-review-content {
   width: 80%;
   margin-right: 10px;
 }
 
-#review-input button {
+.review-submit,
+.review-modify-submit {
   border: none;
   color: white;
   background-color: var(--main-color);
@@ -207,12 +210,12 @@ body {
 
 .user-review {
   position: relative;
-  margin: 16px;
+  margin: 16px 0;
 }
 
 .user-review h3 {
+  display: inline;
   font-size: 16px;
-  margin-bottom: 15px;
   font-weight: bold;
   color: var(--sub2-color);
 }
@@ -226,4 +229,22 @@ body {
 
 .user-review-content {
   font-size: 14px;
+  margin-top: 15px;
+}
+
+.modify-review,
+.delete-review {
+  color: var(--main-color);
+  cursor: pointer;
+  margin-left: 5px;
+  background-color: transparent;
+  border: none;
+}
+
+.delete-review:hover {
+  color: var(--error-color);
+}
+
+.disabled {
+  color: #acacac;
 }

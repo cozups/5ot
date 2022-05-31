@@ -6,7 +6,7 @@ import { categoryService, reviewService, userService } from '../services';
 
 const reviewRouter = Router();
 
-reviewRouter.get('/:product_id', loginRequired, async (req, res, next) => {
+reviewRouter.get('/:product_id', async (req, res, next) => {
   try {
     const product_id = req.params.product_id;
     const reviews = await reviewService.getReviews(product_id);
@@ -38,10 +38,10 @@ reviewRouter.delete('/', loginRequired, async function (req, res, next) {
   try {
     const { review_id, email } = req.body;
 
-    const { originEmail } = await reviewService.getReview(review_id);
+    const review = await reviewService.getReview(review_id);
     const { role } = await userService.getUserByEmail(email);
 
-    if (originEmail !== email && role !== 'admin') {
+    if (review.email !== email && role !== 'admin') {
       throw new Error('리뷰를 삭제할 권한이 없습니다.');
     }
 
@@ -56,10 +56,10 @@ reviewRouter.patch('/', loginRequired, async (req, res, next) => {
   try {
     const { review_id, email, rate, review } = req.body;
 
-    const { originEmail } = await reviewService.getReview(review_id);
+    const review_origin = await reviewService.getReview(review_id);
     const { role } = await userService.getUserByEmail(email);
 
-    if (originEmail !== email && role !== 'admin') {
+    if (review_origin.email !== email && role !== 'admin') {
       throw new Error('리뷰를 수정할 권한이 없습니다.');
     }
 

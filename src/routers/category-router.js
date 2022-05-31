@@ -3,6 +3,7 @@ import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
 import { categoryService, productService } from '../services';
+import { adminRequired } from '../middlewares/admin-required';
 
 const categoryRouter = Router();
 
@@ -15,7 +16,7 @@ categoryRouter.get('/', async (req, res, next) => {
   }
 });
 
-categoryRouter.post('/', loginRequired, async (req, res, next) => {
+categoryRouter.post('/', loginRequired, adminRequired, async (req, res, next) => {
   try {
     const { sex, type } = req.body;
 
@@ -30,7 +31,7 @@ categoryRouter.post('/', loginRequired, async (req, res, next) => {
   }
 });
 
-categoryRouter.delete('/', loginRequired, async (req, res, next) => {
+categoryRouter.delete('/', loginRequired, adminRequired, async (req, res, next) => {
   try {
     const { category_id, sex, type } = req.body;
 
@@ -43,7 +44,7 @@ categoryRouter.delete('/', loginRequired, async (req, res, next) => {
   }
 });
 
-categoryRouter.patch('/', loginRequired, async (req, res, next) => {
+categoryRouter.patch('/', loginRequired, adminRequired, async (req, res, next) => {
   try {
     const sex_YetUpdated = req.body.sex;
     const type_YetUpdated = req.body.type;
