@@ -19,7 +19,15 @@ orderRouter.get('/all', loginRequired, async (req, res, next) => {
 
 orderRouter.post('/', loginRequired, async (req, res, next) => {
   try {
-    const { OrderList, email, fullName, phoneNumber, postalCode, address1, address2 } = req.body;
+    const {
+      OrderList,
+      email,
+      fullName,
+      phoneNumber,
+      postalCode,
+      address1,
+      address2,
+    } = req.body;
 
     const address = { postalCode, address1, address2 };
 
@@ -37,35 +45,45 @@ orderRouter.post('/', loginRequired, async (req, res, next) => {
   }
 });
 
-orderRouter.get('/email/:email', loginRequired, adminRequired, async (req, res, next) => {
-  try {
-    //email is admin
-    let orders;
-    const email = req.params.email;
-    const user = await userService.getUserByEmail(email);
-    if (user.role === 'admin') {
-      orders = await orderService.getAllOrder();
+orderRouter.get(
+  '/email/:email',
+  loginRequired,
+  adminRequired,
+  async (req, res, next) => {
+    try {
+      //email is admin
+      let orders;
+      const email = req.params.email;
+      const user = await userService.getUserByEmail(email);
+      if (user.role === 'admin') {
+        orders = await orderService.getAllOrder();
+      }
+      //email is not admin
+      else {
+        orders = await orderService.getMyOrder(email);
+      }
+
+      res.status(200).json(orders);
+    } catch (error) {
+      next(error);
     }
-    //email is not admin
-    else {
-      orders = await orderService.getMyOrder(email);
+  }
+);
+
+orderRouter.delete(
+  '/',
+  loginRequired,
+  adminRequired,
+  async (req, res, next) => {
+    try {
+      const order_id = req.body.order_id;
+      const deletedCount = await orderService.deleteOrder(order_id);
+
+      res.status(201).json(deletedCount);
+    } catch (error) {
+      next(error);
     }
-
-    res.status(200).json(orders);
-  } catch (error) {
-    next(error);
   }
-});
-
-orderRouter.delete('/', loginRequired, adminRequired, async (req, res, next) => {
-  try {
-    const order_id = req.body.order_id;
-    const deletedCount = await orderService.deleteOrder(order_id);
-
-    res.status(201).json(deletedCount);
-  } catch (error) {
-    next(error);
-  }
-});
+);
 
 export { orderRouter };
