@@ -4,6 +4,7 @@ import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
 import { productService } from '../services';
+import { adminRequired } from '../middlewares/admin-required';
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -60,7 +61,7 @@ productRouter.get('/:sex/:type', async (req, res, next) => {
   }
 });
 
-productRouter.post('/add', upload.single('image'), loginRequired, async (req, res, next) => {
+productRouter.post('/insertion', upload.single('image'), loginRequired, adminRequired, async (req, res, next) => {
   try {
     console.log(req.file);
 
@@ -87,7 +88,7 @@ productRouter.post('/add', upload.single('image'), loginRequired, async (req, re
 });
 
 
-productRouter.delete('/', loginRequired, async (req, res, next) => {
+productRouter.delete('/', loginRequired, adminRequired, async (req, res, next) => {
   try {
     const product_id = req.body.product_id;
     const product = await productService.getItem(product_id);
@@ -112,6 +113,7 @@ productRouter.delete('/', loginRequired, async (req, res, next) => {
 productRouter.patch(
   '/',
   loginRequired,
+  adminRequired,
   async function (req, res, next) {
     try {
       // content-type 을 application/json 로 프론트에서
@@ -125,10 +127,7 @@ productRouter.patch(
       const product_id = req.body.product_id; // product_id는 수정할 대상
 
       // body data 로부터 업데이트할 사용자 정보를 추출함.
-      const product_name = req.body.product_name;
-      const sex = req.body.sex;
-      const type = req.body.type;
-      const stock = req.body.stock;
+      const { product_name, sex, type, stock } = req.body;
 
       const category= {sex,type};
       //product_image
@@ -137,9 +136,7 @@ productRouter.patch(
       // if(product_image){
       // //local에 있는 이미지 지우고 새로 받아야와야 함
       // }
-      const price = req.body.price;
-      const producer = req.body.producer;
-      const product_info = req.body.product_info;
+      const { price, producer, product_info } = req.body;
 
       // const userInfoRequired = { userId, currentPassword };
 
