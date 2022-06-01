@@ -1,7 +1,8 @@
 import * as Api from '/api.js';
 
 // html 엘리먼트
-const changeableElement = document.querySelectorAll('.button-menu')[2].children[0]; // 제품판매 or 문의하기로 바뀔 엘리먼트
+const changeableElement =
+  document.querySelectorAll('.button-menu')[2].children[0]; // 제품판매 or 문의하기로 바뀔 엘리먼트
 console.log(changeableElement);
 
 // functions
@@ -25,7 +26,6 @@ async function checkRole() {
       <i class="fa-solid fa-question"></i>
       <span>문의 하기</span></a>
       `;
-
     }
   } catch (err) {
     console.error(err);
@@ -33,3 +33,7 @@ async function checkRole() {
 }
 
 checkRole();
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}

@@ -176,3 +176,7 @@ function closeModal() {
 }
 
 getCategoryList();
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}

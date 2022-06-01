@@ -120,3 +120,7 @@ loginRender();
 setActive(0);
 scrollByTime();
 checkCart();
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}

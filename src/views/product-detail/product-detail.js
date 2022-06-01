@@ -332,3 +332,7 @@ async function reviewHandler(e) {
       break;
   }
 }
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}

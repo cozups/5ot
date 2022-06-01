@@ -73,3 +73,7 @@ async function patchUserInfo(e) {
 }
 
 setDefaultInfo();
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}

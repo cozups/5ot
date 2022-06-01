@@ -25,3 +25,7 @@ async function unregister(e) {
     alert(`${err.message}`);
   }
 }
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}

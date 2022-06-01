@@ -93,5 +93,11 @@
         </ul>
       </div>
     </div>
+    <script>
+      const purchaseData = sessionStorage.getItem('productInfo');
+      if (purchaseData) {
+        sessionStorage.removeItem('productInfo');
+      }
+    </script>
   </body>
 </html>

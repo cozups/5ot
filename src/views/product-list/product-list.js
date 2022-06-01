@@ -76,3 +76,7 @@ function logout(e) {
 }
 
 loginRender();
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}

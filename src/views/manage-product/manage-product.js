@@ -211,3 +211,7 @@ function closeModal() {
 }
 getList();
 categoryRendering();
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}

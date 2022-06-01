@@ -64,14 +64,15 @@ function setOrderInfo() {
   );
   const totalPriceToPay = document.getElementById('orderTotal');
   let totalOrderPrice = 0;
+  let totalCount = 0;
   if (cart.length > 0) {
-    totalOrderPrice = cart.reduce(
-      (acc, cur) => (acc += cur.price * cur.quantity),
-      0
-    );
+    cart.forEach((item) => {
+      totalCount += item.quantity;
+      totalOrderPrice += item.price * item.quantity;
+    });
   }
 
-  productCount.innerText = cart.length + '개';
+  productCount.innerText = totalCount + '개';
   productsTotal.innerText = totalOrderPrice + '원';
   totalPriceToPay.innerText = totalOrderPrice + deliveryFee + '원';
 }
@@ -141,7 +142,7 @@ function changeQuantity(type, idxToChange) {
   const totalPriceField = document.querySelectorAll('.item-total-price');
   let quantity = Number(quantityField[idxToChange].innerText);
   if (type === 'minus') {
-    if (quantity === 0) {
+    if (quantity === 1) {
       return;
     } else {
       quantity--;
@@ -234,3 +235,8 @@ function goToOrder() {
 }
 
 purchaseButton.addEventListener('click', goToOrder);
+
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}
