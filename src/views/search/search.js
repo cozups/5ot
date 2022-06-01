@@ -17,7 +17,6 @@ async function searchProducts() {
     }
   }
   console.log(data);
-
   //세션스토리지에 저장
   sessionStorage.setItem('searchProducts', JSON.stringify(data));
   window.location.href = '/searchlist';
