@@ -116,3 +116,8 @@ section {
   font-family: 'Helvetica Neue', sans-serif;
   margin: 30px;
 }
+section h1 {
+  margin-top: 20vh;
+  font-size: 25px;
+  font-weight: bold;
+}
