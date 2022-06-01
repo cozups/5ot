@@ -169,9 +169,10 @@ allSelectCheckbox.addEventListener('click', selectAllHandler);
 partialDeleteLabel.addEventListener('click', deleteSelected);
 
 function selectAllHandler() {
-  console.log('select all');
+  let i = 0;
   checkList.forEach((checkbox) => {
     checkbox.checked = allSelectCheckbox.checked;
+    deleteList.push(i++);
   });
 }
 
