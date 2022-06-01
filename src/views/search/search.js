@@ -61,10 +61,13 @@ function logout(e) {
   e.preventDefault();
 
   alert('로그아웃 되었습니다.');
-  sessionStorage.removeItem('token');
-  sessionStorage.removeItem('email');
+  sessionStorage.clear();
 
   window.location.href = '/';
 }
 
 loginRender();
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}

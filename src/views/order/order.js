@@ -91,6 +91,16 @@ async function postOrder(e) {
     address2: address2.value,
   };
   console.log(data);
+  if (
+    !data.fullName ||
+    !data.phoneNumber ||
+    !data.postalCode ||
+    !data.address1 ||
+    !data.address2
+  ) {
+    alert('정보를 제대로 작성하여 주십시오.');
+    return;
+  }
   try {
     const result = await Api.post('/order', data);
     if (storageStatus === 'purchase') {
@@ -142,8 +152,7 @@ function logout(e) {
   e.preventDefault();
 
   alert('로그아웃 되었습니다.');
-  sessionStorage.removeItem('token');
-  sessionStorage.removeItem('email');
+  sessionStorage.clear();
 
   window.location.href = '/';
 }

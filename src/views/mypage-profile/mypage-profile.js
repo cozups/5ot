@@ -21,6 +21,15 @@ async function setDefaultInfo() {
   user = await Api.get('/api/email', userEmail);
   const { fullName, phoneNumber, email } = user;
 
+  if (user.address) {
+    const { postalCode, address1, address2 } = user.address;
+    if (postalCode && address1 && address2) {
+      document.getElementById(
+        'currentAddress'
+      ).innerHTML = `(${postalCode}) ${address1} ${address2}`;
+    }
+  }
+
   nameField.value = fullName;
   phoneNumberField.value = phoneNumber || '';
   idField.innerHTML = email;
@@ -54,13 +63,17 @@ async function patchUserInfo(e) {
     role,
   };
 
-  alert('수정 완료되었습니다.');
-  location.reload();
   try {
     const result = await Api.patch('/api/users', userId, data);
+    alert('수정 완료되었습니다.');
+    location.reload();
   } catch (err) {
     console.error(err);
   }
 }
 
 setDefaultInfo();
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}

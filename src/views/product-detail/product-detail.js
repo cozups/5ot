@@ -144,7 +144,7 @@ function logout(e) {
   e.preventDefault();
 
   alert('로그아웃 되었습니다.');
-  sessionStorage.removeItem('token');
+  sessionStorage.clear();
 
   window.location.href = '/';
 }
@@ -331,4 +331,8 @@ async function reviewHandler(e) {
     default:
       break;
   }
+}
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
 }

@@ -69,3 +69,7 @@ async function cancelOrder(e) {
     console.error(err);
   }
 }
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}

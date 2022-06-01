@@ -142,3 +142,7 @@ select {
 button {
   padding: 2px;
 }
+
+#currentAddress {
+  margin: 8px 0;
+}

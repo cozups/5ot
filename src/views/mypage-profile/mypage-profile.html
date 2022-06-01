@@ -144,6 +144,7 @@
               type="password"
               name="currentPassword"
               id="currentPassword"
+              required
             />
           </div>
 
@@ -152,17 +153,18 @@
             <p class="description">
               변경을 원치 않는 경우 현재 비밀번호를 입력하세요.
             </p>
-            <input type="password" name="password" id="newPassword" />
+            <input type="password" name="password" id="newPassword" required />
           </div>
 
           <div class="form-wrap-item">
             <label for="phoneNumber">전화번호</label>
-            <p class="description">- 를 포함하여 적어주십시오.</p>
-            <input type="email" name="email" id="phoneNumber" />
+            <p class="description">- 를 포함하지 않고 적어주십시오.</p>
+            <input type="email" name="email" id="phoneNumber" required />
           </div>
 
           <div class="form-wrap-item">
             <label for="address">주소</label>
+            <p id="currentAddress"></p>
             <div class="addressWrap">
               <input
                 id="postalCode"
@@ -170,6 +172,7 @@
                 type="text"
                 placeholder="주소 찾기를 클릭해 주세요."
                 readonly
+                required
               />
               <button
                 id="searchAddressButton"
@@ -188,6 +191,7 @@
               placeholder=""
               autocomplete="on"
               readonly
+              required
             />
             <input
               id="address2"
@@ -195,6 +199,7 @@
               type="text"
               placeholder="상세주소를 입력해주세요."
               autocomplete="on"
+              required
             />
           </div>
 

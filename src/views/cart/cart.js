@@ -62,14 +62,15 @@ function setOrderInfo() {
   );
   const totalPriceToPay = document.getElementById('orderTotal');
   let totalOrderPrice = 0;
+  let totalCount = 0;
   if (cart.length > 0) {
-    totalOrderPrice = cart.reduce(
-      (acc, cur) => (acc += cur.price * cur.quantity),
-      0
-    );
+    cart.forEach((item) => {
+      totalCount += item.quantity;
+      totalOrderPrice += item.price * item.quantity;
+    });
   }
 
-  productCount.innerText = cart.length + '개';
+  productCount.innerText = totalCount + '개';
   productsTotal.innerText = totalOrderPrice + '원';
   totalPriceToPay.innerText = totalOrderPrice + deliveryFee + '원';
 }
@@ -139,7 +140,7 @@ function changeQuantity(type, idxToChange) {
   const totalPriceField = document.querySelectorAll('.item-total-price');
   let quantity = Number(quantityField[idxToChange].innerText);
   if (type === 'minus') {
-    if (quantity === 0) {
+    if (quantity === 1) {
       return;
     } else {
       quantity--;
@@ -166,9 +167,10 @@ allSelectCheckbox.addEventListener('click', selectAllHandler);
 partialDeleteLabel.addEventListener('click', deleteSelected);
 
 function selectAllHandler() {
-  console.log('select all');
+  let i = 0;
   checkList.forEach((checkbox) => {
     checkbox.checked = allSelectCheckbox.checked;
+    deleteList.push(i++);
   });
 }
 
@@ -214,8 +216,7 @@ function logout(e) {
   e.preventDefault();
 
   alert('로그아웃 되었습니다.');
-  sessionStorage.removeItem('token');
-  sessionStorage.removeItem('email');
+  sessionStorage.clear();
 
   window.location.href = '/';
 }
@@ -233,3 +234,8 @@ function goToOrder() {
 }
 
 purchaseButton.addEventListener('click', goToOrder);
+
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
+}
