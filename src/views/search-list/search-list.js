@@ -3,17 +3,19 @@ const section = document.getElementsByTagName('section')[0];
 const product = JSON.parse(sessionStorage.getItem('searchProducts'));
 console.log(product);
 // 제품목록 가져오기
-async function getProductList() {
-  try {
-    for (let i = 0; i < product.length; i++) {
-      const sex = product[i].category.sex;
-      const type = product[i].category.type;
-      const name = product[i].product_name;
-      const price = product[i].price.toLocaleString();
-      const info = product[i].product_info;
-      const image = product[i].product_image;
-      const product_id = product[i].product_id;
-      let HTMLtemplate = `
+function getProductList() {
+  if (product == '') {
+    section.innerHTML = `<h1> 입력하신 제품명과 일치하는 제품이 없습니다.</h1>`;
+  }
+  for (let i = 0; i < product.length; i++) {
+    const sex = product[i].category.sex;
+    const type = product[i].category.type;
+    const name = product[i].product_name;
+    const price = product[i].price.toLocaleString();
+    const info = product[i].product_info;
+    const image = product[i].product_image;
+    const product_id = product[i].product_id;
+    let HTMLtemplate = `
         <div id="product-list-wrap">
           <a href="/list/${sex}/${type}/${product_id}">
             <div class="product-list">
@@ -30,10 +32,7 @@ async function getProductList() {
 
         </div>
         `;
-      section.innerHTML += HTMLtemplate;
-    }
-  } catch (error) {
-    console.log(`error : ${error}`);
+    section.innerHTML += HTMLtemplate;
   }
 }
 getProductList();

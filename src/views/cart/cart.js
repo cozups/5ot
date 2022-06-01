@@ -9,8 +9,6 @@ const cartList = document.getElementById('cart-list');
 const cartCountField = document.querySelector('.is-size-6');
 const purchaseButton = document.getElementById('purchaseButton');
 
-// 이벤트 추가
-
 // functions
 //장바구니 리스트 렌더링하기
 cartRendering();
