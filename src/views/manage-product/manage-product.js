@@ -25,7 +25,7 @@ modalModifyButton.addEventListener('click', patchRequest);
 async function categoryRendering() {
   try {
     const categories = await Api.get('/category');
-    categoryList = categories.map(obj => obj.type);
+    categoryList = categories.map((obj) => obj.type);
     let categoryUnique = new Set(categoryList);
     categoryList = [...categoryUnique];
 
@@ -106,13 +106,13 @@ sellForm.addEventListener('submit', async function (e) {
   const formData = new FormData(sellForm);
 
   try {
-    let response = await fetch('/product/add', {
+    let response = await fetch('/product/insertion', {
       method: 'POST',
       body: formData,
     });
     alert('상품이 추가 되었습니다.');
 
-    window.location.href = '/mypage/manage/product';
+    // window.location.href = '/mypage/manage/product';
   } catch (err) {
     console.error(err);
   }
