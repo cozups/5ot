@@ -112,6 +112,7 @@ sellForm.addEventListener('submit', async function (e) {
     });
     alert('상품이 추가 되었습니다.');
 
+    // 고치고나서 ↓↓ 주석해제 부탁드립니다.
     // window.location.href = '/mypage/manage/product';
   } catch (err) {
     console.error(err);
