@@ -122,7 +122,7 @@ sellForm.addEventListener('submit', async function (e) {
   const formData = new FormData(sellForm);
 
   try {
-    let response = await fetch('/product/insertion', {
+    const response = await fetch('/product/insertion', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem('token')}`,
@@ -213,7 +213,7 @@ async function patchRequest(e) {
   }
   data['product_id'] = productToModify.product_id;
   try {
-    let result = await Api.patch('/product', '', data);
+    const result = await Api.patch('/product', '', data);
     alert('상품이 수정 되었습니다.');
 
     closeModal();
