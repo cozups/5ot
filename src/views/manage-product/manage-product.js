@@ -52,10 +52,10 @@ async function getList() {
       <td>${stock}개</td>
       <td>${price}원</td>
       <td>
-        <button class="product-modify-button" value='${product_id}'>
+        <button class="product-modify-button" value='${product_id}' type="button">
           <i class="fa-solid fa-pencil"></i>
         </button>
-        <button class="product-delete-button" value='${product_id}'>
+        <button class="product-delete-button" value='${product_id}' type="button">
           <i class="fa-solid fa-trash-can"></i>
         </button>
       </td>
@@ -64,34 +64,51 @@ async function getList() {
   });
   productList.innerHTML = elements.join('');
 
-  const deleteButton = document.querySelectorAll('.product-delete-button');
-  for (let i = 0; i < deleteButton.length; i++) {
-    deleteButton[i].addEventListener('click', deleteProduct);
-  }
-  const modifyButton = document.querySelectorAll('.product-modify-button');
-  for (let i = 0; i < deleteButton.length; i++) {
-    modifyButton[i].addEventListener('click', modifyProduct);
+  productList.addEventListener('click', (e) =>
+    productManageHandler(e.target.parentElement)
+  );
+}
+
+function productManageHandler(targetButton) {
+  const buttonType = whatButton(targetButton);
+
+  switch (buttonType) {
+    case 'modify':
+      modifyProduct(targetButton);
+      break;
+    case 'delete':
+      deleteProduct(targetButton);
+      break;
+    default:
+      break;
   }
 }
 
-// 상품 삭제
-async function deleteProduct(e) {
-  e.preventDefault();
+function whatButton(target) {
+  if (target.classList.contains('product-modify-button')) {
+    return 'modify';
+  } else if (target.classList.contains('product-delete-button')) {
+    return 'delete';
+  }
 
+  return 'wrong';
+}
+
+// 상품 삭제
+async function deleteProduct(target) {
   const answer = confirm('정말로 삭제하시겠습니까?');
 
   if (!answer) {
     return;
   }
 
-  const product = this.parentElement.parentElement;
-  const product_id = Number(this.value);
+  const product_id = Number(target.value);
 
   try {
-    alert('삭제 되었습니다.');
     const result = await Api.delete('/product', '', {
       product_id,
     });
+    alert('삭제 되었습니다.');
     location.reload();
   } catch (err) {
     console.error(err);
@@ -121,12 +138,10 @@ sellForm.addEventListener('submit', async function (e) {
 });
 
 // 상품 수정
-async function modifyProduct(e) {
-  e.preventDefault();
-
+async function modifyProduct(target) {
   modal.style.display = 'block';
 
-  const product_id = Number(this.value);
+  const product_id = Number(target.value);
 
   // 프로덕트 정보 가져오기
   try {
@@ -211,6 +226,7 @@ async function patchRequest(e) {
 function closeModal() {
   modal.style.display = 'none';
 }
+
 getList();
 categoryRendering();
 const purchaseData = sessionStorage.getItem('productInfo');
