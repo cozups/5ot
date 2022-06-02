@@ -19,14 +19,14 @@ const reviewList = document.getElementById('reviews');
 
 const purchase = document.getElementById('purchase');
 const cart = document.getElementById('cart');
-const product_id = Number(window.location.pathname.split('/')[4]);
+const productId = Number(window.location.pathname.split('/')[4]);
 
 reviewButton.addEventListener('click', postReview);
 reviewList.addEventListener('click', reviewHandler);
 
 async function getProductDetail() {
   try {
-    productData = await Api.get('/product', `${product_id}`);
+    productData = await Api.get('/product', `${productId}`);
     image.src = productData.product_image;
     image.innerHTML = productData.src;
     producer.innerHTML = productData.producer;
@@ -225,7 +225,7 @@ async function reviewRender() {
     });
 
     const reviewTitle = document.querySelector('#review h1');
-    const averageRate = Math.round((totalRate / reviews.length) * 100) / 100;
+    let averageRate = Math.round((totalRate / reviews.length) * 100) / 100;
     if (reviews.length === 0) averageRate = '';
     reviewTitle.innerHTML = `후기 (${reviews.length}건) ⭐${averageRate}`;
     reviewList.innerHTML = reviewAll.join('');

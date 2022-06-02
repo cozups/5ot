@@ -8,24 +8,21 @@ const type = pathname[3];
 async function getProductList() {
   try {
     const result = await Api.get('/product', `${sex}/${type}`);
-    for (let i = 0; i < result.length; i++) {
-      const name = result[i].product_name;
-      const price = result[i].price.toLocaleString();
-      const info = result[i].product_info;
-      const image = result[i].product_image;
-      const productId = result[i].product_id;
-      console.log(productId);
 
-      let HTMLtemplate = `
+    const elements = result.map((data) => {
+      const { product_name, price, product_info, product_image, product_id } =
+        data;
+
+      return `
         <div id="product-list-wrap">
-          <a href="/list/${sex}/${type}/${productId}"> 
+          <a href="/list/${sex}/${type}/${product_id}"> 
             <div class="product-list">
-            <img class="product-thumbnail" src="${image}"/>
+            <img class="product-thumbnail" src="${product_image}"/>
               <div class="product-content">
                 <div class="content">
-                  <h3 class="name">${name}</h3>
-                  <h4 class="price">${price}원</h4>
-                  <p class="description">${info}</p>
+                  <h3 class="name">${product_name}</h3>
+                  <h4 class="price">${price.toLocaleString()}원</h4>
+                  <p class="description">${product_info}</p>
                 </div>          
               </div>
             </div>
@@ -33,8 +30,8 @@ async function getProductList() {
           
         </div>
         `;
-      section.innerHTML += HTMLtemplate;
-    }
+    });
+    section.innerHTML += elements.join('');
   } catch (error) {
     console.log(`error : ${error}`);
   }

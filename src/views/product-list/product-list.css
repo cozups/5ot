@@ -84,7 +84,6 @@ section {
   position: relative;
   width: 800px;
   margin: 100px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
