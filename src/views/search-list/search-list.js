@@ -2,29 +2,33 @@ const headerMenu = document.querySelectorAll('#navbar a');
 const section = document.getElementsByTagName('section')[0];
 const product = JSON.parse(sessionStorage.getItem('searchProducts'));
 console.log(product);
+
 // 제품목록 가져오기
 function getProductList() {
   if (product == '') {
-    section.innerHTML = `<h1> 입력하신 제품명과 일치하는 제품이 없습니다.</h1>`;
+    section.innerHTML = `<h1 id="alert-font"> 입력하신 제품명과 일치하는 제품이 없습니다.</h1>`;
   }
-  for (let i = 0; i < product.length; i++) {
-    const sex = product[i].category.sex;
-    const type = product[i].category.type;
-    const name = product[i].product_name;
-    const price = product[i].price.toLocaleString();
-    const info = product[i].product_info;
-    const image = product[i].product_image;
-    const product_id = product[i].product_id;
-    let HTMLtemplate = `
+  const elements = product.map((data) => {
+    const {
+      sex,
+      type,
+      product_name,
+      price,
+      product_info,
+      product_image,
+      product_id,
+    } = data;
+
+    return `
         <div id="product-list-wrap">
           <a href="/list/${sex}/${type}/${product_id}">
             <div class="product-list">
-            <img class="product-thumbnail" src="${image}"/>
+            <img class="product-thumbnail" src="${product_image}"/>
               <div class="product-content">
                 <div class="content">
-                  <h3 class="name">${name}</h3>
-                  <h4 class="price">${price}원</h4>
-                  <p class="description">${info}</p>
+                  <h3 class="name">${product_name}</h3>
+                  <h4 class="price">${price.toLocaleString()}원</h4>
+                  <p class="description">${product_info}</p>
                 </div>
               </div>
             </div>
@@ -32,8 +36,8 @@ function getProductList() {
 
         </div>
         `;
-    section.innerHTML += HTMLtemplate;
-  }
+  });
+  section.innerHTML = elements.join('');
 }
 getProductList();
 
