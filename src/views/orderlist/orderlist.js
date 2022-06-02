@@ -9,21 +9,24 @@ const listTable = document.querySelector('.order-list');
 //계정따라 로드구현 달라지게 하기
 async function loadData() {
   let rowIdx = 0;
+
   try {
     email = sessionStorage.getItem('email');
     received = await Api.get('/order/email', email);
+    let i = 0;
 
     //정보 가져와서 화면에 구현
-    for (let i = 0; i < received.length; i++) {
-      for (let j = 0; j < received[i].OrderList.length; j++) {
-        const productName = received[i].OrderList[j].product_name;
-        const userId = received[i].email;
-        const count = received[i].OrderList[j].quantity;
-        const address1 = received[i].address.address1;
-        const address2 = received[i].address.address2;
-        const totalPrice = count * received[i].OrderList[j].price;
+    const elements = received.map((data) => {
+      const { email: userId } = data;
+      const { address1, address2 } = data.address;
+      const orderLists = data.OrderList.map((order) => {
+        const {
+          product_name: productName,
+          quantity: count,
+          price: totalPrice,
+        } = order;
 
-        const listElement = `
+        return `
         <tr>
           <td class="product-name" rowspan='2' align='center'>${productName}</td>
           <td class="user" rowspan='2' align='center'>${userId}</td>
@@ -38,10 +41,12 @@ async function loadData() {
           <td class='address2'>${address2}</td>
         </tr>
         `;
+      });
+      i++;
+      return orderLists.join('');
+    });
 
-        listTable.innerHTML += listElement;
-      }
-    }
+    listTable.innerHTML = elements.join('');
   } catch (err) {
     console.error(err);
   }

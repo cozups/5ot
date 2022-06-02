@@ -11,7 +11,7 @@ const sexInput = document.querySelector('#sex');
 const categorynameInput = document.querySelector('#category_name');
 
 // 삭제 관련 html 엘리먼트
-const categoryList = document.querySelector('#category-list');
+const categoryList = document.querySelector('#category-list tbody');
 
 // 수정 관련 html 엘리먼트
 const modal = document.querySelector('#modal');
@@ -26,12 +26,12 @@ modalModifyButton.addEventListener('click', patchRequest);
 // functions
 async function getCategoryList() {
   const categories = await Api.get('/category');
-
-  for (let i = 0; i < categories.length; i++) {
-    const { category_id, sex, type } = categories[i];
+  let i = 0;
+  const elements = categories.map((category) => {
+    const { category_id, sex, type } = category;
     category_ids.push(category_id);
 
-    let element = `
+    return `
     <tr>
       <td class="sexValue">${sex}</td>
       <td class="typeValue">${type}</td>
@@ -39,57 +39,74 @@ async function getCategoryList() {
         <button class="category-modify-button" value='${i}'>
           <i class="fa-solid fa-pencil"></i>
         </button>
-        <button class="category-delete-button" value='${i}'>
+        <button class="category-delete-button" value='${i++}'>
           <i class="fa-solid fa-trash-can"></i>
         </button>
       </td>
     </tr>
   `;
-    $(categoryList).append(element);
-  }
-  const deleteButton = document.querySelectorAll('.category-delete-button');
-  for (let i = 0; i < deleteButton.length; i++) {
-    deleteButton[i].addEventListener('click', deleteCategory);
-  }
-  const modifyButton = document.querySelectorAll('.category-modify-button');
-  for (let i = 0; i < deleteButton.length; i++) {
-    modifyButton[i].addEventListener('click', modifyCategory);
+  });
+
+  categoryList.innerHTML = elements.join('');
+
+  categoryList.addEventListener('click', (e) =>
+    categoryManageHandler(e.target.parentElement)
+  );
+}
+
+function categoryManageHandler(targetButton) {
+  const buttonType = whatButton(targetButton);
+  console.log(buttonType);
+  switch (buttonType) {
+    case 'modify':
+      modifyCategory(targetButton);
+      break;
+    case 'delete':
+      deleteCategory(targetButton);
+      break;
+    default:
+      break;
   }
 }
 
+function whatButton(target) {
+  if (target.classList.contains('category-modify-button')) {
+    return 'modify';
+  } else if (target.classList.contains('category-delete-button')) {
+    return 'delete';
+  }
+
+  return 'wrong';
+}
+
 // 카테고리 삭제
-async function deleteCategory(e) {
-  e.preventDefault();
-
+async function deleteCategory(target) {
   const answer = confirm('정말로 삭제하시겠습니까?');
-
-  sexValue = document.querySelectorAll('.sexValue');
-  typeValue = document.querySelectorAll('.typeValue');
 
   if (!answer) {
     return;
   }
 
-  const value = Number(this.value);
-  console.log(value);
+  sexValue = document.querySelectorAll('.sexValue');
+  typeValue = document.querySelectorAll('.typeValue');
 
-  //const category = this.parentElement.parentElement;
+  const value = Number(target.value);
+
   const category_id = category_ids[value];
   const sex = sexValue[value].innerText;
   const type = typeValue[value].innerText;
 
-  console.log(sex, type);
   try {
-    alert('삭제 되었습니다.');
     const result = await Api.delete('/category', '', {
       category_id,
       sex,
       type,
     });
+    alert('삭제 되었습니다.');
+    location.reload();
   } catch (err) {
     console.error(err);
   }
-  location.reload();
 }
 
 // 카테고리 추가
@@ -111,11 +128,9 @@ registerButton.addEventListener('click', async function (e) {
 });
 
 // 카테고리 수정
-async function modifyCategory(e) {
-  e.preventDefault();
-
+async function modifyCategory(target) {
   modal.style.display = 'block';
-  const value = Number(this.value);
+  const value = Number(target.value);
 
   // 카테고리 정보 가져오기
   try {

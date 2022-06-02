@@ -19,11 +19,10 @@ function cartRendering() {
 
   cartCountField.innerText = `${cart.length}개 상품`;
 
-  cart.forEach((item) => {
+  const elements = cart.map((item) => {
     const { product_image, product_name, quantity, price } = item;
     const total = price * quantity;
-
-    const element = `
+    return `
       <li>
           <input type="checkbox" class="list-checkbox" value="${i}"/>
           <img
@@ -41,14 +40,11 @@ function cartRendering() {
             </div>
             <span class="item-price">${price}</span>
             <span class="item-total-price">총 ${total}원</span>
-            <button class='cancel' value="${i}"><i class="fa-solid fa-trash-can"></i></buttonc>
+            <button class='cancel' value="${i++}"><i class="fa-solid fa-trash-can"></i></buttonc>
           </div>
-          </li>
-          `;
-
-    cartList.innerHTML += element;
-    i++;
+      </li>`;
   });
+  cartList.innerHTML = elements.join('');
 
   setOrderInfo();
   cartList.addEventListener('click', clickHandler);
