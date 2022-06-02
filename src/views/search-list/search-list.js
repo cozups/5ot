@@ -37,7 +37,7 @@ function getProductList() {
         </div>
         `;
   });
-  section.innerHTML += elements.join('');
+  section.innerHTML = elements.join('');
 }
 getProductList();
 

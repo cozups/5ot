@@ -31,7 +31,7 @@ async function getProductList() {
         </div>
         `;
     });
-    section.innerHTML += elements.join('');
+    section.innerHTML = elements.join('');
   } catch (error) {
     console.log(`error : ${error}`);
   }
