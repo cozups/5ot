@@ -5,14 +5,14 @@ let productToModify = null;
 let categoryList = null;
 
 // 등록 관련 html 엘리먼트
-const sellForm = document.querySelector('#sell-form');
+const sellForm = document.getElementById('sell-form');
 
 // 삭제 관련 html 엘리먼트
-const productList = document.querySelector('#product-list');
+const productList = document.getElementById('products');
 
 // 수정 관련 html 엘리먼트
-const modal = document.querySelector('#modal');
-const modalModifyButton = document.querySelector('#modal-button');
+const modal = document.getElementById('modal');
+const modalModifyButton = document.getElementById('modal-button');
 const modalCloseButton = document.querySelector('.close-button');
 const modalForm = document.querySelector('.modal-content form');
 
@@ -26,15 +26,14 @@ async function categoryRendering() {
   try {
     const categories = await Api.get('/category');
     categoryList = categories.map((obj) => obj.type);
-    let categoryUnique = new Set(categoryList);
-    categoryList = [...categoryUnique];
+    categoryList = [...new Set(categoryList)];
 
-    const categoryField = document.querySelector('#type');
+    const categoryField = document.getElementById('type');
 
-    for (let i = 0; i < categoryList.length; i++) {
-      let optionElement = `<option value='${categoryList[i]}'>${categoryList[i]}</option>`;
-      categoryField.innerHTML += optionElement;
-    }
+    const optionElements = categoryList.map(
+      (category) => `<option value='${category}'>${category}</option>`
+    );
+    categoryField.innerHTML = optionElements.join('');
   } catch (err) {
     console.error(err);
   }
@@ -44,10 +43,10 @@ async function categoryRendering() {
 async function getList() {
   const products = await Api.get('/product/all');
 
-  for (let i = 0; i < products.length; i++) {
-    const { product_id, product_name, stock, price } = products[i];
+  const elements = products.map((product) => {
+    const { product_id, product_name, stock, price } = product;
 
-    let element = `
+    return `
     <tr>
       <td>${product_name}</td>
       <td>${stock}개</td>
@@ -62,8 +61,8 @@ async function getList() {
       </td>
     </tr>
   `;
-    $(productList).append(element);
-  }
+  });
+  productList.innerHTML = elements.join('');
 
   const deleteButton = document.querySelectorAll('.product-delete-button');
   for (let i = 0; i < deleteButton.length; i++) {
@@ -171,10 +170,10 @@ function setDefaultInfo() {
     '.modal-content #type'
   ).childNodes;
 
-  const optionElement = categoryList.map(
+  const optionElements = categoryList.map(
     (category) => `<option value='${category}'>${category}</option>`
   );
-  modalCategory.innerHTML = optionElement.join('');
+  modalCategory.innerHTML = optionElements.join('');
 
   sexOptions.forEach((option) => {
     if (option.value === sex) {
