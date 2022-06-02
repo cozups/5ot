@@ -227,3 +227,9 @@ thead td {
   margin-top: 8px;
   cursor: pointer;
 }
+
+.fa-pencil,
+.fa-trash-can {
+  display: block;
+  width: 100%;
+}
