@@ -167,25 +167,26 @@ function setDefaultInfo() {
   // select 옵션 값 설정
   const sexOptions = document.querySelectorAll('.modal-content #sex option');
   const modalCategory = document.querySelector('.modal-content #type');
-  const modalCategoryOptions = document.querySelector('.modal-content #type');
+  const modalCategoryOptions = document.querySelector(
+    '.modal-content #type'
+  ).childNodes;
 
-  for (let i = 0; i < categoryList.length; i++) {
-    let optionElement = `<option value='${categoryList[i]}'>${categoryList[i]}</option>`;
-    modalCategory.innerHTML += optionElement;
-  }
+  const optionElement = categoryList.map(
+    (category) => `<option value='${category}'>${category}</option>`
+  );
+  modalCategory.innerHTML = optionElement.join('');
 
-  for (let i = 0; i < sexOptions.length; i++) {
-    if (sexOptions[i].value === sex) {
-      sexOptions[i].selected = true;
+  sexOptions.forEach((option) => {
+    if (option.value === sex) {
+      option.selected = true;
     }
-  }
+  });
 
-  console.log(modalCategoryOptions);
-  for (let i = 0; i < modalCategoryOptions.length; i++) {
-    if (modalCategoryOptions[i].value === category) {
-      modalCategoryOptions[i].selected = true;
+  modalCategoryOptions.forEach((option) => {
+    if (option.value === category) {
+      option.selected = true;
     }
-  }
+  });
 }
 
 async function patchRequest(e) {
