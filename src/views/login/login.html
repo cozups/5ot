@@ -25,6 +25,17 @@
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="login.css" />
     <script src="login.js" type="module" defer></script>
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-1.11.3.min.js"
+    ></script>
+    <!-- 카카오 로그인 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <!-- 네이버 로그인 -->
+    <script
+      src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
+      charset="utf-8"
+    ></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -50,7 +61,7 @@
         </div>
 
         <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+          <div class="navbar-end">
             <ul id="navbar">
               <li><a href="/register">회원가입</a></li>
               <li>
@@ -61,6 +72,12 @@
                   <span>카트</span>
                 </a>
               </li>
+              <li>
+                <a href="/search"
+                  ><span class="magnify"
+                    ><i class="fa-solid fa-magnifying-glass"></i></span
+                ></a>
+              </li>
             </ul>
           </div>
         </div>
@@ -70,7 +87,7 @@
     <!-- 로그인 폼(Form) -->
     <div class="login-form-container">
       <form class="box login-form-box" id="loginForm">
-        <p class="title is-5 has-text-info">어서오세요!</p>
+        <p class="title is-5">로그인</p>
         <div class="field">
           <label class="label" for="emailInput">이메일</label>
           <div class="control">
@@ -97,10 +114,94 @@
           </div>
         </div>
 
-        <button class="button is-info is-fullwidth" id="submitButton">
+        <button class="button is-fullwidth" id="submitButton">
           로그인하기
         </button>
+
+        <!-- sns 로그인 -->
+        <div class="snsLogin">
+          <div>
+            <a id="naverLogin">
+              <img src="../images/btnG_완성형.png" />
+            </a>
+          </div>
+
+          <div>
+            <a id="kakao-login-btn"></a>
+          </div>
+        </div>
       </form>
     </div>
+
+    <script type="text/javascript">
+      function unlinkApp() {
+        Kakao.API.request({
+          url: '/v1/user/unlink',
+          success: function (res) {
+            alert('success: ' + JSON.stringify(res));
+          },
+          fail: function (err) {
+            alert('fail: ' + JSON.stringify(err));
+          },
+        });
+      }
+    </script>
+
+    <script type="text/javascript">
+      window.Kakao.init('d8889d25a173eb9ac8cd38c5e8d50054');
+      console.log(Kakao.isInitialized());
+
+      Kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function (authObj) {
+          Kakao.API.request({
+            url: '/v2/user/me',
+            success: function (result) {
+              Kakao.Auth.setAccessToken(authObj.access_token);
+              sessionStorage.setItem('token', authObj.access_token);
+              alert(`정상적으로 로그인되었습니다.`);
+              window.location.href = '/';
+            },
+            fail: function (error) {
+              alert(
+                'login success, but failed to request user information: ' +
+                  JSON.stringify(error)
+              );
+            },
+          });
+        },
+        fail: function (err) {
+          alert('failed to login: ' + JSON.stringify(err));
+        },
+      });
+    </script>
+    <script>
+      var naverLogin = new naver.LoginWithNaverId({
+        clientId: '3tgTikynKKIgH4KVMRmM', // cliendId
+        callbackUrl: 'http://localhost:5001/login', // Callback URL
+        isPopup: false,
+        callbackHandle: true,
+        loginButton: { color: 'green', type: 3, height: 62 },
+      });
+      naverLogin.init(); // 로그인 설정
+
+      window.addEventListener('load', function () {
+        naverLogin.getLoginStatus(function (status) {
+          if (status) {
+            var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
+
+            console.log(naverLogin.user);
+
+            if (email == undefined || email == null) {
+              alert('이메일은 필수정보입니다. 정보제공을 동의해주세요.');
+              naverLogin.reprompt();
+              return;
+            }
+          } else {
+            console.log('callback 처리에 실패하였습니다.');
+          }
+        });
+      });
+    </script>
   </body>
 </html>

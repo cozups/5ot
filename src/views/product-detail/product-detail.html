@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-5팀</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="product-detail.css" />
+    <script src="product-detail.js" type="module" defer></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="container mt-3">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img src="/elice-rabbit.png" width="30" height="30" />
+            <span class="has-text-link">쇼핑-5팀</span>
+          </a>
+
+          <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div class="navbar-end">
+          <ul id="navbar">
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/register">회원가입</a></li>
+            <li>
+              <a href="/cart" aria-current="page">
+                <span class="icon">
+                  <i class="fas fa-cart-shopping"></i>
+                </span>
+                <span>카트</span>
+              </a>
+            </li>
+            <li>
+              <a href="/search"
+                ><span class="magnify"
+                  ><i class="fa-solid fa-magnifying-glass"></i></span
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="div-container">
+      <!--카테고리 버튼-->
+      <div id="slide-buttons">
+        <h2>Woman</h2>
+        <ul class="slide-button-list">
+          <li>
+            <a href="/list/w/new"
+              ><button class="slide-button-element">new</button></a
+            >
+          </li>
+          <li>
+            <a href="/list/w/beauty"
+              ><button class="slide-button-element">beauty</button></a
+            >
+          </li>
+          <li>
+            <a href="/list/w/shoes"
+              ><button class="slide-button-element">shoes</button></a
+            >
+          </li>
+          <li>
+            <a href="/list/w/dress"
+              ><button class="slide-button-element">dress</button></a
+            >
+          </li>
+        </ul>
+        <h2>Man</h2>
+        <ul class="slide-button-list">
+          <li>
+            <a href="/list/m/new"
+              ><button class="slide-button-element">new</button></a
+            >
+          </li>
+          <li>
+            <a href="/list/m/suit"
+              ><button class="slide-button-element">suit</button></a
+            >
+          </li>
+          <li>
+            <a href="/list/m/shoes"
+              ><button class="slide-button-element">shoes</button></a
+            >
+          </li>
+          <li>
+            <a href="/list/m/athletics"
+              ><button class="slide-button-element">athletics</button></a
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- 제품상세 -->
+      <div id="product-detail-wrap">
+        <div id="product-detail">
+          <img id="product-thumbnail" src="" />
+          <div class="product-detail-right">
+            <p id="producer"></p>
+            <div class="content">
+              <p id="name"></p>
+              <p id="price"></p>
+              <p id="description"></p>
+            </div>
+            <div class="quantity">
+              <button id="minus" disabled><i class="fas fa-minus"></i></button>
+              <span id="qty">1</span>
+              <button id="plus"><i class="fas fa-plus"></i></button>
+            </div>
+            <div class="buttons">
+              <button type="button" id="purchase">구매하기</button>
+              <button type="button" id="cart">장바구니</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="review">
+          <h1>후기 (0건)</h1>
+          <div class="review-input">
+            <select name="rate" id="rate">
+              <option value="5" selected>5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+            </select>
+            <textarea
+              name=""
+              id="review-content"
+              cols="30"
+              rows="5"
+              placeholder="리뷰를 작성하세요"
+            ></textarea>
+            <button class="review-submit">제출</button>
+          </div>
+          <ul id="reviews"></ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

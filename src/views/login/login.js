@@ -45,6 +45,8 @@ async function handleSubmit(e) {
     // 물론 다른 스토리지여도 됨
     sessionStorage.setItem('token', token);
 
+    sessionStorage.setItem('email', email);
+
     alert(`정상적으로 로그인되었습니다.`);
 
     // 로그인 성공
@@ -55,4 +57,8 @@ async function handleSubmit(e) {
     console.error(err.stack);
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
+}
+const purchaseData = sessionStorage.getItem('productInfo');
+if (purchaseData) {
+  sessionStorage.removeItem('productInfo');
 }

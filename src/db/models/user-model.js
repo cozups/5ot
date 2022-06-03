@@ -31,6 +31,11 @@ export class UserModel {
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
   }
+
+  async deleteUser (email) {
+    const { deletedCount } = await User.deleteOne({ email });
+    return deletedCount  //  이렇게 하면 되는건지 확인좀 해주세요
+  }
 }
 
 const userModel = new UserModel();

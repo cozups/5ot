@@ -1,3 +1,4 @@
+import * as Api from './../views/api.js';
 import express from 'express';
 import path from 'path';
 
@@ -9,6 +10,24 @@ const viewsRouter = express.Router();
 viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
+viewsRouter.use('/cart', serveStatic('cart'));
+viewsRouter.use('/order', serveStatic('order'));
+viewsRouter.use('/order/complete', serveStatic('complete'));
+
+viewsRouter.use('/search', serveStatic('search'));
+viewsRouter.use('/mypage', serveStatic('mypage'));
+viewsRouter.use('/mypage/profile', serveStatic('mypage-profile'));
+
+viewsRouter.use('/list/:sex/:type', serveStatic('product-list'));
+viewsRouter.use('/list/:sex/:type/:product_id', serveStatic('product-detail'));
+
+viewsRouter.use('/orderlist', serveStatic('orderlist'));
+viewsRouter.use('/mypage/orderlist', serveStatic('orderlist'));
+viewsRouter.use('/mypage/manage', serveStatic('manage-select-page'));
+viewsRouter.use('/mypage/manage/category', serveStatic('manage-category'));
+viewsRouter.use('/mypage/manage/product', serveStatic('manage-product'));
+viewsRouter.use('/mypage/unregister', serveStatic('unregister-user'));
+viewsRouter.use('/searchlist', serveStatic('search-list'));
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));
