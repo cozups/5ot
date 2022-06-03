@@ -141,6 +141,10 @@ thead td {
   padding: 4px;
   border-radius: 6px;
   background-color: #fff;
+}
+
+.category-modify-button i,
+.category-delete-button i {
   cursor: pointer;
 }
 
