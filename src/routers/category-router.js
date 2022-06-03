@@ -16,7 +16,7 @@ categoryRouter.get('/', async (req, res, next) => {
   }
 });
 
-categoryRouter.post('/', loginRequired, adminRequired, async (req, res, next) => {
+categoryRouter.post('/', loginRequired, async (req, res, next) => {
   try {
     const { sex, type } = req.body;
 
@@ -31,7 +31,7 @@ categoryRouter.post('/', loginRequired, adminRequired, async (req, res, next) =>
   }
 });
 
-categoryRouter.delete('/', loginRequired, adminRequired, async (req, res, next) => {
+categoryRouter.delete('/', loginRequired, async (req, res, next) => {
   try {
     const { category_id, sex, type } = req.body;
 
@@ -44,7 +44,7 @@ categoryRouter.delete('/', loginRequired, adminRequired, async (req, res, next) 
   }
 });
 
-categoryRouter.patch('/', loginRequired, adminRequired, async (req, res, next) => {
+categoryRouter.patch('/', loginRequired, async (req, res, next) => {
   try {
     const sex_YetUpdated = req.body.sex;
     const type_YetUpdated = req.body.type;
