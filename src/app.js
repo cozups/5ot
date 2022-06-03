@@ -1,10 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-<<<<<<< HEAD
-import { viewsRouter, userRouter } from './routers';
-=======
 import { viewsRouter, userRouter, productRouter,orderRouter, categoryRouter, reviewRouter} from './routers';
->>>>>>> f858794614e7870b533e69a13e8f770cddfe546b
 import { errorHandler } from './middlewares';
 
 const app = express();
