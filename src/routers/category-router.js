@@ -46,7 +46,10 @@ categoryRouter.delete('/', loginRequired, adminRequired, async (req, res, next) 
 
 categoryRouter.patch('/', loginRequired, adminRequired, async (req, res, next) => {
   try {
-    const { sex_YetUpdated, type_YetUpdated, sex, type } = req.body;
+    const sex_YetUpdated = req.body.sex;
+    const type_YetUpdated = req.body.type;
+    const sex = req.body.updateSex;
+    const type = req.body.updateType;
 
     const categoryRequired = { sex_YetUpdated, type_YetUpdated };
 
