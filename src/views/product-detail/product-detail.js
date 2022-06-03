@@ -176,7 +176,7 @@ async function postReview(e) {
   const userName = sessionStorage.getItem('userName');
 
   const data = {
-    product_id,
+    product_id: productId,
     email: myEmail,
     userName,
     rate,
