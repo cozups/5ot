@@ -131,8 +131,6 @@ class UserService {
 
     return user;
   }
-<<<<<<< HEAD
-=======
   
   //유저 정보 삭제, 현재 비밀번호가 있어야 수정 가능함.
   //박세웅
@@ -163,7 +161,6 @@ class UserService {
     return user;
 
   }
->>>>>>> f858794614e7870b533e69a13e8f770cddfe546b
 }
 
 const userService = new UserService(userModel);
