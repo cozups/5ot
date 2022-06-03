@@ -176,7 +176,7 @@ async function postReview(e) {
   const userName = sessionStorage.getItem('userName');
 
   const data = {
-    product_id,
+    product_id: productId,
     email: myEmail,
     userName,
     rate,
@@ -195,7 +195,7 @@ async function postReview(e) {
 
 async function reviewRender() {
   try {
-    reviews = await Api.get('/review', product_id);
+    reviews = await Api.get('/review', productId);
     let totalRate = 0;
 
     let reviewAll = [];

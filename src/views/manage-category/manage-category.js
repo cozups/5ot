@@ -56,7 +56,6 @@ async function getCategoryList() {
 
 function categoryManageHandler(targetButton) {
   const buttonType = whatButton(targetButton);
-  console.log(buttonType);
   switch (buttonType) {
     case 'modify':
       modifyCategory(targetButton);

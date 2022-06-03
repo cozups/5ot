@@ -62,7 +62,6 @@ productRouter.post(
   '/insertion',
   upload.single('image'),
   loginRequired,
-  adminRequired,
   async (req, res, next) => {
     try {
       console.log(req.file);
@@ -94,7 +93,7 @@ productRouter.post(
 productRouter.delete(
   '/',
   loginRequired,
-  adminRequired,
+  
   async (req, res, next) => {
     try {
       const product_id = req.body.product_id;
@@ -119,7 +118,7 @@ productRouter.delete(
 productRouter.patch(
   '/',
   loginRequired,
-  adminRequired,
+  
   async function (req, res, next) {
     try {
       // content-type 을 application/json 로 프론트에서
