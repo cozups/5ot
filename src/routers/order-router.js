@@ -10,7 +10,7 @@ const orderRouter = Router();
 orderRouter.get(
   '/all',
   loginRequired,
-  adminRequired,
+  
   async (req, res, next) => {
     try {
       const orders = await orderService.getAllOrder();
