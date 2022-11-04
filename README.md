@@ -11,6 +11,26 @@
 
 <br>
 
+## View
+
+| 메인 화면   | 제품 리스트 화면   |
+| -------- | ---------------------- |
+| ![image](https://user-images.githubusercontent.com/58796245/199911498-84cacfcc-4cc2-496f-a6d8-5ec5478616a1.png) | ![image](https://user-images.githubusercontent.com/58796245/199911880-5dbf2415-1f4c-42cd-b77f-b4e5afa9154a.png) |
+
+| 제품 상세 정보 화면   | 장바구니 화면   |
+| -------- | ---------------------- |
+|![image](https://user-images.githubusercontent.com/58796245/199912689-b4c7ef49-c9cc-4cb1-a400-507eac48cbc4.png) | ![image](https://user-images.githubusercontent.com/58796245/199913001-fbda97ec-1fce-4796-9ed4-3fa586f1df80.png) |
+
+| 주문하기 화면   | 마이페이지 화면   |
+| -------- | ---------------------- |
+| ![image](https://user-images.githubusercontent.com/58796245/199914144-b13daeac-443e-4f11-91eb-7d1a7e0a7f8f.png) | ![image](https://user-images.githubusercontent.com/58796245/199913846-fdc5c85c-6567-4514-8ea5-affccbf81e90.png) |
+
+| 주문 조회 화면   | 회원 정보 수정 화면   |
+| -------- | ---------------------- |
+|![image](https://user-images.githubusercontent.com/58796245/199913846-fdc5c85c-6567-4514-8ea5-affccbf81e90.png)| ![image](https://user-images.githubusercontent.com/58796245/199914614-66ec3a36-ef8f-4859-8e39-291f1a4e7d19.png)
+ |
+
+
 ## 핵심 기능
 
 ### 회원 기능
