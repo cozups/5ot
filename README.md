@@ -27,8 +27,7 @@
 
 | 주문 조회 화면   | 회원 정보 수정 화면   |
 | -------- | ---------------------- |
-|![image](https://user-images.githubusercontent.com/58796245/199913846-fdc5c85c-6567-4514-8ea5-affccbf81e90.png)| ![image](https://user-images.githubusercontent.com/58796245/199914614-66ec3a36-ef8f-4859-8e39-291f1a4e7d19.png)
- |
+|![image](https://user-images.githubusercontent.com/58796245/227207043-5fb91e16-2952-4814-86f4-a3dccbc9c959.png)| ![image](https://user-images.githubusercontent.com/58796245/199914614-66ec3a36-ef8f-4859-8e39-291f1a4e7d19.png)|
 
 
 ## 핵심 기능
