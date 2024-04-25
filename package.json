@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "babel-node index.js",
-    "heroku-postbuild": "npm install"
+    "heroku-postbuild": "npm install",
+    "build": "babel src -d build"
   },
   "engines": {
     "node": "16.14.0"
