@@ -6,11 +6,15 @@ export const fetchCategories = async () => {
     const result = await Api.get('/category');
     const manCategories = [];
 
+    // 성별 필터링
     result.forEach((category) => {
       category.sex === 'w'
         ? womanCategories.push(category)
         : manCategories.push(category);
     });
+
+    sessionStorage.setItem('womanCategories', JSON.stringify(womanCategories));
+    sessionStorage.setItem('manCategories', JSON.stringify(manCategories));
 
     return [womanCategories, manCategories];
   } catch (err) {
@@ -21,8 +25,21 @@ export const fetchCategories = async () => {
 
 export async function renderCategories() {
   const slideButtons = [];
-  const [womanCategories, manCategories] = await fetchCategories();
 
+  let womanCategories = [];
+  let manCategories = [];
+
+  if (
+    !sessionStorage.getItem('womanCategories') ||
+    !sessionStorage.getItem('manCategories')
+  ) {
+    [womanCategories, manCategories] = await fetchCategories();
+  } else {
+    womanCategories = JSON.parse(sessionStorage.getItem('womanCategories'));
+    manCategories = JSON.parse(sessionStorage.getItem('manCategories'));
+  }
+
+  // ul에 동적으로 li 생성 후 삽입
   const womanUL = document.querySelector('.slide-button-list.woman');
   const manUL = document.querySelector('.slide-button-list.man');
 
