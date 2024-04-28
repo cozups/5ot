@@ -67,6 +67,7 @@ body {
   font-size: 16px;
   margin: 8px 0;
   cursor: pointer;
+  color: black;
 }
 
 .slide-button-element:hover {
@@ -86,6 +87,10 @@ body {
 
 #slide-buttons h2 {
   font-size: 32px;
+}
+
+.button-active {
+  font-weight: bold;
 }
 
 /* product-detail-wrap */

@@ -1,9 +1,18 @@
 import * as Api from '/api.js';
+import { renderCategories } from '/category.js';
+
 const headerMenu = document.querySelectorAll('#navbar a');
 const section = document.getElementsByTagName('section')[0];
 const pathname = window.location.pathname.split('/');
 const sex = pathname[2];
 const type = pathname[3];
+
+let sideMenus = await renderCategories();
+
+sideMenus.forEach(
+  (menu) => menu.innerHTML === type && menu.classList.add('button-active')
+);
+
 // 제품목록 가져오기
 async function getProductList() {
   try {

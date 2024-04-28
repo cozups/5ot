@@ -99,6 +99,7 @@ body {
   margin: 8px 0;
   cursor: pointer;
   transition: all 0.1s;
+  color: black;
 }
 
 .slide-button-element:hover {

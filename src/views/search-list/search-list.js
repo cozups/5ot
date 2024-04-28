@@ -1,7 +1,11 @@
+import { renderCategories } from '/category.js';
+
 const headerMenu = document.querySelectorAll('#navbar a');
 const section = document.getElementsByTagName('section')[0];
 const product = JSON.parse(sessionStorage.getItem('searchProducts'));
 console.log(product);
+
+let sideMenus = await renderCategories();
 
 // 제품목록 가져오기
 function getProductList() {

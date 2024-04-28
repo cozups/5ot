@@ -1,5 +1,14 @@
 import * as Api from '/api.js';
 import * as Util from '/useful-functions.js';
+import { renderCategories } from '/category.js';
+
+let sideMenus = await renderCategories();
+const pathname = window.location.pathname.split('/');
+const type = pathname[3];
+
+sideMenus.forEach(
+  (menu) => menu.innerHTML === type && menu.classList.add('button-active')
+);
 
 let productData = null; // 다른 함수에서도 상품 데이터를 필요로 하기 때문에 let 사용
 let reviews = []; // 다른 함수에서도 리뷰 정보가 필요함
