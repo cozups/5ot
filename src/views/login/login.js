@@ -43,9 +43,9 @@ async function handleSubmit(e) {
 
     // 로그인 성공, 토큰을 세션 스토리지에 저장
     // 물론 다른 스토리지여도 됨
-    sessionStorage.setItem('token', token);
+    localStorage.setItem('token', token);
 
-    sessionStorage.setItem('email', email);
+    localStorage.setItem('email', email);
 
     alert(`정상적으로 로그인되었습니다.`);
 
@@ -67,8 +67,8 @@ async function handleTestUserLogin() {
     });
     const token = result.token;
 
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('email', 'test@test.com');
+    localStorage.setItem('token', token);
+    localStorage.setItem('email', 'test@test.com');
 
     alert(`정상적으로 로그인되었습니다.`);
     window.location.href = '/';
@@ -86,8 +86,8 @@ async function handleTestAdminLogin() {
     });
     const token = result.token;
 
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('email', 'admin@admin.com');
+    localStorage.setItem('token', token);
+    localStorage.setItem('email', 'admin@admin.com');
 
     alert(`정상적으로 로그인되었습니다.`);
     window.location.href = '/';

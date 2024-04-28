@@ -53,7 +53,7 @@ function scrollItems(e) {
 
 // 로그인 상태 체크 -> 로그인 상태에 따른 렌더링을 하는 함수들
 function checkLogin() {
-  const token = sessionStorage.getItem('token') || '';
+  const token = localStorage.getItem('token') || '';
   if (token) {
     return true;
   } else {
@@ -74,9 +74,9 @@ async function loginRender() {
     headerMenu[1].childNodes[0].textContent = '마이페이지';
 
     try {
-      const email = sessionStorage.getItem('email');
+      const email = localStorage.getItem('email');
       const user = await Api.get('/api/email', email);
-      sessionStorage.setItem('userName', user.fullName);
+      localStorage.setItem('userName', user.fullName);
     } catch (err) {
       console.error(err);
     }
@@ -88,7 +88,7 @@ function logout(e) {
   e.preventDefault();
 
   alert('로그아웃 되었습니다.');
-  sessionStorage.clear();
+  localStorage.clear();
 
   window.location.href = '/';
 }

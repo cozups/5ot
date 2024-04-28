@@ -11,7 +11,7 @@ async function loadData() {
   let rowIdx = 0;
 
   try {
-    email = sessionStorage.getItem('email');
+    email = localStorage.getItem('email');
     received = await Api.get('/order/email', email);
     let i = 0;
 

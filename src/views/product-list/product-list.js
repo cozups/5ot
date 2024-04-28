@@ -93,7 +93,7 @@ if (type === 'new') {
 
 // 로그인 상태 체크 -> 로그인 상태에 따른 렌더링을 하는 함수들
 function checkLogin() {
-  const token = sessionStorage.getItem('token') || '';
+  const token = localStorage.getItem('token') || '';
   if (token) {
     return true;
   } else {
@@ -120,7 +120,7 @@ function logout(e) {
   e.preventDefault();
 
   alert('로그아웃 되었습니다.');
-  sessionStorage.clear();
+  localStorage.clear();
 
   window.location.href = '/';
 }

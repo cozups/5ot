@@ -16,7 +16,7 @@ submitButton.addEventListener('click', patchUserInfo);
 // functions
 // 기본적으로 표시되게 할 정보들을 표시한다.
 async function setDefaultInfo() {
-  const userEmail = sessionStorage.getItem('email');
+  const userEmail = localStorage.getItem('email');
 
   user = await Api.get('/api/email', userEmail);
   const { fullName, phoneNumber, email } = user;

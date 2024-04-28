@@ -125,7 +125,7 @@ sellForm.addEventListener('submit', async function (e) {
     const response = await fetch('/product/insertion', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
       body: formData,
     });

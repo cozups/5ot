@@ -12,7 +12,7 @@ sideMenus.forEach(
 
 let productData = null; // 다른 함수에서도 상품 데이터를 필요로 하기 때문에 let 사용
 let reviews = []; // 다른 함수에서도 리뷰 정보가 필요함
-const myEmail = sessionStorage.getItem('email');
+const myEmail = localStorage.getItem('email');
 
 const headerMenu = document.querySelectorAll('#navbar a');
 const image = document.getElementById('product-thumbnail');
@@ -126,7 +126,7 @@ function addCart() {
 
 // 로그인 상태 체크 -> 로그인 상태에 따른 렌더링을 하는 함수들
 function checkLogin() {
-  const token = sessionStorage.getItem('token') || '';
+  const token = localStorage.getItem('token') || '';
   if (token) {
     return true;
   } else {
@@ -153,7 +153,7 @@ function logout(e) {
   e.preventDefault();
 
   alert('로그아웃 되었습니다.');
-  sessionStorage.clear();
+  localStorage.clear();
 
   window.location.href = '/';
 }
@@ -182,7 +182,7 @@ async function postReview(e) {
 
   const rate = Number(document.getElementById('rate').value);
   const review = document.getElementById('review-content').value;
-  const userName = sessionStorage.getItem('userName');
+  const userName = localStorage.getItem('userName');
 
   const data = {
     product_id: productId,
