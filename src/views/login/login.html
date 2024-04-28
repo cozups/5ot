@@ -117,91 +117,12 @@
         <button class="button is-fullwidth" id="submitButton">
           로그인하기
         </button>
-
-        <!-- sns 로그인 -->
-        <!-- <div class="snsLogin">
-          <div>
-            <a id="naverLogin">
-              <img src="../images/btnG_완성형.png" />
-            </a>
-          </div>
-
-          <div>
-            <a id="kakao-login-btn"></a>
-          </div>
-        </div> -->
       </form>
+      <div class="login-for-test-container">
+        <p>테스트용 계정으로 로그인</p>
+        <button class="login-for-test-button user">유저 로그인하기</button>
+        <button class="login-for-test-button admin">관리자 로그인하기</button>
+      </div>
     </div>
-
-    <!-- <script type="text/javascript">
-      function unlinkApp() {
-        Kakao.API.request({
-          url: '/v1/user/unlink',
-          success: function (res) {
-            alert('success: ' + JSON.stringify(res));
-          },
-          fail: function (err) {
-            alert('fail: ' + JSON.stringify(err));
-          },
-        });
-      }
-    </script>
-
-    <script type="text/javascript">
-      window.Kakao.init('d8889d25a173eb9ac8cd38c5e8d50054');
-      console.log(Kakao.isInitialized());
-
-      Kakao.Auth.createLoginButton({
-        container: '#kakao-login-btn',
-        success: function (authObj) {
-          Kakao.API.request({
-            url: '/v2/user/me',
-            success: function (result) {
-              Kakao.Auth.setAccessToken(authObj.access_token);
-              sessionStorage.setItem('token', authObj.access_token);
-              alert(`정상적으로 로그인되었습니다.`);
-              window.location.href = '/';
-            },
-            fail: function (error) {
-              alert(
-                'login success, but failed to request user information: ' +
-                  JSON.stringify(error)
-              );
-            },
-          });
-        },
-        fail: function (err) {
-          alert('failed to login: ' + JSON.stringify(err));
-        },
-      });
-    </script>
-    <script>
-      var naverLogin = new naver.LoginWithNaverId({
-        clientId: '3tgTikynKKIgH4KVMRmM', // cliendId
-        callbackUrl: 'http://localhost:5001/login', // Callback URL
-        isPopup: false,
-        callbackHandle: true,
-        loginButton: { color: 'green', type: 3, height: 62 },
-      });
-      naverLogin.init(); // 로그인 설정
-
-      window.addEventListener('load', function () {
-        naverLogin.getLoginStatus(function (status) {
-          if (status) {
-            var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
-
-            console.log(naverLogin.user);
-
-            if (email == undefined || email == null) {
-              alert('이메일은 필수정보입니다. 정보제공을 동의해주세요.');
-              naverLogin.reprompt();
-              return;
-            }
-          } else {
-            console.log('callback 처리에 실패하였습니다.');
-          }
-        });
-      });
-    </script> -->
   </body>
 </html>

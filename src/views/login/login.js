@@ -5,16 +5,16 @@ import { validateEmail } from '/useful-functions.js';
 const emailInput = document.querySelector('#emailInput');
 const passwordInput = document.querySelector('#passwordInput');
 const submitButton = document.querySelector('#submitButton');
+const testUserLogin = document.querySelector('.login-for-test-button.user');
+const testAdminLogin = document.querySelector('.login-for-test-button.admin');
 
-addAllElements();
 addAllEvents();
-
-// html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-async function addAllElements() {}
 
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
   submitButton.addEventListener('click', handleSubmit);
+  testUserLogin.addEventListener('click', handleTestUserLogin);
+  testAdminLogin.addEventListener('click', handleTestAdminLogin);
 }
 
 // 로그인 진행
@@ -58,6 +58,45 @@ async function handleSubmit(e) {
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
 }
+
+async function handleTestUserLogin() {
+  try {
+    const result = await Api.post('/api/login', {
+      email: 'test@test.com',
+      password: 'testuser',
+    });
+    const token = result.token;
+
+    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('email', 'test@test.com');
+
+    alert(`정상적으로 로그인되었습니다.`);
+    window.location.href = '/';
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
+async function handleTestAdminLogin() {
+  try {
+    const result = await Api.post('/api/login', {
+      email: 'admin@admin.com',
+      password: 'admin',
+    });
+    const token = result.token;
+
+    sessionStorage.setItem('token', token);
+    sessionStorage.setItem('email', 'admin@admin.com');
+
+    alert(`정상적으로 로그인되었습니다.`);
+    window.location.href = '/';
+  } catch (err) {
+    console.error(err.stack);
+    alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+  }
+}
+
 const purchaseData = sessionStorage.getItem('productInfo');
 if (purchaseData) {
   sessionStorage.removeItem('productInfo');
