@@ -9,9 +9,48 @@ const type = pathname[3];
 
 let sideMenus = await renderCategories();
 
-sideMenus.forEach(
-  (menu) => menu.innerHTML === type && menu.classList.add('button-active')
-);
+sideMenus.forEach((menu) => {
+  [...menu.parentElement.parentElement.classList].includes(
+    sex === 'w' ? 'woman' : 'man'
+  ) &&
+    menu.innerHTML === type &&
+    menu.classList.add('button-active');
+});
+
+async function getProductAll() {
+  try {
+    const result = await Api.get('/product/all');
+
+    const elements = result.map((data) => {
+      if (data.category.sex === sex) {
+        const { product_name, price, product_info, product_image, product_id } =
+          data;
+
+        return `
+          <div id="product-list-wrap">
+            <a href="/list/${sex}/${data.category.type}/${product_id}"> 
+              <div class="product-list">
+              <img class="product-thumbnail" src="${product_image}"/>
+                <div class="product-content">
+                  <div class="content">
+                    <h3 class="name">${product_name}</h3>
+                    <h4 class="price">${price.toLocaleString()}원</h4>
+                    <p class="description">${product_info}</p>
+                  </div>          
+                </div>
+              </div>
+            </a>
+            
+          </div>
+          `;
+      }
+    });
+    console.log(elements);
+    section.innerHTML = elements.join('');
+  } catch (error) {
+    console.log(`error : ${error}`);
+  }
+}
 
 // 제품목록 가져오기
 async function getProductList() {
@@ -24,7 +63,7 @@ async function getProductList() {
 
       return `
         <div id="product-list-wrap">
-          <a href="/list/${sex}/${type}/${product_id}"> 
+          <a href="/list/${sex}/${data.category.type}/${product_id}"> 
             <div class="product-list">
             <img class="product-thumbnail" src="${product_image}"/>
               <div class="product-content">
@@ -45,7 +84,12 @@ async function getProductList() {
     console.log(`error : ${error}`);
   }
 }
-getProductList();
+
+if (type === 'new') {
+  getProductAll();
+} else {
+  getProductList();
+}
 
 // 로그인 상태 체크 -> 로그인 상태에 따른 렌더링을 하는 함수들
 function checkLogin() {
