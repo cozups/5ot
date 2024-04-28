@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-5팀</title>
+    <title>5ot</title>
     <!-- 아이콘 -->
     <link
       rel="icon"
@@ -25,18 +25,18 @@
     <!-- Daum 주소 API 사용하기 위한 파일 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-    /** 우편번호 찾기 */
-    function execDaumPostcode() {
-        daum.postcode.load(function(){
-            new daum.Postcode({
-                oncomplete: function(data) {
-                  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-                  document.querySelector("#postalCode").value = data.zonecode;
-                  document.querySelector("#address1").value =  data.address
-                }
-            }).open();
+      /** 우편번호 찾기 */
+      function execDaumPostcode() {
+        daum.postcode.load(function () {
+          new daum.Postcode({
+            oncomplete: function (data) {
+              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+              document.querySelector('#postalCode').value = data.zonecode;
+              document.querySelector('#address1').value = data.address;
+            },
+          }).open();
         });
-    }
+      }
     </script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="../cart/cart.css" />
@@ -48,8 +48,7 @@
       <div class="container mt-3">
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
-            <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-5팀</span>
+            <span class="has-text-link">5ot</span>
           </a>
 
           <a
@@ -97,10 +96,13 @@
           </div>
         </div>
 
-        <div class="tile is-ancestor cart-container" style="width: 100%; margin:50px 0 0 130px">
+        <div
+          class="tile is-ancestor cart-container"
+          style="width: 100%; margin: 50px 0 0 130px"
+        >
           <div class="tile is-ancestor">
             <div class="tile is-parent cart-products">
-              <div class="box delivery-info" style="width: 100%;">
+              <div class="box delivery-info" style="width: 100%">
                 <!-- 배송지 정보 -->
                 <p class="subtitle is-4">배송지정보</p>
                 <div class="field is-horizontal">
@@ -122,10 +124,12 @@
                     </div>
                   </div>
                 </div>
-  
+
                 <div class="field is-horizontal">
                   <div class="field-label is-normal">
-                    <label class="label" for="receiverPhoneNumber">*연락처</label>
+                    <label class="label" for="receiverPhoneNumber"
+                      >*연락처</label
+                    >
                   </div>
                   <div class="field-body">
                     <div class="field">
@@ -142,7 +146,7 @@
                     </div>
                   </div>
                 </div>
-  
+
                 <div class="field is-horizontal">
                   <div class="field-label is-normal">
                     <label class="label" for="address2">*주소</label>
@@ -172,7 +176,7 @@
                     </div>
                   </div>
                 </div>
-  
+
                 <div class="field is-horizontal">
                   <div class="field-label is-normal no-label"></div>
                   <div class="field-body">
@@ -192,7 +196,7 @@
                     </div>
                   </div>
                 </div>
-  
+
                 <div class="field is-horizontal">
                   <div class="field-label is-normal no-label"></div>
                   <div class="field-body">
@@ -210,7 +214,7 @@
                     </div>
                   </div>
                 </div>
-  
+
                 <div class="field is-horizontal">
                   <div class="field-label is-normal">
                     <label class="label" for="requestSelectBox">요청사항</label>
@@ -236,12 +240,14 @@
                         <option value="5" class="select-option">
                           부재 시 택배함에 넣어주세요.
                         </option>
-                        <option value="6" class="select-option">직접 입력</option>
+                        <option value="6" class="select-option">
+                          직접 입력
+                        </option>
                       </select>
                     </div>
                   </div>
                 </div>
-  
+
                 <div
                   class="field is-horizontal custom-request"
                   id="customRequestContainer"
@@ -265,35 +271,32 @@
               </div>
             </div>
 
-          <!-- 선택한 상품 총 요약 -->
-          <div class="tile is-parent tile-order-summary">
-            <div class="order-summary">
-              <div class="header">
-                <p>결제정보</p>
-              </div>
-              <div class="order-info">
-                <div class="info">
-                  <p>상품수</p>
-                  <p id="productsCount"></p>
+            <!-- 선택한 상품 총 요약 -->
+            <div class="tile is-parent tile-order-summary">
+              <div class="order-summary">
+                <div class="header">
+                  <p>결제정보</p>
                 </div>
-                <div class="info">
-                  <p>상품금액</p>
-                  <p id="productsTotal"></p>
-                </div>
-                <div class="info">
-                  <p>배송비</p>
-                  <p id="deliveryFee">3000원</p>
-                </div>
-                <div class="total">
-                  <p class="total-label">총 결제 예정 금액</p>
-                  <p class="total-price" id="orderTotal"></p>
-                </div>
-                <div class="purchase">
-                  
-                    <button class="button" id="purchaseButton">
-                      주문하기
-                    </button>
-      
+                <div class="order-info">
+                  <div class="info">
+                    <p>상품수</p>
+                    <p id="productsCount"></p>
+                  </div>
+                  <div class="info">
+                    <p>상품금액</p>
+                    <p id="productsTotal"></p>
+                  </div>
+                  <div class="info">
+                    <p>배송비</p>
+                    <p id="deliveryFee">3000원</p>
+                  </div>
+                  <div class="total">
+                    <p class="total-label">총 결제 예정 금액</p>
+                    <p class="total-price" id="orderTotal"></p>
+                  </div>
+                  <div class="purchase">
+                    <button class="button" id="purchaseButton">주문하기</button>
+                  </div>
                 </div>
               </div>
             </div>

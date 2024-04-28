@@ -1,4 +1,11 @@
 @import url('http://fonts.cdnfonts.com/css/helvetica-neue-9');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+span.has-text-link {
+  font-family: 'Lobster', sans-serif;
+  color: black;
+  font-size: 2rem;
+}
 
 * {
   box-sizing: border-box;
