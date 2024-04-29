@@ -2,15 +2,16 @@ import { renderCategories } from '/category.js';
 
 const headerMenu = document.querySelectorAll('#navbar a');
 const section = document.getElementsByTagName('section')[0];
-const product = JSON.parse(sessionStorage.getItem('searchProducts'));
-console.log(product);
 
-let sideMenus = await renderCategories();
+await renderCategories();
 
 // 제품목록 가져오기
 function getProductList() {
-  if (product == '') {
+  const product = JSON.parse(sessionStorage.getItem('searchProducts'));
+
+  if (!product.length) {
     section.innerHTML = `<h1 id="alert-font"> 입력하신 제품명과 일치하는 제품이 없습니다.</h1>`;
+    return;
   }
   const elements = product.map((data) => {
     const {

@@ -3,26 +3,28 @@ import * as Api from '/api.js';
 const headerMenu = document.querySelectorAll('#navbar a');
 const search = document.getElementById('search');
 const submit = document.getElementById('submit');
+const searchForm = document.querySelector('.search-form');
+
+searchForm.addEventListener('submit', searchProducts);
+submit.addEventListener('click', searchProducts);
 
 //검색기능
-async function searchProducts() {
+async function searchProducts(e) {
+  e.preventDefault();
+
   const input = search.value;
   const result = await Api.get('/product/all');
-  const data = [];
-  console.log(result);
-  for (let i = 0; i < result.length; i++) {
-    const name = result[i].product_name.trim();
-    if (name.indexOf(input.replace(/ /g, '').toUpperCase()) !== -1) {
-      data.push(result[i]);
-    }
-  }
-  console.log(data);
+  const data = result.filter((item) => {
+    return item.product_name
+      .trim()
+      .toLowerCase()
+      .includes(input.toLowerCase().trim());
+  });
+
   //세션스토리지에 저장
-  localStorage.setItem('searchProducts', JSON.stringify(data));
+  sessionStorage.setItem('searchProducts', JSON.stringify(data));
   window.location.href = '/searchlist';
 }
-
-submit.addEventListener('click', searchProducts);
 
 // 로그인 상태 체크 -> 로그인 상태에 따른 렌더링을 하는 함수들
 function checkLogin() {

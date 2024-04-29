@@ -61,3 +61,10 @@ span.has-text-link {
   width: 80px;
   height: 40px;
 }
+
+.search-form-title {
+  font-weight: bold;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1em;
+}
