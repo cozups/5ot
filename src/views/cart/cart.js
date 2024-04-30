@@ -1,18 +1,30 @@
-import * as Api from '/api.js';
-const headerMenu = document.querySelectorAll('#navbar a');
+import { loginRender } from '/loginFunc.js';
+
 // 변수
 let cart = JSON.parse(localStorage.getItem(`myCart`));
-let deleteList = [];
+let checkedList = [];
 
 // html 엘리먼트 선택
 const cartList = document.getElementById('cart-list');
 const cartCountField = document.querySelector('.is-size-6');
 const purchaseButton = document.getElementById('purchaseButton');
+const allSelectCheckbox = document.getElementById('allSelectCheckbox');
+const checkList = document.querySelectorAll('.list-checkbox');
+const selectedOrderDeleteLabel = document.getElementById(
+  'selectedOrderDeleteLabel'
+);
+
+// addEventListener
+allSelectCheckbox.addEventListener('click', selectAllHandler);
+selectedOrderDeleteLabel.addEventListener('click', cancelSelectedOrder);
+purchaseButton.addEventListener('click', goToOrder);
+
+// 함수 실행
+cartRendering();
+loginRender();
 
 // functions
-//장바구니 리스트 렌더링하기
-cartRendering();
-
+// 장바구니 아이템 리스트 렌더링
 function cartRendering() {
   let i = 0;
   cartList.innerHTML = '';
@@ -50,6 +62,7 @@ function cartRendering() {
   cartList.addEventListener('click', clickHandler);
 }
 
+// 상품 개수, 총 가격 계산
 function setOrderInfo() {
   const productCount = document.getElementById('productsCount');
   const productsTotal = document.getElementById('productsTotal');
@@ -59,7 +72,7 @@ function setOrderInfo() {
   const totalPriceToPay = document.getElementById('orderTotal');
   let totalOrderPrice = 0;
   let totalCount = 0;
-  if (cart.length > 0) {
+  if (cart.length) {
     cart.forEach((item) => {
       totalCount += item.quantity;
       totalOrderPrice += item.price * item.quantity;
@@ -71,7 +84,8 @@ function setOrderInfo() {
   totalPriceToPay.innerText = totalOrderPrice + deliveryFee + '원';
 }
 
-function whatButton(targetClass) {
+// 클릭된 버튼의 타입 판별
+function checkButtonType(targetClass) {
   if (targetClass.contains('list-checkbox')) {
     return 'checkbox';
   } else if (targetClass.contains('fa-trash-can')) {
@@ -83,62 +97,61 @@ function whatButton(targetClass) {
   }
 }
 
+// 이벤트 위임 - 클릭 이벤트 핸들러
 function clickHandler(e) {
   const target = e.target;
   const targetClass = e.target.classList;
-  const buttonType = whatButton(targetClass);
+  const buttonType = checkButtonType(targetClass);
 
-  let btn = null;
+  // e.target이 i 태그이기 때문에 parent를 가리켜야함 (font-awesome 때문)
+  let btn = target.parentElement;
   let idx = 0;
 
   switch (buttonType) {
     case 'checkbox':
       const value = Number(target.value);
 
-      if (target.checked) {
-        deleteList.push(value);
-      } else {
-        deleteList = deleteList.filter((idx) => idx !== value);
-      }
+      target.checked
+        ? checkedList.push(value)
+        : (checkedList = checkedList.filter((idx) => idx !== value));
 
-      if (deleteList.length === cart.length) {
-        allSelectCheckbox.checked = true;
-      } else {
-        allSelectCheckbox.checked = false;
-      }
+      allSelectCheckbox.checked = checkedList.length === cart.length;
+
       break;
 
     case 'cancel':
-      btn = target.parentElement; // e.target이 i 태그이기 때문에 parent를 가리켜야함.. (font-awesome 때문)
       idx = Number(btn.value);
-
-      deleteList.push(idx);
-      cancelOrder();
-
-      location.reload();
+      cancelSingleOrder(idx);
       break;
 
     case 'plus':
     case 'minus':
-      btn = target.parentElement; // e.target이 i 태그이기 때문에 parent를 가리켜야함.. (font-awesome 때문)
       idx = Number(btn.value);
       changeQuantity(buttonType, idx);
   }
 }
 
-function cancelOrder() {
-  cart = cart.filter((item, idx) => deleteList.indexOf(idx) < 0);
+// 1개의 장바구니 주문 취소
+function cancelSingleOrder(idx) {
+  cart.splice(idx, 1);
   localStorage.setItem('myCart', JSON.stringify(cart));
+  location.reload();
 }
 
+// 선택된 장바구니 주문 취소
+function cancelSelectedOrder() {
+  cart = cart.filter((_, idx) => checkedList.indexOf(idx) < 0);
+  localStorage.setItem('myCart', JSON.stringify(cart));
+  location.reload();
+}
+
+// 주문 개수 변경
 function changeQuantity(type, idxToChange) {
   const quantityField = document.querySelectorAll('.qty');
   const totalPriceField = document.querySelectorAll('.item-total-price');
   let quantity = Number(quantityField[idxToChange].innerText);
   if (type === 'minus') {
-    if (quantity === 1) {
-      return;
-    } else {
+    if (quantity > 1) {
       quantity--;
     }
   } else {
@@ -154,70 +167,15 @@ function changeQuantity(type, idxToChange) {
   setOrderInfo();
 }
 
-// 전체, 선택 삭제
-const allSelectCheckbox = document.getElementById('allSelectCheckbox');
-const checkList = document.querySelectorAll('.list-checkbox');
-const partialDeleteLabel = document.getElementById('partialDeleteLabel');
-
-allSelectCheckbox.addEventListener('click', selectAllHandler);
-partialDeleteLabel.addEventListener('click', deleteSelected);
-
+// 전체 선택 - 한번 더 누르면 전체 취소
 function selectAllHandler() {
-  let i = 0;
-  checkList.forEach((checkbox) => {
+  checkList.forEach((checkbox, index) => {
     checkbox.checked = allSelectCheckbox.checked;
-    deleteList.push(i++);
+    checkedList.push(index);
   });
 }
 
-function deleteSelected() {
-  cancelOrder();
-
-  location.reload();
-}
-
-// 로그인 상태 체크 -> 로그인 상태에 따른 렌더링을 하는 함수들
-function checkLogin() {
-  const token = localStorage.getItem('token') || '';
-  if (token) {
-    return true;
-  } else {
-    return false;
-  }
-}
-function loginRender() {
-  if (checkLogin()) {
-    // login 상태 (메뉴 배치 순서를 바꾸었습니다.)
-    // 회원가입 -> 로그아웃
-    headerMenu[0].href = '';
-    headerMenu[0].childNodes[0].textContent = '로그아웃';
-    headerMenu[0].addEventListener('click', logout);
-
-    // 로그인 -> 마이페이지
-    headerMenu[1].href = '/mypage';
-    headerMenu[1].childNodes[0].textContent = '마이페이지';
-  } else if (!checkLogin()) {
-    headerMenu[0].href = '/register';
-    headerMenu[0].childNodes[0].textContent = '회원가입';
-
-    headerMenu[1].href = '/login';
-    headerMenu[1].childNodes[0].textContent = '로그인';
-  }
-}
-
-loginRender();
-
-// 로그아웃 function
-function logout(e) {
-  e.preventDefault();
-
-  alert('로그아웃 되었습니다.');
-  localStorage.clear();
-
-  window.location.href = '/';
-}
-
-//로그인,로그아웃상태에따라 구매하기 버튼 달라지는 function
+//로그인, 로그아웃 상태에따라 구매하기 버튼 달라지는 function
 function goToOrder() {
   if (checkLogin()) {
     window.location.href = '/order';
@@ -229,8 +187,7 @@ function goToOrder() {
   }
 }
 
-purchaseButton.addEventListener('click', goToOrder);
-
+// 불필요한 데이터 클리어
 const purchaseData = sessionStorage.getItem('productInfo');
 if (purchaseData) {
   sessionStorage.removeItem('productInfo');
