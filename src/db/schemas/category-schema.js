@@ -15,20 +15,21 @@ const CategorySchema = new Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+    },
   },
-    {
+  {
     collection: 'categories',
     timestamps: false,
   }
-
-  
 );
 
 CategorySchema.plugin(autoIncrement.plugin, {
   model: 'category',
   field: 'category_id',
   startAt: 1,
-  incrementBy: 1
+  incrementBy: 1,
 });
 
 export { CategorySchema };

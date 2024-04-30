@@ -2,9 +2,23 @@ import * as Api from '/api.js';
 
 export const fetchCategories = async () => {
   try {
-    const womanCategories = [{ type: 'new' }];
+    const womanCategories = [
+      {
+        sex: 'w',
+        type: 'all',
+        image:
+          'https://images.unsplash.com/flagged/photo-1553802922-2eb2f7f2c65b?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+    ];
     const result = await Api.get('/category');
-    const manCategories = [{ type: 'new' }];
+    const manCategories = [
+      {
+        sex: 'm',
+        type: 'all',
+        image:
+          'https://images.unsplash.com/photo-1507680434567-5739c80be1ac?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+    ];
 
     // 성별 필터링
     result.forEach((category) => {

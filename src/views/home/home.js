@@ -17,11 +17,34 @@ body.addEventListener('wheel', scrollItems);
 
 // 함수 실행
 loginRender();
+renderSlideImages();
 scrollByTime();
 checkCart();
 slideButtons[0].classList.add('button-active');
 
 // functions
+// 슬라이드 이미지 동적 렌더링
+function renderSlideImages() {
+  const womanCategories = JSON.parse(sessionStorage.getItem('womanCategories'));
+  const manCategories = JSON.parse(sessionStorage.getItem('manCategories'));
+  const categories = [...womanCategories, ...manCategories];
+
+  const categoryItems = categories.map(
+    (category) => `
+    <li class="item-photo ${category.type}">
+      <a href="/list/${category.sex}/${category.type}">
+        <img
+          src="${category.image}"
+          alt=""
+        />
+      </a>
+    </li>
+  `
+  );
+
+  slides.innerHTML = categoryItems.join('');
+}
+
 // 이미지 슬라이드를 다음으로 넘김
 function moveNext() {
   slidesTop = currentIdx * 510;

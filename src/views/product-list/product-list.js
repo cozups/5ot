@@ -21,7 +21,7 @@ sideMenus.forEach((menu) => {
 });
 loginRender();
 
-if (type === 'new') {
+if (type === 'all') {
   getProductAll();
 } else {
   getProductList();

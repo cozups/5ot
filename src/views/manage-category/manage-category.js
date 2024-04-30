@@ -113,9 +113,10 @@ registerButton.addEventListener('click', async function (e) {
 
   const sex = sexInput.value;
   const type = categorynameInput.value;
+  const image = '';
 
   try {
-    await Api.post('/category', { sex, type });
+    await Api.post('/category', { sex, type, image });
 
     alert('카테고리가 추가 되었습니다.');
     await fetchCategories();

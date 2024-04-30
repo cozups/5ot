@@ -1,4 +1,5 @@
 import * as Api from '/api.js';
+import { fetchCategories } from '/category.js';
 
 // 변수
 let productToModify = null;
@@ -140,6 +141,8 @@ sellForm.addEventListener('submit', async function (e) {
       body: formData,
     });
     alert('상품이 추가 되었습니다.');
+
+    await fetchCategories();
 
     window.location.href = '/mypage/manage/product';
   } catch (err) {

@@ -4,6 +4,7 @@ import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
 import { productService } from '../services';
+import { categoryService } from '../services';
 import { adminRequired } from '../middlewares/admin-required';
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -83,6 +84,11 @@ productRouter.post(
         product_info,
       });
 
+      await categoryService.setCategory(
+        { sex_YetUpdated: sex, type_YetUpdated: type },
+        { image: product_image }
+      );
+
       res.status(201).json(new_product);
     } catch (error) {
       next(error);
@@ -93,7 +99,7 @@ productRouter.post(
 productRouter.delete(
   '/',
   loginRequired,
-  
+
   async (req, res, next) => {
     try {
       const product_id = req.body.product_id;
@@ -118,7 +124,7 @@ productRouter.delete(
 productRouter.patch(
   '/',
   loginRequired,
-  
+
   async function (req, res, next) {
     try {
       // content-type 을 application/json 로 프론트에서
