@@ -8,17 +8,10 @@ const passwordInput = document.querySelector('#passwordInput');
 const passwordConfirmInput = document.querySelector('#passwordConfirmInput');
 const submitButton = document.querySelector('#submitButton');
 
-addAllElements();
-addAllEvents();
+// addEventListener
+submitButton.addEventListener('click', handleSubmit);
 
-// html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-async function addAllElements() {}
-
-// 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-function addAllEvents() {
-  submitButton.addEventListener('click', handleSubmit);
-}
-
+// functions
 // 회원가입 진행
 async function handleSubmit(e) {
   e.preventDefault();
@@ -28,7 +21,7 @@ async function handleSubmit(e) {
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
 
-  // 잘 입력했는지 확인
+  // 유효성 검사
   const isFullNameValid = fullName.length >= 2;
   const isEmailValid = validateEmail(email);
   const isPasswordValid = password.length >= 4;
@@ -61,6 +54,8 @@ async function handleSubmit(e) {
     alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
   }
 }
+
+// 불필요한 데이터 클리어
 const purchaseData = sessionStorage.getItem('productInfo');
 if (purchaseData) {
   sessionStorage.removeItem('productInfo');

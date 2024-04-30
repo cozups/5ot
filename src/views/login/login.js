@@ -8,8 +8,10 @@ const submitButton = document.querySelector('#submitButton');
 const testUserLogin = document.querySelector('.login-for-test-button.user');
 const testAdminLogin = document.querySelector('.login-for-test-button.admin');
 
+// 함수 실행
 addAllEvents();
 
+// functions
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
   submitButton.addEventListener('click', handleSubmit);
@@ -24,7 +26,7 @@ async function handleSubmit(e) {
   const email = emailInput.value;
   const password = passwordInput.value;
 
-  // 잘 입력했는지 확인
+  // 유효성 검사
   const isEmailValid = validateEmail(email);
   const isPasswordValid = password.length >= 4;
 
@@ -41,17 +43,13 @@ async function handleSubmit(e) {
     const result = await Api.post('/api/login', data);
     const token = result.token;
 
-    // 로그인 성공, 토큰을 세션 스토리지에 저장
-    // 물론 다른 스토리지여도 됨
+    // 로그인 성공, 토큰을 로컬 스토리지에 저장
     localStorage.setItem('token', token);
-
     localStorage.setItem('email', email);
 
     alert(`정상적으로 로그인되었습니다.`);
 
-    // 로그인 성공
-
-    // 기본 페이지로 이동
+    // 홈 페이지로 이동
     window.location.href = '/';
   } catch (err) {
     console.error(err.stack);
@@ -59,6 +57,7 @@ async function handleSubmit(e) {
   }
 }
 
+// 테스트용 유저 계정 로그인
 async function handleTestUserLogin() {
   try {
     const result = await Api.post('/api/login', {
@@ -78,6 +77,7 @@ async function handleTestUserLogin() {
   }
 }
 
+// 테스트용 관리자 계정 로그인
 async function handleTestAdminLogin() {
   try {
     const result = await Api.post('/api/login', {
@@ -97,6 +97,7 @@ async function handleTestAdminLogin() {
   }
 }
 
+// 불필요한 데이터 클리어
 const purchaseData = sessionStorage.getItem('productInfo');
 if (purchaseData) {
   sessionStorage.removeItem('productInfo');
