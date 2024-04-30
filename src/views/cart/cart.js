@@ -1,4 +1,4 @@
-import { loginRender } from '/loginFunc.js';
+import { loginRender, checkLogin } from '/loginFunc.js';
 
 // 변수
 let cart = JSON.parse(localStorage.getItem(`myCart`));
