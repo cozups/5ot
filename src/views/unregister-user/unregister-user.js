@@ -1,10 +1,14 @@
 import * as Api from '/api.js';
 
+// Elements
 const button = document.getElementById('submit');
 const passwordInput = document.querySelector('#password');
 
+// addEventListener
 button.addEventListener('click', unregister);
 
+// functions
+// 회원 탈퇴
 async function unregister(e) {
   e.preventDefault();
 
@@ -25,6 +29,8 @@ async function unregister(e) {
     alert(`${err.message}`);
   }
 }
+
+// 불필요한 데이터 클리어
 const purchaseData = sessionStorage.getItem('productInfo');
 if (purchaseData) {
   sessionStorage.removeItem('productInfo');
