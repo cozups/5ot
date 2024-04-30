@@ -2,9 +2,9 @@ import * as Api from '/api.js';
 
 export const fetchCategories = async () => {
   try {
-    const womanCategories = [];
+    const womanCategories = [{ type: 'new' }];
     const result = await Api.get('/category');
-    const manCategories = [];
+    const manCategories = [{ type: 'new' }];
 
     // 성별 필터링
     result.forEach((category) => {
