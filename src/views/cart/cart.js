@@ -9,7 +9,6 @@ const cartList = document.getElementById('cart-list');
 const cartCountField = document.querySelector('.is-size-6');
 const purchaseButton = document.getElementById('purchaseButton');
 const allSelectCheckbox = document.getElementById('allSelectCheckbox');
-const checkList = document.querySelectorAll('.list-checkbox');
 const selectedOrderDeleteLabel = document.getElementById(
   'selectedOrderDeleteLabel'
 );
@@ -32,14 +31,13 @@ function cartRendering() {
   cartCountField.innerText = `${cart.length}개 상품`;
 
   const elements = cart.map((item) => {
-    const { product_image, product_name, quantity, price } = item;
+    const { product_image, product_name, quantity, price, product_id } = item;
     const total = price * quantity;
     return `
       <li>
-          <input type="checkbox" class="list-checkbox" value="${i}"/>
+          <input type="checkbox" class="list-checkbox" data-product-id="${product_id}"/>
           <img
             src="${product_image}"
-            alt=""
           />
           <div class="cart-item-info">
             <h3>${product_name}</h3>
@@ -48,11 +46,11 @@ function cartRendering() {
                 <i class="fas fa-minus"></i>
               </button>
               <span class="qty">${quantity}</span>
-              <button class="plus" value="${i}"><i class="fas fa-plus"></i></button>
+              <button class="plus" data-product-id="${product_id}"><i class="fas fa-plus"></i></button>
             </div>
             <span class="item-price">${price}</span>
             <span class="item-total-price">총 ${total}원</span>
-            <button class='cancel' value="${i++}"><i class="fa-solid fa-trash-can"></i></buttonc>
+            <button class='cancel' data-product-id="${product_id}"><i class="fa-solid fa-trash-can"></i></buttonc>
           </div>
       </li>`;
   });
@@ -106,22 +104,22 @@ function clickHandler(e) {
   // e.target이 i 태그이기 때문에 parent를 가리켜야함 (font-awesome 때문)
   let btn = target.parentElement;
   let idx = 0;
+  let product_id = Number(btn.dataset.productId);
 
   switch (buttonType) {
     case 'checkbox':
-      const value = Number(target.value);
-
+      product_id = Number(target.dataset.productId);
       target.checked
-        ? checkedList.push(value)
-        : (checkedList = checkedList.filter((idx) => idx !== value));
+        ? checkedList.push(product_id)
+        : (checkedList = checkedList.filter((id) => id !== product_id));
 
       allSelectCheckbox.checked = checkedList.length === cart.length;
-
       break;
 
     case 'cancel':
-      idx = Number(btn.value);
-      cancelSingleOrder(idx);
+      cart = cancelOrder(product_id);
+      localStorage.setItem('myCart', JSON.stringify(cart));
+      location.reload();
       break;
 
     case 'plus':
@@ -131,16 +129,17 @@ function clickHandler(e) {
   }
 }
 
-// 1개의 장바구니 주문 취소
-function cancelSingleOrder(idx) {
-  cart.splice(idx, 1);
-  localStorage.setItem('myCart', JSON.stringify(cart));
-  location.reload();
+// 장바구니 주문 취소
+function cancelOrder(id) {
+  return cart.filter((item) => item.product_id !== id);
 }
 
 // 선택된 장바구니 주문 취소
 function cancelSelectedOrder() {
-  cart = cart.filter((_, idx) => checkedList.indexOf(idx) < 0);
+  checkedList.forEach((projectId) => {
+    cart = cancelOrder(projectId);
+  });
+
   localStorage.setItem('myCart', JSON.stringify(cart));
   location.reload();
 }
@@ -169,9 +168,14 @@ function changeQuantity(type, idxToChange) {
 
 // 전체 선택 - 한번 더 누르면 전체 취소
 function selectAllHandler() {
-  checkList.forEach((checkbox, index) => {
+  const checkList = document.querySelectorAll('.list-checkbox');
+  checkList.forEach((checkbox) => {
     checkbox.checked = allSelectCheckbox.checked;
-    checkedList.push(index);
+    if (allSelectCheckbox.checked) {
+      checkedList.push(+checkbox.dataset.productId);
+    } else {
+      checkedList = [];
+    }
   });
 }
 
