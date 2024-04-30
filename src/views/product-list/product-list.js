@@ -1,14 +1,17 @@
 import * as Api from '/api.js';
 import { renderCategories } from '/category.js';
+import { loginRender } from '/loginFunc.js';
 
-const headerMenu = document.querySelectorAll('#navbar a');
-const section = document.getElementsByTagName('section')[0];
+// 변수
 const pathname = window.location.pathname.split('/');
 const sex = pathname[2];
 const type = pathname[3];
-
 let sideMenus = await renderCategories();
 
+// Elements
+const section = document.getElementsByTagName('section')[0];
+
+// 초기화 및 함수 실행
 sideMenus.forEach((menu) => {
   [...menu.parentElement.parentElement.classList].includes(
     sex === 'w' ? 'woman' : 'man'
@@ -16,7 +19,16 @@ sideMenus.forEach((menu) => {
     menu.innerHTML === type &&
     menu.classList.add('button-active');
 });
+loginRender();
 
+if (type === 'new') {
+  getProductAll();
+} else {
+  getProductList();
+}
+
+// functions
+// 카테고리 상관없이 상품 전체 가져오기 -> 성별 필터링 (new 카테고리용)
 async function getProductAll() {
   try {
     const result = await Api.get('/product/all');
@@ -45,14 +57,14 @@ async function getProductAll() {
           `;
       }
     });
-    console.log(elements);
+
     section.innerHTML = elements.join('');
   } catch (error) {
     console.log(`error : ${error}`);
   }
 }
 
-// 제품목록 가져오기
+// 제품목록 가져오기 (new 카테고리 제외)
 async function getProductList() {
   try {
     const result = await Api.get('/product', `${sex}/${type}`);
@@ -85,47 +97,7 @@ async function getProductList() {
   }
 }
 
-if (type === 'new') {
-  getProductAll();
-} else {
-  getProductList();
-}
-
-// 로그인 상태 체크 -> 로그인 상태에 따른 렌더링을 하는 함수들
-function checkLogin() {
-  const token = localStorage.getItem('token') || '';
-  if (token) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-function loginRender() {
-  if (checkLogin()) {
-    // login 상태 (메뉴 배치 순서를 바꾸었습니다.)
-    // 회원가입 -> 로그아웃
-    headerMenu[0].href = '';
-    headerMenu[0].childNodes[0].textContent = '로그아웃';
-    headerMenu[0].addEventListener('click', logout);
-
-    // 로그인 -> 마이페이지
-    headerMenu[1].href = '/mypage';
-    headerMenu[1].childNodes[0].textContent = '마이페이지';
-  }
-}
-
-// 로그아웃 function
-function logout(e) {
-  e.preventDefault();
-
-  alert('로그아웃 되었습니다.');
-  localStorage.clear();
-
-  window.location.href = '/';
-}
-
-loginRender();
+// 불필요한 데이터 클리어
 const purchaseData = sessionStorage.getItem('productInfo');
 if (purchaseData) {
   sessionStorage.removeItem('productInfo');
