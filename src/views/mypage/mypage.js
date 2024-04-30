@@ -1,12 +1,14 @@
 import * as Api from '/api.js';
 
-// html 엘리먼트
+// Elements
+// 제품판매 or 문의하기로 바뀔 엘리먼트
 const changeableElement =
-  document.querySelectorAll('.button-menu')[2].children[0]; // 제품판매 or 문의하기로 바뀔 엘리먼트
-console.log(changeableElement);
+  document.querySelectorAll('.button-menu')[2].children[0];
+
+// 함수 실행
+checkRole();
 
 // functions
-
 // 권한이 admin -> 제품 판매 페이지 렌더링, basic-user -> 문의하기 페이지 렌더링
 async function checkRole() {
   const email = localStorage.getItem('email');
@@ -32,7 +34,7 @@ async function checkRole() {
   }
 }
 
-checkRole();
+// 불필요한 데이터 클리어
 const purchaseData = sessionStorage.getItem('productInfo');
 if (purchaseData) {
   sessionStorage.removeItem('productInfo');

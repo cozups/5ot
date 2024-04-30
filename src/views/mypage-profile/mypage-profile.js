@@ -3,15 +3,17 @@ import * as Api from '/api.js';
 // 변수
 let user = null;
 
-// html 엘리먼트
+// Elements
 const nameField = document.querySelector('#fullNameInput');
 const phoneNumberField = document.querySelector('#phoneNumber');
 const idField = document.querySelector('#user-id');
-
 const submitButton = document.querySelector('#submitButton');
 
-// 이벤트 추가
+// addEventListener
 submitButton.addEventListener('click', patchUserInfo);
+
+// 함수 실행
+setDefaultInfo();
 
 // functions
 // 기본적으로 표시되게 할 정보들을 표시한다.
@@ -64,7 +66,7 @@ async function patchUserInfo(e) {
   };
 
   try {
-    const result = await Api.patch('/api/users', userId, data);
+    await Api.patch('/api/users', userId, data);
     alert('수정 완료되었습니다.');
     location.reload();
   } catch (err) {
@@ -72,7 +74,7 @@ async function patchUserInfo(e) {
   }
 }
 
-setDefaultInfo();
+// 불필요한 데이터 클리어
 const purchaseData = sessionStorage.getItem('productInfo');
 if (purchaseData) {
   sessionStorage.removeItem('productInfo');
