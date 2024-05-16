@@ -25,7 +25,6 @@ loginRender();
 // functions
 // 장바구니 아이템 리스트 렌더링
 function cartRendering() {
-  let i = 0;
   cartList.innerHTML = '';
 
   cartCountField.innerText = `${cart.length}개 상품`;
@@ -34,7 +33,7 @@ function cartRendering() {
     const { product_image, product_name, quantity, price, product_id } = item;
     const total = price * quantity;
     return `
-      <li>
+      <li data-product-id="${product_id}">
           <input type="checkbox" class="list-checkbox" data-product-id="${product_id}"/>
           <img
             src="${product_image}"
@@ -42,11 +41,13 @@ function cartRendering() {
           <div class="cart-item-info">
             <h3>${product_name}</h3>
             <div class="item-quantity">
-              <button class="minus" value="${i}">
+              <button class="minus" data-product-id="${product_id}">
                 <i class="fas fa-minus"></i>
               </button>
               <span class="qty">${quantity}</span>
-              <button class="plus" data-product-id="${product_id}"><i class="fas fa-plus"></i></button>
+              <button class="plus" data-product-id="${product_id}">
+                <i class="fas fa-plus"></i>
+              </button>
             </div>
             <span class="item-price">${price}</span>
             <span class="item-total-price">총 ${total}원</span>
@@ -124,8 +125,7 @@ function clickHandler(e) {
 
     case 'plus':
     case 'minus':
-      idx = Number(btn.value);
-      changeQuantity(buttonType, idx);
+      changeQuantity(buttonType, +btn.dataset.productId);
   }
 }
 
@@ -145,23 +145,39 @@ function cancelSelectedOrder() {
 }
 
 // 주문 개수 변경
-function changeQuantity(type, idxToChange) {
-  const quantityField = document.querySelectorAll('.qty');
-  const totalPriceField = document.querySelectorAll('.item-total-price');
-  let quantity = Number(quantityField[idxToChange].innerText);
-  if (type === 'minus') {
-    if (quantity > 1) {
-      quantity--;
-    }
-  } else {
-    quantity++;
+function changeQuantity(type, product_id) {
+  const quantityField = document.querySelector(
+    `li[data-product-id="${product_id}"] span.qty`
+  );
+  const totalPriceField = document.querySelector(
+    `li[data-product-id="${product_id}"] span.item-total-price`
+  );
+
+  const itemIdx = cart.findIndex((item) => item.product_id === product_id);
+  const item = cart[itemIdx];
+
+  let quantity = +quantityField.innerText;
+  const price = item.price;
+
+  switch (type) {
+    case 'minus':
+      if (quantity > 1) {
+        quantity--;
+      }
+      break;
+    case 'plus':
+      quantity++;
+      break;
+    default:
+      break;
   }
 
-  quantityField[idxToChange].innerText = quantity;
-  totalPriceField[idxToChange].innerText = `총 ${
-    quantity * cart[idxToChange].price
-  }원`;
-  cart[idxToChange].quantity = quantity;
+  item.quantity = quantity;
+  cart.splice(itemIdx, 1, item);
+
+  quantityField.innerText = quantity;
+  totalPriceField.innerText = `총 ${quantity * price}원`;
+
   localStorage.setItem('myCart', JSON.stringify(cart));
   setOrderInfo();
 }
