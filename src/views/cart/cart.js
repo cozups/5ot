@@ -104,7 +104,6 @@ function clickHandler(e) {
 
   // e.target이 i 태그이기 때문에 parent를 가리켜야함 (font-awesome 때문)
   let btn = target.parentElement;
-  let idx = 0;
   let product_id = Number(btn.dataset.productId);
 
   switch (buttonType) {
