@@ -3,3 +3,7 @@ node_modules
 yarn.lock
 .env
 src/views/images
+.vercel
+
+# Local Netlify folder
+.netlify

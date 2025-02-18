@@ -1,0 +1,2 @@
+[build]
+  functions = "functions"  # 서버리스 함수가 들어갈 폴더를 지정
