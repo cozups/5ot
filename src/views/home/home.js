@@ -9,7 +9,13 @@ let stopScroll = false;
 // html elements
 const body = document.querySelector('body');
 const slides = document.querySelector('.slides');
-let slideButtons = await renderCategories();
+
+let slideButtons = [];
+async function init() {
+  slideButtons = await renderCategories();
+}
+init();
+
 let slideRange = slideButtons.length - 1;
 
 // addEventListner

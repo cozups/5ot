@@ -5,7 +5,10 @@ import { loginRender } from '/loginFunc.js';
 const section = document.getElementsByTagName('section')[0];
 
 // 함수 실행
-await renderCategories();
+async function init() {
+  await renderCategories();
+}
+init();
 getProductList();
 loginRender();
 

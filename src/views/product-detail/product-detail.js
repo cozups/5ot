@@ -4,7 +4,13 @@ import { renderCategories } from '/category.js';
 import { loginRender, checkLogin } from '/loginFunc.js';
 
 // 변수
-let sideMenus = await renderCategories();
+let sideMenus = [];
+
+async function init() {
+  sideMenus = await renderCategories();
+}
+init();
+
 const pathname = window.location.pathname.split('/');
 const type = pathname[3];
 const productId = Number(pathname[4]);

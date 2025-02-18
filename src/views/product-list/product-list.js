@@ -6,6 +6,7 @@ import { loginRender } from '/loginFunc.js';
 const pathname = window.location.pathname.split('/');
 const sex = pathname[2];
 const type = pathname[3];
+
 let sideMenus = [];
 async function init() {
   sideMenus = await renderCategories();
