@@ -1,19 +1,19 @@
-import { mongoose, trusted } from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
+import { mongoose } from 'mongoose';
+import mongooseSequence from 'mongoose-sequence';
 
 const Schema = mongoose.Schema;
 
-autoIncrement.initialize(mongoose);
+const autoIncrement = mongooseSequence(mongoose);
 
 const OrderSchema = new Schema(
   {
     OrderList: [
       new mongoose.Schema({
-        product_id: Number, 
+        product_id: Number,
         product_name: String,
         quantity: Number,
         price: Number,
-      })
+      }),
     ],
     order_id: {
       type: Number,
@@ -50,11 +50,10 @@ const OrderSchema = new Schema(
     timestamps: true,
   }
 );
-OrderSchema.plugin(autoIncrement.plugin, {
-  model: 'order',
-  field: 'order_id',
-  startAt: 1,
-  incrementBy: 1
+OrderSchema.plugin(autoIncrement, {
+  inc_field: 'order_id', // 자동 증가할 필드 이름
+  start_seq: 1, // 시작값
+  increment_by: 1, // 증가값
 });
 
 export { OrderSchema };

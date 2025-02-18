@@ -1,9 +1,10 @@
-import { mongoose, trusted } from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
+import mongoose from 'mongoose';
+import mongooseSequence from 'mongoose-sequence';
 
 const Schema = mongoose.Schema;
 
-autoIncrement.initialize(mongoose);
+// mongoose-sequence 플러그인을 mongoose에 적용
+const autoIncrement = mongooseSequence(mongoose);
 
 const CategorySchema = new Schema(
   {
@@ -25,11 +26,11 @@ const CategorySchema = new Schema(
   }
 );
 
-CategorySchema.plugin(autoIncrement.plugin, {
-  model: 'category',
-  field: 'category_id',
-  startAt: 1,
-  incrementBy: 1,
+// mongoose-sequence 플러그인 사용
+CategorySchema.plugin(autoIncrement, {
+  inc_field: 'category_id', // 자동 증가할 필드 이름
+  start_seq: 1, // 시작값
+  increment_by: 1, // 증가값
 });
 
 export { CategorySchema };

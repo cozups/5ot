@@ -1,12 +1,12 @@
-//DW CHOI 2022_05_23 
+//DW CHOI 2022_05_23
 //DESCRIPTION: schema for product
 
 import { mongoose } from 'mongoose';
-import autoIncrement from 'mongoose-auto-increment';
+import mongooseSequence from 'mongoose-sequence';
 
 const Schema = mongoose.Schema;
 
-autoIncrement.initialize(mongoose);
+const autoIncrement = mongooseSequence(mongoose);
 
 const ProductSchema = new Schema(
   {
@@ -22,19 +22,20 @@ const ProductSchema = new Schema(
       ),
       required: true,
     },
-    product_name: { //primary key 인데 설정 어떻게 하는지 모름..
+    product_name: {
+      //primary key 인데 설정 어떻게 하는지 모름..
       type: String,
       required: true,
       //unique: true, primary key 설정?
     },
-  
+
     stock: {
-      key:{$gte:0},
+      key: { $gte: 0 },
       type: Number,
       required: true,
     },
     price: {
-      key:{$gte:0},
+      key: { $gte: 0 },
       type: Number,
       required: true,
       minimum: 0,
@@ -48,7 +49,7 @@ const ProductSchema = new Schema(
       required: true,
     },
     product_image: {
-      type: String, 
+      type: String,
       required: true,
     },
     producer: {
@@ -61,11 +62,10 @@ const ProductSchema = new Schema(
     timestamps: true,
   }
 );
-ProductSchema.plugin(autoIncrement.plugin, {
-  model: 'product',
-  field: 'product_id',
-  startAt: 1,
-  incrementBy: 1
+ProductSchema.plugin(autoIncrement, {
+  inc_field: 'product_id', // 자동 증가할 필드 이름
+  start_seq: 1, // 시작값
+  increment_by: 1, // 증가값
 });
 
 export { ProductSchema };
