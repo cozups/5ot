@@ -8,8 +8,8 @@ import {
   orderRouter,
   categoryRouter,
   reviewRouter,
-} from './src/routers';
-import { errorHandler } from './src/middlewares';
+} from '../src/routers';
+import { errorHandler } from '../src/middlewares';
 
 const app = express();
 
