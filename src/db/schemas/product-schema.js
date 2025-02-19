@@ -1,7 +1,7 @@
 //DW CHOI 2022_05_23
 //DESCRIPTION: schema for product
 
-import { mongoose } from 'mongoose';
+import mongoose from 'mongoose';
 import mongooseSequence from 'mongoose-sequence';
 
 const Schema = mongoose.Schema;
@@ -23,10 +23,8 @@ const ProductSchema = new Schema(
       required: true,
     },
     product_name: {
-      //primary key 인데 설정 어떻게 하는지 모름..
       type: String,
       required: true,
-      //unique: true, primary key 설정?
     },
 
     stock: {
@@ -39,10 +37,6 @@ const ProductSchema = new Schema(
       type: Number,
       required: true,
       minimum: 0,
-    },
-    product_id: {
-      type: Number,
-      required: true,
     },
     product_info: {
       type: String,

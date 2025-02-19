@@ -1,4 +1,4 @@
-import { mongoose } from 'mongoose';
+import mongoose from 'mongoose';
 import mongooseSequence from 'mongoose-sequence';
 
 const Schema = mongoose.Schema;
@@ -15,10 +15,6 @@ const OrderSchema = new Schema(
         price: Number,
       }),
     ],
-    order_id: {
-      type: Number,
-      required: true,
-    },
     email: {
       type: String,
       required: true,
