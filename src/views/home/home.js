@@ -11,10 +11,6 @@ const body = document.querySelector('body');
 const slides = document.querySelector('.slides');
 
 let slideButtons = [];
-async function init() {
-  slideButtons = await renderCategories();
-}
-init();
 
 let slideRange = slideButtons.length - 1;
 
@@ -22,11 +18,16 @@ let slideRange = slideButtons.length - 1;
 body.addEventListener('wheel', scrollItems);
 
 // 함수 실행
-loginRender();
-renderSlideImages();
-scrollByTime();
-checkCart();
-slideButtons[0].classList.add('button-active');
+async function init() {
+  slideButtons = await renderCategories();
+
+  loginRender();
+  renderSlideImages();
+  scrollByTime();
+  checkCart();
+  slideButtons[0].classList.add('button-active');
+}
+init();
 
 // functions
 // 슬라이드 이미지 동적 렌더링
@@ -63,8 +64,7 @@ function scrollByTime() {
     if (!stopScroll) {
       slideButtons[currentIdx].classList.remove('button-active');
 
-      currentIdx += 1;
-      if (currentIdx > slideRange) currentIdx = 0;
+      currentIdx = currentIdx + 1 < slideButtons.length ? currentIdx + 1 : 0;
 
       slideButtons[currentIdx].classList.add('button-active');
       moveNext();
@@ -75,14 +75,15 @@ function scrollByTime() {
 // 마우스로 이미지 슬라이드
 function scrollItems(e) {
   stopScroll = true;
-  slideButtons[currentIdx].classList.remove('button-active');
 
-  if (e.wheelDelta > 0 && currentIdx > 0) {
+  if (e.wheelDelta > 0) {
     // scroll up
-    currentIdx -= 1;
-  } else if (e.wheelDelta < 0 && currentIdx < slideRange) {
+    slideButtons[currentIdx].classList.remove('button-active');
+    currentIdx = currentIdx - 1 >= 0 ? currentIdx - 1 : slideButtons.length - 1;
+  } else if (e.wheelDelta < 0) {
     // scroll down
-    currentIdx += 1;
+    slideButtons[currentIdx].classList.remove('button-active');
+    currentIdx = currentIdx + 1 < slideButtons.length ? currentIdx + 1 : 0;
   }
 
   slideButtons[currentIdx].classList.add('button-active');
