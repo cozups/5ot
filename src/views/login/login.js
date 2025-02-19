@@ -82,7 +82,7 @@ async function handleTestAdminLogin() {
   try {
     const result = await Api.post('/api/login', {
       email: 'admin@admin.com',
-      password: 'admin',
+      password: 'admin123',
     });
     const token = result.token;
 
