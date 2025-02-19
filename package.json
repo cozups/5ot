@@ -18,9 +18,7 @@
     "mongoose": "^6.3.1",
     "mongoose-sequence": "^6.0.1",
     "multer": "^1.4.4",
-    "serverless-http": "^3.2.0"
-  },
-  "devDependencies": {
+    "serverless-http": "^3.2.0",
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.9",
     "@babel/node": "^7.16.8",
